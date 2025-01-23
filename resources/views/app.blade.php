@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <link rel="shortcut icon" href="{{asset('media/favicon.png')}}" type="image/x-icon">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="shortcut icon" href="{{asset('media/favicon.png')}}" type="image/x-icon">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
