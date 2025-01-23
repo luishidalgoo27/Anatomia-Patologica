@@ -10,6 +10,10 @@
             "dest": "/public/build/assets/"
         },
         {
+            "src": "/(.*\\.(jpg|jpeg|png|gif|svg))",
+            "dest": "/public/$1" 
+        },
+        {
             "src": "/img/(.*)",
             "dest": "/public/img/"
         },
