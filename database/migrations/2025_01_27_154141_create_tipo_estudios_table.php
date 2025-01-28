@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('tipo_estudios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->unsignedBigInteger('id_Calidad');
             $table->timestamps();
-
-            $table->foreign('id_Calidad')->references('id')->on('calidades');
         });
     }
 
