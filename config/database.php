@@ -93,7 +93,6 @@ return [
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'require',
-            'options' => env('DB_OPTIONS'),
     ],
 
 
