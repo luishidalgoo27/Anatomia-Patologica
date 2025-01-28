@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_estudio', function (Blueprint $table) {
+        Schema::create('tipo_naturalezas', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo');
             $table->string('nombre');
-            $table->unsignedBigInteger('Id_Calidad');
             $table->timestamps();
 
-            $table->foreign('Id_Calidad')->references('id')->on('calidades');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('tipo_estudio');
+        Schema::dropIfExists('tipo_naturalezas');
     }
 };

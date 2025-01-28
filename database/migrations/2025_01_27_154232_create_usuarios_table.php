@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sede', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
-            $table->string('Codigo');
-            $table->string('Nombre');
+            $table->string('email');
+            $table->unsignedBigInteger('id_Sede');
             $table->timestamps();
+
+            $table->foreign('id_Sede')->references('id')->on('sedes');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('sede');
+        Schema::dropIfExists('usuarios');
     }
 };

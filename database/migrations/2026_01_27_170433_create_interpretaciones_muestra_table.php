@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('interpretacion_muestra', function (Blueprint $table) {
             $table->text('descripcion');
-            $table->unsignedBigInteger('muestra_id'); 
-            $table->unsignedBigInteger('interpretacion_id'); 
+            $table->unsignedBigInteger('id_muestra'); 
+            $table->unsignedBigInteger('id_interpretacion'); 
             $table->timestamps();
         
-            $table->foreign('muestra_id')->references('id')->on('muestra')->onDelete('cascade');
-            $table->foreign('interpretacion_id')->references('id')->on('interpretacion')->onDelete('cascade');
+            $table->foreign('id_muestra')->references('id')->on('muestras');
+            $table->foreign('id_interpretacion')->references('id')->on('interpretaciones');
         
-            $table->primary(['muestra_id', 'interpretacion_id']);
+            $table->primary(['id_muestra', 'id_interpretacion']);
         });
     }
 

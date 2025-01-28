@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('formato', function (Blueprint $table) {
+        Schema::create('sedes', function (Blueprint $table) {
             $table->id();
-            $table->string('Nombre');
             $table->string('codigo');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('formato');
+        Schema::dropIfExists('sedes');
     }
 };

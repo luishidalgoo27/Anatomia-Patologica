@@ -11,20 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('imagen', function (Blueprint $table) {
+        Schema::create('formatos', function (Blueprint $table) {
             $table->id();
-            $table->string('Ruta');
-            $table->float('zoom');
-            $table->unsignedBigInteger('Id_Muestra');
+            $table->string('nombre');
+            $table->string('codigo');
             $table->timestamps();
-
-            $table->foreign('Id_Muestra')->references('id')->on('muestra');
-
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('imagen');
+        Schema::dropIfExists('formatos');
     }
 };
