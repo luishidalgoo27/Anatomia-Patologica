@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('usuario', function (Blueprint $table) {
             $table->id();
             $table->string('email');
+            $table->unsignedBigInteger('Id_Sede');
             $table->timestamps();
+
+            $table->foreign('Id_Sede')->references('id')->on('sede');
         });
     }
 
