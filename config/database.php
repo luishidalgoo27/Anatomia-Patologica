@@ -93,6 +93,11 @@ return [
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'require',
+            'options' => [
+                PDO::ATTR_EMULATE_PREPARES => true,
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                'options' => "--endpoint=ep-green-night-a28vu538", // Reemplaza con tu Endpoint ID
+            ],
     ],
 
 
