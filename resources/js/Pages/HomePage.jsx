@@ -1,7 +1,14 @@
 export default function HomePage(){
     return(
         <>
-            <h1>HOME</h1>
+            <div class="content-wrapper">
+                <div class="content">
+                    <h1>HOME</h1>
+                    <div>
+                        hola que pasa
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

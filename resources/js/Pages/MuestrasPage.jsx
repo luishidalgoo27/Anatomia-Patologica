@@ -1,7 +1,12 @@
 export default function MuestrasPage(){
     return(
         <>
-            <h1>MUESTRAS PAGE</h1>
+            <div class="content-wrapper">
+                <div class="content">
+                    <h1>MUESTRAS PAGE</h1>
+                </div>
+            </div>
+            
         </>
     )
 }
