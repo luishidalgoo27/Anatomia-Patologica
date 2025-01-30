@@ -1,6 +1,8 @@
 import { createRoot } from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import '../css/app.css'
+import '../assets/dist/css/adminlte.css'
+import '../assets/plugins/fontawesome-free/css/all.css'
 import AppLayout from './Layouts/AppLayout'
 import ErrorPage from './Pages/ErrorPage'
 import HomePage from './Pages/HomePage'

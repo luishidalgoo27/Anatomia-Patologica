@@ -1,2 +1,5 @@
 import './bootstrap'
 import './main'
+import '../assets/plugins/jquery/jquery.js'
+import '../assets/plugins/bootstrap/js/bootstrap.bundle.js'
+import '../assets/dist/js/adminlte.js'

@@ -4,9 +4,6 @@ export default function HomePage(){
             <div class="content-wrapper">
                 <div class="content">
                     <h1>HOME</h1>
-                    <div>
-                        hola que pasa
-                    </div>
                 </div>
             </div>
         </>
