@@ -7,7 +7,7 @@
     <title>Home</title>
 
     @viteReactRefresh
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/app.css']) 
  
   </head>
 
