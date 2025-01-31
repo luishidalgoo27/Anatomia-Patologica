@@ -22,14 +22,7 @@ export default function HomePage() {
                                 Añadir usuario
                             </button>
 
-                            <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                Editar usuario
-                            </button>
 
-
-                            <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                Borrar usuario
-                            </button>
                         </div>
                     </form>
 
@@ -51,6 +44,11 @@ export default function HomePage() {
                                             Contraseña
                                         </p>
                                     </th>
+                                    <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            
+                                        </p>
+                                    </th>
 
 
                                 </tr>
@@ -68,7 +66,14 @@ export default function HomePage() {
                                         </p>
                                     </td>
 
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Editar usuario
+                                    </button>
 
+
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Borrar usuario
+                                    </button>
                                 </tr>
                                 <tr>
 
@@ -82,6 +87,16 @@ export default function HomePage() {
                                             12345
                                         </p>
                                     </td>
+
+                                    
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Editar usuario
+                                    </button>
+
+
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Borrar usuario
+                                    </button>
 
 
                                 </tr>
@@ -97,7 +112,16 @@ export default function HomePage() {
                                             12345
                                         </p>
                                     </td>
+                                    
+                                    
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Editar usuario
+                                    </button>
 
+
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Borrar usuario
+                                    </button>
 
                                 </tr>
                                 <tr>
@@ -114,7 +138,15 @@ export default function HomePage() {
                                         </p>
                                     </td>
 
+                                    
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Editar usuario
+                                    </button>
 
+
+                                    <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                        Borrar usuario
+                                    </button>
                                 </tr>
 
                             </tbody>
