@@ -1,13 +1,18 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
+
+Route::get('/apiusers', [UserController::class, 'index']);
 
 // Ruta de fallback para React
 Route::get('/{any}', function () {
     return view('welcome'); // Cambia "welcome" si estás usando otra vista principal
 })->where('any', '.*'); // Captura todas las rutas posibles
+
+
 
 /* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
