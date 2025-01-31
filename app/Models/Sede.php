@@ -6,5 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sede extends Model
 {
-    //
+    protected $table = 'sedes';
+
+    protected $primary = "id";
+    protected $fillable = [
+        'codigo', 
+        'nombre'
+    ];
+
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class, 'id_sede');
+    }
+
+    public function muestras()
+    {
+        return $this->hasMany(Muestra::class, 'id_sede');
+    }
 }
