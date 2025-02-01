@@ -2,14 +2,44 @@ import { useEffect, useState } from "react"
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     useEffect(()=>{
-        fetch('http://localhost:8080/apiusers')
+        obtenerUsuarios()
+    }, [])
+
+    const obtenerUsuarios = () => {
+        fetch('/api/users')
             .then(response => response.json())
             .then(data => setUsuarios(data))
             .catch(error => console.error('Error al obtener los datos:', error))
-    }, [])
+    }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const nuevoUsuario = { email, password };
+    
+        const response = await fetch('/api/anadirUser', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(nuevoUsuario)
+        });
+        
+        const data = await response.json()
+        if(!response.ok){
+            console.error("Error en el servidor:", data);
+            console.log("Error: " + data.message);
+        }else{
+            console.log("Usuario añadido correctamente:", data);
+            setEmail("");
+            setPassword("");
+            obtenerUsuarios();
+        }
+    }
+    
 
     return (
         <>
@@ -18,14 +48,14 @@ export default function HomePage() {
                
 
                     {/* Formulario */}
-                    <form  className="flex flex-col items-center">
+                    <form onSubmit={handleSubmit}  className="flex flex-col items-center">
                         <div className="pb-11  pt-4" >
                             <label className="block" htmlFor="email">Correo</label>
-                            <input type="email" name="email" id="email" />
+                            <input type="email" name="email" id="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
                         </div>
                         <div className="pb-11" >
                             <label className="block" htmlFor="password">Contraseña</label>
-                            <input type="password" name="password" id="password" />
+                            <input type="password" name="password" id="password" value={password} onChange={(e)=> setPassword(e.target.value)} />
                         </div>
 
 

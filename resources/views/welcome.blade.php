@@ -13,7 +13,7 @@
 
   <body class="hold-transition sidebar-mini">
     <div class="wrapper" id="root">
-    
+
     </div>
   </body>
 </html>

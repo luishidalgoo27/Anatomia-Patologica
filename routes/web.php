@@ -5,7 +5,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 
-Route::get('/apiusers', [UserController::class, 'index']);
+//Demas rutas
 
 // Ruta de fallback para React
 Route::get('/{any}', function () {

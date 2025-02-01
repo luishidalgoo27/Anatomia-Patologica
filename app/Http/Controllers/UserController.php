@@ -11,16 +11,15 @@ class UserController extends Controller
     {
         $users = User::all();
         return response()->json($users, 200);
-        return view('users');
+        //return view('users');
     }  
 
     public function store(Request $request)
     {
-        $nuevoUsuario = User::create([
-            'email' => $request->input(),
-            'password' => 'ola'
+        $user = User::create([
+            'email' => $request->email,
+            'password' => $request->password 
         ]);
-
-
+        return response()->json(['message' => 'Usuario creado correctamente', 'user' => $user], 201);
     }
 }
