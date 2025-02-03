@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 
 //Demas rutas
 Route::get('/users', [UserController::class, 'index']);
+Route::post('/anadirUser', [UserController::class, 'store']);
 // Ruta de fallback para React
 Route::get('/{any}', function () {
     return view('welcome'); // Cambia "welcome" si estás usando otra vista principal

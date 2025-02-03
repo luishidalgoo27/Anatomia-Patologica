@@ -5,10 +5,6 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 
-
-
-Route::post('/anadirUser', [UserController::class, 'store']);
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
