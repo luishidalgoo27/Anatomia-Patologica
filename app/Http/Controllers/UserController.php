@@ -15,11 +15,21 @@ class UserController extends Controller
     }  
 
     public function store(Request $request)
-    {
+{
+    $request->validate([
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:8'
+    ]);
+
+    try {
         $user = User::create([
             'email' => $request->email,
-            'password' => $request->password 
+            'password' => bcrypt($request->password) // Asegúrate de encriptar la contraseña
         ]);
+
         return response()->json(['message' => 'Usuario creado correctamente', 'user' => $user], 201);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error al crear el usuario', 'message' => $e->getMessage()], 500);
     }
+}
 }
