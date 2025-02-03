@@ -9,14 +9,14 @@ export default function HomePage() {
     }, [])
 
     const obtenerUsuarios = () => {
-        fetch('/api/users')
+        fetch('/api/api/users')
             .then(response => response.json())
             .then(data => setUsuarios(data))
             .catch(error => console.error('Error al obtener los datos:', error))
     }
 
     const handleSubmit = async (usuario) => {
-        const response = await fetch('/api/anadirUser', {
+        const response = await fetch('/api/api/anadirUser', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
