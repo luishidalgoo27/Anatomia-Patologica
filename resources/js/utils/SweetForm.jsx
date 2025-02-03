@@ -9,12 +9,14 @@ export const showSwal = (handleSubmit) => {
                 <input
                     type="text"
                     id="email"
+                    name="email"
                     className="swal2-input"
                     placeholder="Correo electrónico"
                 />
                 <input
                     type="password"
                     id="password"
+                    name="password"
                     className="swal2-input"
                     placeholder="Contraseña"
                 />
