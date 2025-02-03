@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 
 //Demas rutas
-Route::get('/users', [UserController::class, 'index']);
+
 
 // Ruta de fallback para React
 Route::get('/{any}', function () {
