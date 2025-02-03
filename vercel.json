@@ -24,6 +24,16 @@
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
+        },
+        {
+            "src": "/api/users",
+            "methods": ["GET"],
+            "dest": "/api/index.php"
+        },
+        {
+            "src": "/api/anadirUser",
+            "methods": ["POST"],
+            "dest": "/api/index.php"
         }
     ],
     "env": {
