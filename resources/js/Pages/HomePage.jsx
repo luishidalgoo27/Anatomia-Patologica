@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
+import { showSwal } from "@/utils/SweetForm"
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
+    
     useEffect(()=>{
         obtenerUsuarios()
     }, [])
@@ -16,16 +15,13 @@ export default function HomePage() {
             .catch(error => console.error('Error al obtener los datos:', error))
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const nuevoUsuario = { email, password };
-    
+    const handleSubmit = async (usuario) => {
         const response = await fetch('/api/anadirUser', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(nuevoUsuario)
+            body: JSON.stringify(usuario)
         });
         
         const data = await response.json()
@@ -34,37 +30,20 @@ export default function HomePage() {
             console.log("Error: " + data.message);
         }else{
             console.log("Usuario añadido correctamente:", data);
-            setEmail("");
-            setPassword("");
             obtenerUsuarios();
         }
-    }
-    
+    }  
 
     return (
         <>
             <div className="content-wrapper">
                 <div className="content">
                
-
-                    {/* Formulario */}
-                    <form onSubmit={handleSubmit}  className="flex flex-col items-center">
-                        <div className="pb-11  pt-4" >
-                            <label className="block" htmlFor="email">Correo</label>
-                            <input type="email" name="email" id="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
-                        </div>
-                        <div className="pb-11" >
-                            <label className="block" htmlFor="password">Contraseña</label>
-                            <input type="password" name="password" id="password" value={password} onChange={(e)=> setPassword(e.target.value)} />
-                        </div>
-
-
-                        <div className="p-4 flex gap-4 justify-center">
-                            <button className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                Añadir usuario
-                            </button>
-                        </div>
-                    </form>
+                    <div className="p-4 flex gap-4 justify-center">
+                        <button onClick={() => showSwal(handleSubmit)} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                            Añadir usuario
+                        </button>
+                    </div>
 
                     {/* Tabla de usuarios */}                    
                     <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
