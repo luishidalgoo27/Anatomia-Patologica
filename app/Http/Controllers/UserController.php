@@ -24,7 +24,7 @@ class UserController extends Controller
     try {
         $user = User::create([
             'email' => $request->email,
-            'password' => bcrypt($request->password) // Asegúrate de encriptar la contraseña
+            'password' => bcrypt($request->password) // Bycript para pasar contra encriptada
         ]);
 
         return response()->json(['message' => 'Usuario creado correctamente', 'user' => $user], 201);
@@ -32,4 +32,30 @@ class UserController extends Controller
         return response()->json(['error' => 'Error al crear el usuario', 'message' => $e->getMessage()], 500);
     }
 }
+
+public function update(Request $request)
+{
+    $idUser = $request->input('id');
+    $user = User::where('id', $idUser);
+    
+    $user->email = $request->input('email');
+    $user->password = $request->input('password');
+
+    $user->save();
+
+    return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 201);
+}
+
+public function destroy(Request $request)
+{
+    $idUser = $request->input('id');
+    $user = User::where('id', $idUser);
+
+    if($user){
+        $user->delete();
+    }
+
+    return response()->json(['message' => 'Usuario eliminado correctamente', 'user' => $user], 201);
+}
+
 }
