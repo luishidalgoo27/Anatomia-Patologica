@@ -7,7 +7,6 @@ use App\Http\Controllers\ProfileController;
 
 //Demas rutas
 
-
 // Ruta de fallback para React
 Route::get('/{any}', function () {
     return view('welcome'); // Cambia "welcome" si estás usando otra vista principal
