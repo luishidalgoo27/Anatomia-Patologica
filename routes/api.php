@@ -6,7 +6,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/users', [UserController::class, 'index']);
-Route::post('/anadirUser', [UserController::class, 'store']);
+Route::post('/addUser', [UserController::class, 'store']);
+Route::patch('/updateUser', [UserController::class, 'update']);
+Route::delete('/deleteUser', [UserController::class, 'destroy']);
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
