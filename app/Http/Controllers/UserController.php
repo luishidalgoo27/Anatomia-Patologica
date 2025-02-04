@@ -38,9 +38,9 @@ public function update(Request $request)
     $idUser = $request->input('id');
     $user = User::where('id', $idUser);
     
-    $user->email = $request->input('email');
-    
-    $user->save();
+    $user->update([
+        'email' => $request->email
+    ]);
 
     return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 201);
 }

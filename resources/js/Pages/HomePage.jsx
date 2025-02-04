@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { showSwal } from "@/utils/SweetForm"
+import { handleAdd, deleteUser, handleUpdate } from "@/utils/sweetAlert2"
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])
     
     useEffect(()=>{
         obtenerUsuarios()
-    }, [])
+    }, []) 
 
     const obtenerUsuarios = () => {
         fetch('/api/api/users')
@@ -15,32 +15,13 @@ export default function HomePage() {
             .catch(error => console.error('Error al obtener los datos:', error))
     }
 
-    const handleSubmit = async (usuario) => {
-        const response = await fetch('/api/api/anadirUser', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(usuario)
-        });
-        
-        const data = await response.json()
-        if(!response.ok){
-            console.error("Error en el servidor:", data);
-            console.log("Error: " + data.message);
-        }else{
-            console.log("Usuario añadido correctamente:", data);
-            obtenerUsuarios();
-        }
-    }  
-
     return (
         <>
             <div className="content-wrapper">
                 <div className="content">
                
                     <div className="p-4 flex gap-4 justify-center">
-                        <button onClick={() => showSwal(handleSubmit)} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                        <button onClick={() => handleAdd(obtenerUsuarios)} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
                             Añadir usuario
                         </button>
                     </div>
@@ -88,12 +69,12 @@ export default function HomePage() {
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={usuario.id} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                                <button id={usuario.id} onClick={() => handleUpdate(usuario,obtenerUsuarios)} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
                                                     Editar usuario
                                                 </button>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={usuario.id} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                                <button id={usuario.id} onClick={()=> {deleteUser(usuario.id,obtenerUsuarios)}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
                                                     Borrar usuario
                                                 </button>
                                             </td>
