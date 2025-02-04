@@ -39,8 +39,7 @@ public function update(Request $request)
     $user = User::where('id', $idUser);
     
     $user->email = $request->input('email');
-    $user->password = $request->input('password');
-
+    
     $user->save();
 
     return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 201);
