@@ -97,7 +97,7 @@ export const handleUpdate = (usuario,obtenerUsuarios) => {
             <input type="text" id="email" name="email" class="swal2-input" value=${usuario.email} placeholder="Correo electrónico">
         `,
         showCancelButton: true,
-        confirmButtonText: "Añadir",
+        confirmButtonText: "Editar",
         cancelButtonText: "Cancelar",
         preConfirm: () => {
             const email = document.getElementById("email").value;
