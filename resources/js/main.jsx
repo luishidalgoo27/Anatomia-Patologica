@@ -7,6 +7,8 @@ import AppLayout from './Layouts/AppLayout'
 import ErrorPage from './Pages/ErrorPage'
 import HomePage from './Pages/HomePage'
 import MuestrasPage from './Pages/MuestrasPage'
+import MuestrasPage2 from './Pages/MuestrasPage2'
+import InformeFinalPage from './Pages/InformeFinalPage'
 
 const router = createBrowserRouter([
     {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
             {
                 path: '/muestras',
                 element: <MuestrasPage />
+            },
+            {
+                path: '/muestras2',
+                element: <MuestrasPage2 />
+            },
+            {
+                path: '/informeFinal',
+                element: <InformeFinalPage />
             }
         ]
     }
