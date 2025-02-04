@@ -16,7 +16,7 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         
-        colors:{'azulMedac': '#001f3f',},
+        colors:{'azulMedac': '#001f3f'},
 
         },
     },
