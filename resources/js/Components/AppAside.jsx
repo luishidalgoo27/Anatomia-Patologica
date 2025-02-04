@@ -43,7 +43,7 @@ export default function AppAside(){
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/muestras" className="nav-link">
+                            <Link to="/muestras2" className="nav-link">
                             <i className="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Muestras
@@ -51,7 +51,7 @@ export default function AppAside(){
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/muestras" className="nav-link">
+                            <Link to="/informeFinal" className="nav-link">
                             <i className="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Muestras

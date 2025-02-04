@@ -41,7 +41,7 @@ public function update(Request $request)
     $user->update([
         'email' => $request->email
     ]);
- 
+  
     return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 201);
 }
 
