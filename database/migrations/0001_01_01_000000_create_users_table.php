@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+           // $table->unsignedBigInteger('id_sede');
             $table->timestamps();
+           // $table->foreign('id_sede')->references('id')->on('sedes');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -15,18 +15,18 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->string('codigo');
-            $table->string('organo');
+            $table->string('organo')->nullable();
             $table->text('descripcion_calidad');
             $table->unsignedBigInteger('id_calidad');
             $table->unsignedBigInteger('id_tipo_naturaleza');
             $table->unsignedBigInteger('id_formato');
             $table->unsignedBigInteger('id_sede');
-            $table->unsignedBigInteger('id_usuario');
+           // $table->unsignedBigInteger('id_user');
             $table->timestamps();
 
             $table->foreign('id_calidad')->references('id')->on('calidades');
             $table->foreign('id_formato')->references('id')->on('formatos');
-            $table->foreign('id_usuario')->references('id')->on('usuarios');
+           // $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_tipo_naturaleza')->references('id')->on('tipo_naturalezas');
             $table->foreign('id_sede')->references('id')->on('sedes');
         });

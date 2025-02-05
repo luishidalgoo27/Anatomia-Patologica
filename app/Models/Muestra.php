@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Muestra extends Model
 {
+    use HasFactory;
     protected $table = 'muestras';
 
     protected $primary = "id";
@@ -18,7 +20,7 @@ class Muestra extends Model
         'id_tipo_naturaleza', 
         'id_formato', 
         'id_sede', 
-        'id_usuario'
+        //'id_user'
     ];
 
     public function calidad()
@@ -31,10 +33,10 @@ class Muestra extends Model
         return $this->belongsTo(Formato::class, 'id_formato');
     }
 
-    public function usuario()
-    {
-        return $this->belongsTo(Usuario::class, 'id_usuario');
-    }
+   # public function usuario()
+    #{
+     #   return $this->belongsTo(User::class, 'id_usuario');
+    #}
 
     public function tipoNaturaleza()
     {

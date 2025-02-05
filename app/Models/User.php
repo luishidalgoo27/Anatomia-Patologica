@@ -20,7 +20,18 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
+       // 'id_sede'
     ];
+
+  //  public function sede()
+    //{
+      //  return $this->belongsTo(Sede::class, 'id_sede');
+    //}
+
+    //public function muestras()
+    //{
+      //  return $this->hasMany(Muestra::class, 'id_usuario');
+    //}
 
     /**
      * The attributes that should be hidden for serialization.
@@ -28,6 +39,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
+        'password',
         'remember_token',
     ];
 
