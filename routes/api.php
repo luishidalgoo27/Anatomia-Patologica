@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\MuestraController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
@@ -11,7 +13,10 @@ Route::patch('/updateUser', [UserController::class, 'update']);
 Route::delete('/deleteUser', [UserController::class, 'destroy']);
 
 /* LLamadas API de Muestras */
-
+Route::get('/muestras', [MuestraController::class, 'index']);
+Route::post('/addMuestra', [MuestraController::class, 'store']);
+Route::patch('/updateMuestra', [MuestraController::class, 'update']);
+Route::delete('/deleteMuestra', [MuestraController::class, 'destroy']);
 
 
 Route::get('/user', function (Request $request) {
