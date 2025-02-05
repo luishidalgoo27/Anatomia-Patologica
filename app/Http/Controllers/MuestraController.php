@@ -23,27 +23,24 @@ class MuestraController extends Controller
     public function store(Request $request)
     {
     $request->validate([
-        'codigo' => 'required',
-        'naturaleza' => 'required',
-        'fecha' => 'required',
-        'formato' => 'required',
-        'organo' => 'required',
-        'centro' => 'required',
-        'calidad' => 'required',
         'descripcioncalidad' => 'required',
+        'fecha' => 'required',
+        'codigo' => 'required',
+        'calidad' => 'required',
+        'naturaleza' => 'required',
+        'organo' => 'required|nullable',
+        'formato' => 'required'
     ]);
 
     try{
         Muestra::create([
-            'codigo' => $request->codigo,
-            'id_tipo_naturaleza' => $request->naturaleza,
-            'fecha' => $request->fecha,
-            'if_formato' => $request->formato,
-            'organo' => $request->organo,
-            'id_sede' => $request->centro,
-            'id_calidad' => $request->calidad,
             'descripcion_calidad' => $request->descripcioncalidad,
-
+            'fecha' => $request->fecha,
+            'codigo' => $request->codigo,
+            'id_calidad' => $request->calidad,
+            'id_tipo_naturaleza' => $request->naturaleza,
+            'organo' => $request->organo,
+            'id_formato' => $request->formato,
         ]);
 
         return response()->json('La muestra se ha creado correctamente', 201);
@@ -69,7 +66,7 @@ class MuestraController extends Controller
             'fecha' => $request->fecha,
             'if_formato' => $request->formato,
             'organo' => $request->organo,
-            'id_sede' => $request->centro,
+            /* 'id_sede' => $request->centro, */
             'id_calidad' => $request->calidad,
             'descripcion_calidad' => $request->descripcioncalidad,
         ]);
