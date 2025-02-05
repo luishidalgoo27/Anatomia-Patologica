@@ -64,7 +64,7 @@ class MuestraController extends Controller
             'codigo' => $request->codigo,
             'id_tipo_naturaleza' => $request->naturaleza,
             'fecha' => $request->fecha,
-            'if_formato' => $request->formato,
+            'id_formato' => $request->formato,
             'organo' => $request->organo,
             /* 'id_sede' => $request->centro, */
             'id_calidad' => $request->calidad,
