@@ -23,10 +23,10 @@ Route::post('/addMuestra', [MuestraController::class, 'store']);
 Route::patch('/updateMuestra', [MuestraController::class, 'update']);
 Route::delete('/deleteMuestra', [MuestraController::class, 'destroy']);
 
-Route::get('/apiFormato', [FormatoController::class, 'index']);
-Route::get('/apiTipoEstudio', [TipoEstudioController::class, 'index']);
-Route::get('/apiNaturaleza', [NaturalezaController::class, 'index']);
-Route::get('/apiCalidad', [CalidadController::class, 'index']);
+Route::get('/formato', [FormatoController::class, 'index']);
+Route::get('/tipoEstudio', [TipoEstudioController::class, 'index']);
+Route::get('/naturaleza', [NaturalezaController::class, 'index']);
+Route::get('/calidad', [CalidadController::class, 'index']);
 /* Route::get('/apiSede', [SedeController::class, 'index']); */
 
 Route::get('/user', function (Request $request) {
