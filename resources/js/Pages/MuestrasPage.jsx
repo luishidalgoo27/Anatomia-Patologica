@@ -10,36 +10,51 @@ export default function MuestrasPage(){
                         </button>
                 </div>
 
-                <div className="flex flex-wrap gap-60 ml-8 pt-10">
+                <div className="grid grid-cols-2 gap-14 items-start pt-10 pb-12">
+                    <div className="flex flex-col">
+                        <label htmlFor="">Codigo de la muestra</label>
+                        <input type="text" className="w-44"/>
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label htmlFor="">Naturaleza de la muestra</label>
+                        <select name="" id="" className="w-44"></select>                        
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label htmlFor="">Coservacion de muestra</label>
+                        <select name="" id="" className="w-44"></select>                        
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label htmlFor="">Fecha de recoleccion</label>
+                        <input type="date" name="" id="" className="w-44"/>
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label htmlFor="">Formato</label>
+                        <select name="" id="" className="w-44"></select>                        
+                    </div>
                     
-                    <div className="flex flex-col gap-14">
-                        <label htmlFor="codigo">Codigo de la muestra</label>
-                        <input id="codigo" type="text" />
-                        
-                        <label htmlFor="naturaleza">Naturaleza de la muestra</label>
-                        <input id="naturaleza" type="text" />
-                        
-                        <label htmlFor="conservacion">Coservacion de muestra</label>
-                        <input id="conservacion" type="text" />
+                    <div className="flex flex-col">
+                        <label htmlFor="">Órgano</label>
+                        <input type="text" className="w-44"/>
                     </div>
 
-                    <div className="flex flex-col gap-14">
-                        <label htmlFor="fecha">Fecha de recoleccion</label>
-                        <input id="fecha" type="text" />
-                        
-                        <label htmlFor="biopsia">Opciones biopsia</label>
-                        <input id="biopsia" type="text" />
-                        
-                        <label htmlFor="procedencia">Centro de procedencia</label>
-                        <input id="procedencia" type="text" />
-                    </div>
-
-                    <div>
-                        <label htmlFor="imageFile">Imagenes de la muestra</label>
-                        <input type="file" id="imageFile" accept="image/*" multiple />
+                    <div className="flex flex-col">
+                        <label htmlFor="">Centro de procedencia</label>
+                        <select name="" id="" className="w-44"></select>                        
                     </div>
                 </div>
+
+                <div className="flex flex-col">
+                    <label for="imageFile">Imagenes de la muestra</label>
+                    <input type="file" id="imageFile" accept="image/*" multiple />
+                </div>
                 
+
+
+
                 </div>
             </div>
             
