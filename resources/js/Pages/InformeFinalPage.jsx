@@ -32,28 +32,10 @@ export default function MuestrasPage(){
                         </div>
 
                         
-                        <div className="ml-auto       mt-10 ">
+                        <div className="ml-auto mt-10 ">
                             <h1>hola</h1>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 </div>
             </div>

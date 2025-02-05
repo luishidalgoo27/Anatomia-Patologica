@@ -10,6 +10,9 @@ Route::post('/addUser', [UserController::class, 'store']);
 Route::patch('/updateUser', [UserController::class, 'update']);
 Route::delete('/deleteUser', [UserController::class, 'destroy']);
 
+/* LLamadas API de Muestras */
+
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
