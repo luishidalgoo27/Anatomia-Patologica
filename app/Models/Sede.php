@@ -22,8 +22,8 @@ class Sede extends Model
       //  return $this->hasMany(User::class, 'id_sede');
     //}
 
-    public function muestras()
-    {
-        return $this->hasMany(Muestra::class, 'id_sede');
-    }
+//    public function muestras()
+//    {
+//        return $this->hasMany(Muestra::class, 'id_sede');
+//    }
 }

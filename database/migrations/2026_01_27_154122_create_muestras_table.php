@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_calidad');
             $table->unsignedBigInteger('id_tipo_naturaleza');
             $table->unsignedBigInteger('id_formato');
-            $table->unsignedBigInteger('id_sede');
+           // $table->unsignedBigInteger('id_sede');
            // $table->unsignedBigInteger('id_user');
             $table->timestamps();
 
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreign('id_formato')->references('id')->on('formatos');
            // $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_tipo_naturaleza')->references('id')->on('tipo_naturalezas');
-            $table->foreign('id_sede')->references('id')->on('sedes');
+           // $table->foreign('id_sede')->references('id')->on('sedes');
         });
     }
 
