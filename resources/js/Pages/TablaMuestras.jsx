@@ -66,40 +66,40 @@ export default function TablaMuestras() {
                             <tbody>
                                 {
                                     muestras.map((muestra,index) => (
-                                        <tr key={index}>
+                                        <tr id={muestra.id} key={index}>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {}
+                                                    {muestra.codigo}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {}
+                                                    {muestra.fecha}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {}
+                                                    {muestra.descripcion_calidad}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {}
+                                                    {muestra.id_calidad}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {}
+                                                    {muestra.id_tipo_naturaleza}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {}
+                                                    {muestra.organo}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {}
+                                                    {muestra.id_formato}
                                                 </p>
                                             </td>
                                         </tr>
