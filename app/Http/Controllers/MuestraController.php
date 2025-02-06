@@ -23,24 +23,24 @@ class MuestraController extends Controller
     public function store(Request $request)
     {
     $request->validate([
-        'descripcioncalidad' => 'required',
+        'descripcion_calidad' => 'required',
         'fecha' => 'required',
         'codigo' => 'required',
-        'calidad' => 'required',
-        'naturaleza' => 'required',
+        'id_calidad' => 'required',
+        'id_tipo_naturaleza' => 'required',
         'organo' => 'required|nullable',
-        'formato' => 'required'
+        'id_formato' => 'required'
     ]);
 
     try{
         Muestra::create([
-            'descripcion_calidad' => $request->descripcioncalidad,
+            'descripcion_calidad' => $request->descripcion_calidad,
             'fecha' => $request->fecha,
             'codigo' => $request->codigo,
-            'id_calidad' => $request->calidad,
-            'id_tipo_naturaleza' => $request->naturaleza,
+            'id_calidad' => $request->id_calidad,
+            'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
             'organo' => $request->organo,
-            'id_formato' => $request->formato,
+            'id_formato' => $request->id_formato,
         ]);
 
         return response()->json('La muestra se ha creado correctamente', 201);

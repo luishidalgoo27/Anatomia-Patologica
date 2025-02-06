@@ -14,6 +14,14 @@ export default function TablaMuestras() {
             .catch(error => console.error('Error al obtener los datos:', error))
     }    
 
+    const handleUpdate = () => {
+
+    }
+    
+    const handleDelete = () => {
+    
+    }
+
     return (
         <>
             <div className="content-wrapper">

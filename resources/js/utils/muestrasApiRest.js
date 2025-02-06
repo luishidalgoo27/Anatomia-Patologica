@@ -2,11 +2,11 @@
 
 import Swal from "sweetalert2";
 
-const addMuestra = async () => {
+export const addMuestra = async (muestra) => {
     const response = await fetch(`/api/addMuestra`, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(muestra)
     })
@@ -16,8 +16,8 @@ const addMuestra = async () => {
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
     }else{
-        console.log("Usuario añadido correctamente:", data);
-        getMuestras();
+        console.log("Muestra añadida correctamente:", data);
+        Swal.fire("Muestra añadida!", "La muestra se ha creado correctamente", "success")
     }
 }
 
@@ -27,18 +27,4 @@ const updateMuestra = async () => {
 
 const deleteMuestra = async () => {
     fetch(`/api/deleteMuestra?id=`)
-}
-
-
-/* Esto es el onclick que se hace en el formulario de la pagina muestras */
-export const handleAdd = () => {
-    
-}
-
-export const handleUpdate = () => {
-
-}
-
-export const handleDelete = () => {
-
 }
