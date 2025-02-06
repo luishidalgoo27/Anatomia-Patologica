@@ -80,19 +80,16 @@ export const handleUpdateMuestra = async (muestra, getMuestras) => {
                 
                 <select id="id_formato" class="swal2-input swal2-select">
                     <option value="">Seleccione un formato</option>
-                    ${formatos.map(f => `<option value="${f.id}">${f.nombre}</option>`).join("")}
                 </select>
 
                 <select id="id_tipo_naturaleza" class="swal2-input swal2-select">
                     <option value="">Seleccione una naturaleza</option>
-                    ${naturalezas.map(n => `<option value="${n.id}">${n.nombre}</option>`).join("")}
                 </select>
 
                 <input type="text" id="organo" class="swal2-input" value="${muestra.organo}" placeholder="Órgano">
                 
                 <select id="id_calidad" class="swal2-input swal2-select">
                     <option value="">Seleccione la calidad</option>
-                    ${calidades.map(c => `<option value="${c.id}">${c.nombre}</option>`).join("")}
                 </select>
 
                 <textarea id="descripcion_calidad" class="swal2-textarea" placeholder="Descripción de calidad">${muestra.descripcion_calidad}</textarea>
