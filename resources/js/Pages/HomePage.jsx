@@ -9,7 +9,7 @@ export default function HomePage() {
     }, []) 
 
     const obtenerUsuarios = () => {
-        fetch('/api/users')
+        fetch('/api/api/users')
             .then(response => response.json())
             .then(data => setUsuarios(data))
             .catch(error => console.error('Error al obtener los datos:', error))

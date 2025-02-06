@@ -29,28 +29,28 @@ export default function MuestrasPage(){
 
 
     const getFormato = () => {
-        fetch(`/api/formato`)
+        fetch(`/api/api/formato`)
             .then(response => response.json())
             .then(data => setFormatos(data))
             .catch(error => console.error('Error al obtener los datos:', error))
     }  
 
     const getTipoEstudio = () => {
-        fetch(`/api/tipoEstudio`)
+        fetch(`/api/api/tipoEstudio`)
             .then(response => response.json())
             .then(data => setEstudios(data))
             .catch(error => console.error('Error al obtener los datos:', error))
     } 
 
     const getNaturaleza = () => {
-        fetch(`/api/naturaleza`)
+        fetch(`/api/api/naturaleza`)
             .then(response => response.json())
             .then(data => setNaturalezas(data))
             .catch(error => console.error('Error al obtener los datos:', error))
     } 
 
     const getCalidad = () => {
-        fetch(`/api/calidad`)
+        fetch(`/api/api/calidad`)
             .then(response => response.json())
             .then(data => setCalidades(data))
             .catch(error => console.error('Error al obtener los datos:', error))

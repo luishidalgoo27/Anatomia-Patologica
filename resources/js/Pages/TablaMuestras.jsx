@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { handleUpdateMuestra, deleteMuestra } from "@/utils/muestrasApiRest"
 
 export default function TablaMuestras() {
     const [muestras,setMuestras] = useState([])
@@ -8,19 +9,11 @@ export default function TablaMuestras() {
     }, []) 
 
     const getMuestras = () => {
-        fetch(`/api/muestras`)
+        fetch(`/api/api/muestras`)
             .then(response => response.json())
             .then(data => setMuestras(data))
             .catch(error => console.error('Error al obtener los datos:', error))
     }    
-
-    const handleUpdate = () => {
-
-    }
-    
-    const handleDelete = () => {
-    
-    }
 
     return (
         <>
@@ -68,6 +61,16 @@ export default function TablaMuestras() {
                                             Formato
                                         </p>
                                     </th>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            Modificar
+                                        </p>
+                                    </th>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            Eliminar
+                                        </p>
+                                    </th>
                                 </tr>
                             </thead>
 
@@ -109,6 +112,16 @@ export default function TablaMuestras() {
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {muestra.id_formato}
                                                 </p>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <button id={muestra.id} onClick={()=> {handleUpdateMuestra(muestra,getMuestras)}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                                    Editar muestra
+                                                </button>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <button id={muestra.id} onClick={()=> {deleteMuestra(muestra.id,getMuestras)}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                                                    Borrar muestra
+                                                </button>
                                             </td>
                                         </tr>
                                     ))

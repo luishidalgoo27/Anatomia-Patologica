@@ -62,13 +62,13 @@ class MuestraController extends Controller
 
         $muestra->update([
             'codigo' => $request->codigo,
-            'id_tipo_naturaleza' => $request->naturaleza,
+            'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
             'fecha' => $request->fecha,
-            'id_formato' => $request->formato,
+            'id_formato' => $request->id_formato,
             'organo' => $request->organo,
+            'id_calidad' => $request->id_calidad,
+            'descripcion_calidad' => $request->descripcion_calidad,
             /* 'id_sede' => $request->centro, */
-            'id_calidad' => $request->calidad,
-            'descripcion_calidad' => $request->descripcioncalidad,
         ]);
 
         return response()->json(['message' => 'Muestra actualizada correctamente', 'muestra' => $muestra], 201);
