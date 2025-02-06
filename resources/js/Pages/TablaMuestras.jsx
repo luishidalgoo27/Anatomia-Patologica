@@ -73,7 +73,7 @@ export default function TablaMuestras() {
                                     </th>
                                 </tr>
                             </thead>
-
+ 
                             <tbody>
                                 {
                                     muestras.map((muestra,index) => (
