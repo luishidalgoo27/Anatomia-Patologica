@@ -43,10 +43,10 @@ class Muestra extends Model
         return $this->belongsTo(Tipo_naturaleza::class, 'id_tipo_naturaleza');
     }
 
-    public function sede()
-    {
-        return $this->belongsTo(Sede::class, 'id_sede');
-    }
+    //public function sede()
+    //{
+      //  return $this->belongsTo(Sede::class, 'id_sede');
+    //}
 
     public function imagenes()
     {
