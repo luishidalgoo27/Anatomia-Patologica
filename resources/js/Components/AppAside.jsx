@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import MedacLogo from '../../assets/dist/img/MEDAC_LOGO.png'
-import UserImg from '../../assets/dist/img/user2-160x160.jpg'
+import MedacLogo from '../../assets/img/MEDAC_LOGO.png'
+import UserImg from '../../assets/img/user2-160x160.jpg'
 
 export default function AppAside(){
     return(
@@ -63,14 +63,6 @@ export default function AppAside(){
                                     <i className="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Tabla muestras
-                                    </p>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/muestras" className="nav-link">
-                                    <i className="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Muestras
                                     </p>
                                 </Link>
                             </li>
