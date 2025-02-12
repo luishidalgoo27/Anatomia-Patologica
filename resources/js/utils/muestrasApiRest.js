@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 
 export const addMuestra = async (muestra) => {
-    const response = await fetch(`/api/api/addMuestra`, {
+    const response = await fetch(`/api/addMuestra`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const addMuestra = async (muestra) => {
 }
 
 const updateMuestra = async (muestra,muestraId,getMuestras) => {
-    const response = await fetch(`/api/api/updateMuestra?id=${muestraId}`, {
+    const response = await fetch(`/api/updateMuestra?id=${muestraId}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const updateMuestra = async (muestra,muestraId,getMuestras) => {
 }
 
 export const deleteMuestra = async (muestraId, getMuestras) => {
-    const response = await fetch(`/api/api/deleteMuestra?id=${muestraId}`, {
+    const response = await fetch(`/api/deleteMuestra?id=${muestraId}`, {
         method: "DELETE", 
         headers: {
             "Content-Type": "application/json",
