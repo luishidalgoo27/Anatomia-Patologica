@@ -17,11 +17,11 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="content-wrapper">
-                <div className="content">
+        <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
+        <div className="content">
                
-                    <div className="p-4 flex gap-4 justify-center">
-                        <button onClick={() => handleAdd(obtenerUsuarios)} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                    <div className="text-right p-3 pb-3">
+                        <button onClick={() => handleAdd(obtenerUsuarios)} className="bg-azulMedac text-white  w-36 h-12 rounded-lg ">
                             Añadir usuario
                         </button>
                     </div>
