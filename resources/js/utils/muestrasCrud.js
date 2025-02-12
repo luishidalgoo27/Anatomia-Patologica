@@ -1,10 +1,16 @@
 import Swal from "sweetalert2";
 
+const formato = []
+const estudio = []
+const naturaleza = []
+const calidad = []
+
+
 const getFormato = () => {
     fetch(`/formato`)
         .then(response => response.json())
         .then(data => ()=>{
-
+            formato = data
         })
         .catch(error => console.error('Error al obtener los datos:', error))
 }  
@@ -13,7 +19,7 @@ const getTipoEstudio = () => {
     fetch(`/api/tipoEstudio`)
         .then(response => response.json())
         .then(data => ()=>{
-
+            estudio = data
         })
         .catch(error => console.error('Error al obtener los datos:', error))
 } 
@@ -22,7 +28,7 @@ const getNaturaleza = () => {
     fetch(`/api/naturaleza`)
         .then(response => response.json())
         .then(data => ()=>{
-
+            naturaleza = data
         })
         .catch(error => console.error('Error al obtener los datos:', error))
 } 
@@ -31,7 +37,7 @@ const getCalidad = () => {
     fetch(`/api/calidad`)
         .then(response => response.json())
         .then(data => ()=>{
-            
+            calidad = data
         })
         .catch(error => console.error('Error al obtener los datos:', error))
 } 
