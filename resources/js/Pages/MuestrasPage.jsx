@@ -19,9 +19,7 @@ export default function MuestrasPage(){
 
     return(
         <>
-        <div>
-            <h1>hola</h1>
-        </div>
+
             <div className="content-wrapper">
                 <div className="content bg-slate-200">
 
