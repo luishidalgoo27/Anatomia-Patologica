@@ -8,7 +8,7 @@ export default function MuestrasPage(){
     useEffect(()=>{
         getMuestras()
     }, [])
-    
+     
     const getMuestras = () => {
         fetch(`/api/muestras`)
         .then(response => response.json())
