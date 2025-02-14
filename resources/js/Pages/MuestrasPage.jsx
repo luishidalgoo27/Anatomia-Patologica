@@ -10,7 +10,7 @@ export default function MuestrasPage(){
     }, [])
      
     const getMuestras = () => {
-        fetch(`/api/muestras`)
+        fetch(`/api/api/muestras`)
         .then(response => response.json())
         .then(data => setMuestras(data))
         .catch(error => console.error('Error al obtener los datos:', error))

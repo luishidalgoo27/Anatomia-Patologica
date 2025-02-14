@@ -5,7 +5,7 @@ let formato,estudio,naturaleza,calidad
 
 const getFormato = async () => {
     try{
-        const response = await fetch(`/api/formato`)
+        const response = await fetch(`/api/api/formato`)
         const data = await response.json()
         formato = data
     } catch(error){
@@ -15,7 +15,7 @@ const getFormato = async () => {
 
 const getTipoEstudio = async () => {
     try {
-        const response = await fetch(`/api/tipoEstudio`)
+        const response = await fetch(`/api/api/tipoEstudio`)
         const data = await response.json()
         estudio = data
     } catch (error) {
@@ -25,7 +25,7 @@ const getTipoEstudio = async () => {
 
 const getNaturaleza = async () => {
     try {
-        const response = await fetch(`/api/naturaleza`)
+        const response = await fetch(`/api/api/naturaleza`)
         const data = await response.json()
         naturaleza = data
     } catch (error) {
@@ -35,7 +35,7 @@ const getNaturaleza = async () => {
 
 const getCalidad = async () => {
     try {
-        const response = await fetch('/api/calidad')
+        const response = await fetch('/api/api/calidad')
         const data = await response.json()
         calidad = data
     } catch (error) {
@@ -45,7 +45,7 @@ const getCalidad = async () => {
 
 
 const addMuestra = async (muestra, getMuestras) => {
-    const response = await fetch(`/api/addMuestra`, {
+    const response = await fetch(`/api/api/addMuestra`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const addMuestra = async (muestra, getMuestras) => {
 }
 
 const deleteMuestra = async (idMuestra) => {
-    const response = await fetch('/api/deleteMuestra', {
+    const response = await fetch('/api/api/deleteMuestra', {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json"
