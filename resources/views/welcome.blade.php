@@ -10,7 +10,7 @@
     @vite(['resources/js/app.js', 'resources/css/app.css']) 
   
   </head>
-
+ 
   <body class="hold-transition sidebar-mini">
     <div class="wrapper" id="root">
 
