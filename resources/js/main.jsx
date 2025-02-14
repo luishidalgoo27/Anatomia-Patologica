@@ -10,6 +10,8 @@ import MuestrasPage from './Pages/MuestrasPage'
 import MuestrasPage2 from './Pages/MuestrasPage2'
 import InformeFinalPage from './Pages/InformeFinalPage'
 import TablaMuestras from './Pages/TablaMuestras'
+import LoginPage from './Pages/LoginPage'
+import CrearCuentaPage from './Pages/CrearCuentaPage'
 
 const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
             {
                 path: '/tablamuestras',
                 element: <TablaMuestras />
+            },
+            {
+                path: '/login',
+                element: <LoginPage />
+            },
+            {
+                path: '/CrearCuenta',
+                element: <CrearCuentaPage />
             }
         ]
     }
