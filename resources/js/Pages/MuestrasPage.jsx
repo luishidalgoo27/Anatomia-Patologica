@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { handleAdd } from "@/utils/muestrasCrud"
+import { handleAdd, actualizarMuestra } from "@/utils/muestrasCrud"
 
 export default function MuestrasPage(){    
     //Estados para pintar los input de muestras
@@ -27,7 +27,7 @@ export default function MuestrasPage(){
                     
                     <div>
                         <div className="text-right p-3 pb-3">
-                            <button onClick={handleAdd} className="bg-azulMedac text-white w-36 h-12 rounded-lg ">
+                            <button onClick={()=>{handleAdd(getMuestras)}} className="bg-azulMedac text-white w-36 h-12 rounded-lg ">
                                 Añadir muestra
                             </button>
                         </div>
@@ -54,43 +54,13 @@ export default function MuestrasPage(){
                                             Descripción
                                         </p>
                                     </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Calidad
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Tipo de naturaleza
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Órgano
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Formato
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Modificar
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Eliminar
-                                        </p>
-                                    </th>
                                 </tr>
                             </thead>
  
                             <tbody>
                                 {
                                     muestras.map((muestra,index) => (
-                                        <tr id={muestra.id} key={index}>
+                                        <tr id={muestra.id} key={index} onClick={() => actualizarMuestra(muestra)}>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {muestra.codigo}
@@ -105,36 +75,6 @@ export default function MuestrasPage(){
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {muestra.descripcion_calidad}
                                                 </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.id_calidad}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.id_tipo_naturaleza}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.organo}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.id_formato}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={muestra.id} onClick={()=> {}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                                    Editar muestra
-                                                </button>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={muestra.id} onClick={()=> {}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                                    Borrar muestra
-                                                </button>
                                             </td>
                                         </tr>
                                     ))

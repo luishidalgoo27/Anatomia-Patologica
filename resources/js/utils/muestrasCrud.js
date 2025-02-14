@@ -1,45 +1,46 @@
 import Swal from "sweetalert2";
 
-const formato = []
-const estudio = []
-const naturaleza = []
-const calidad = []
+let formato,estudio,naturaleza,calidad 
 
 
-const getFormato = () => {
-    fetch(`/formato`)
-        .then(response => response.json())
-        .then(data => ()=>{
-            formato = data
-        })
-        .catch(error => console.error('Error al obtener los datos:', error))
+const getFormato = async () => {
+    try{
+        const response = await fetch(`/api/formato`)
+        const data = await response.json()
+        formato = data
+    } catch(error){
+        console.error('Error al obtener los datos:', error)
+    }   
 }  
 
-const getTipoEstudio = () => {
-    fetch(`/api/tipoEstudio`)
-        .then(response => response.json())
-        .then(data => ()=>{
-            estudio = data
-        })
-        .catch(error => console.error('Error al obtener los datos:', error))
+const getTipoEstudio = async () => {
+    try {
+        const response = await fetch(`/api/tipoEstudio`)
+        const data = await response.json()
+        estudio = data
+    } catch (error) {
+        console.error('Error al obtener los datos:', error)
+    }
 } 
 
-const getNaturaleza = () => {
-    fetch(`/api/naturaleza`)
-        .then(response => response.json())
-        .then(data => ()=>{
-            naturaleza = data
-        })
-        .catch(error => console.error('Error al obtener los datos:', error))
+const getNaturaleza = async () => {
+    try {
+        const response = await fetch(`/api/naturaleza`)
+        const data = await response.json()
+        naturaleza = data
+    } catch (error) {
+        console.error('Error al obtener los datos:', error)
+    }
 } 
 
-const getCalidad = () => {
-    fetch(`/api/calidad`)
-        .then(response => response.json())
-        .then(data => ()=>{
-            calidad = data
-        })
-        .catch(error => console.error('Error al obtener los datos:', error))
+const getCalidad = async () => {
+    try {
+        const response = await fetch('/api/calidad')
+        const data = await response.json()
+        calidad = data
+    } catch (error) {
+        console.error('Error al obtener los datos:', error)
+    }
 } 
 
 
@@ -63,8 +64,28 @@ const addMuestra = async (muestra, getMuestras) => {
     }
 }
 
+const deleteMuestra = async (idMuestra) => {
+    const response = await fetch('/api/deleteMuestra', {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(idMuestra)
+    })
+
+    const data = response.json()
+    if(!response.ok){
+        console.error("Error en el servidor:", data);
+        console.log("Error: " + data.message);
+    }else{
+        getMuestras()
+        console.log("Muestra eliminada correctamente:", data);
+        Swal.fire("Muestra eliminada!", "La muestra se ha eliminada correctamente", "error")
+    }
+}
+
 export const handleAdd = async (getMuestras) => {
-    await Promise.all([getFormato(), getNaturaleza(), getCalidad()])
+    await Promise.all([getFormato(), getNaturaleza(), getTipoEstudio(), getCalidad()])
 
     Swal.fire({
         title:'Añadir muestra',
@@ -79,11 +100,21 @@ export const handleAdd = async (getMuestras) => {
                 <label for="formato">Formato</label>
                 <select id="formato" class="swal2-select">
                     <option value="">Seleccione una opción</option>
+                    ${
+                        formato.map(f => (
+                            `<option value="${f.id}">${f.nombre}</option>`
+                        ))                  
+                    }
                 </select>
 
                 <label for="naturaleza">Tipo de naturaleza</label>
                 <select id="naturaleza" class="swal2-select">
                     <option value="">Seleccione una opción</option>
+                    ${
+                        naturaleza.map(n => (
+                            `<option value="${n.id}">${n.nombre}</option>`
+                        ))                  
+                    }
                 </select>
 
                 <label for="organo">Órgano</label>
@@ -92,11 +123,21 @@ export const handleAdd = async (getMuestras) => {
                 <label for="estudio">Tipo de estudio</label>
                 <select id="estudio" class="swal2-select">
                     <option value="">Seleccione una opción</option>
+                    ${
+                        estudio.map(e => (
+                            `<option value="${e.id}">${e.nombre}</option>`
+                        ))                  
+                    }
                 </select>
 
                 <label for="calidad">Calidad de la muestra</label>
                 <select id="calidad" class="swal2-select">
                     <option value="">Seleccione una opción</option>
+                    ${
+                        calidad.map(c => (
+                            `<option value="${c.id}">${c.nombre}</option>`
+                        ))                  
+                    }
                 </select>
                 
                 <label for="descripcion">Descripción de la calidad</label>
@@ -104,7 +145,7 @@ export const handleAdd = async (getMuestras) => {
 
                 <label for="imagenes">Imagenes de la muestra</label>
                 <input type="file" id="imagenes" class="swal2-file" accept="image/*" multiple />
-            </div
+            </div>
         `,
         showCancelButton: true,
         confirmButtonText: "Añadir",
@@ -128,9 +169,22 @@ export const handleAdd = async (getMuestras) => {
         },
     }).then((result) => {
         if (result.isConfirmed) {
-            addUser(result.value,getMuestras); 
+            addMuestra(result.value,getMuestras); 
             console.log("Datos ingresados:", result.value)
-            Swal.fire("Muestra añadida!", "La muestra se ha registrado correctamente", "success")
         }
     })
 }
+
+export const actualizarMuestra = (muestra) => {
+    Swal.fire({
+        title: `Editar Muestra`,
+        html: `
+            <div class="flex flex-row items-center justify-center">
+                <button id="editar-muestra" class="swal2-input">Editar</button>
+                <button id="eliminar-muestra" class="swal2-input">Eliminar</button>        
+            </div>
+        `,
+        icon: "info",
+        confirmButtonText: "Cerrar",
+    });
+};
