@@ -5,7 +5,7 @@ import UserImg from '../../assets/img/user2-160x160.jpg'
 export default function AppAside(){
     return(
         <>
-            <aside className="main-sidebar sidebar-dark-primary elevation-4">
+            <aside className="main-sidebar bg-navy sidebar-dark-primary elevation-4">
                 <Link to="/" className="brand-link">
                     <img src={MedacLogo} alt="AdminLTE Logo" className="brand-image img-circle elevation-3"/>
                     <span className="brand-text font-weight-light">Medac Fundación</span>

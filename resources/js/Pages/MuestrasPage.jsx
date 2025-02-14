@@ -20,11 +20,9 @@ export default function MuestrasPage(){
     return(
         <>
 
-            <div className="content-wrapper">
-                <div className="content bg-slate-200">
-
-                    <div className="pb-28"></div>
-                    
+            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
+                <div className="content ">
+                
                     <div>
                         <div className="text-right p-3 pb-3">
                             <button onClick={handleAdd} className="bg-azulMedac text-white w-36 h-12 rounded-lg ">
