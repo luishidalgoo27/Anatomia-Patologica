@@ -13,7 +13,7 @@ class MuestraController extends Controller
      */
     public function index()
     {
-        $muestras = Muestra::all();
+        $muestras = Muestra::with(['calidad','formato','tipoNaturaleza'])->get();
         return response()->json($muestras, 200);
     }
 
