@@ -12,6 +12,8 @@ Route::get('/{any}', function () {
     return view('welcome'); // Cambia "welcome" si estás usando otra vista principal
 })->where('any', '.*'); // Captura todas las rutas posibles
 
+Route::post('/subirImagen', [UserController::class, 'subirImagen'])->name('upload');
+
 /* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
