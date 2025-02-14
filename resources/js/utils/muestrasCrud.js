@@ -90,6 +90,7 @@ export const handleAdd = async (getMuestras) => {
     Swal.fire({
         title:'Añadir muestra',
         html: `
+<<<<<<< HEAD
             <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-6  text-azulMedac font-sans">
                 
                 <label for="fecha">Fecha de recolección</label>
@@ -144,6 +145,9 @@ export const handleAdd = async (getMuestras) => {
                 </div>
 
             </div
+=======
+
+>>>>>>> origin/frontend-rafa
         `,
         showCancelButton: true,
         confirmButtonText: "Añadir",
