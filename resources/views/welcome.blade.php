@@ -8,9 +8,14 @@
 
     @viteReactRefresh
     @vite(['resources/js/app.js', 'resources/css/app.css']) 
-  
+    
   </head>
-
+  <form method="POST" enctype="multipart/form-data" action="{{route('upload')}}">
+    @csrf
+    <label for="imagenes">Imagenes de la muestra</label>
+    <input name="image" type="file" />
+    <input type="submit" value="upload">
+  </form>
   <body class="hold-transition sidebar-mini">
     <div class="wrapper" id="root">
 
