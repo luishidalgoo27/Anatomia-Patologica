@@ -125,8 +125,24 @@ export const handleAdd = async (getMuestras) => {
                 <label for="descripcion">Descripción de la calidad</label>
                 <textarea type="text" id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
 
-                <label for="imagenes">Imagenes de la muestra</label>
-                <input type="file" id="imagenes" class="swal2-file" accept="image/*" multiple />
+                
+                <div class="flex flex-col w-96  ">
+                    <label for="calidad">Calidad de la muestra</label>
+                    <select id="calidad" class="rounded-xl ">
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
+ 
+                <div class="flex flex-col  w-96 ">
+                    <label for="descripcion">Descripción de la calidad</label>
+                    <textarea type="text" id="descripcion" class="h-36 rounded-lg" placeholder="Descripción"></textarea>
+                </div>
+
+                <div class="flex flex-col  w-96 ">
+                    <label for="imagenes">Imagenes de la muestra</label>
+                    <input type="file" id="imagenes" class="" accept="image/*" multiple />
+                </div>
+
             </div
         `,
         showCancelButton: true,
