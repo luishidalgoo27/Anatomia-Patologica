@@ -17,7 +17,7 @@ export default function AppAside(){
                             <img src={UserImg} className="img-circle elevation-2" alt="User Image"/>
                         </div>
                         <div className="info">
-                            <a href="#" className="d-block">Luis</a>
+                            <a href="/login" className="d-block">Luis</a>
                         </div>
                     </div>
 
