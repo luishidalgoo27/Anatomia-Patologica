@@ -33,7 +33,7 @@ export default function MuestrasPage(){
 
 
                     {/* Tabla de muestras */}                    
-                    <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+                    <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border overflow-auto">
                         <table className="w-full text-left table-auto min-w-max">
                             <thead>
                                 <tr>
@@ -52,36 +52,7 @@ export default function MuestrasPage(){
                                             Descripción
                                         </p>
                                     </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Calidad
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Tipo de naturaleza
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Órgano
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Formato
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Modificar
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Eliminar
-                                        </p>
-                                    </th>
+                                   
                                 </tr>
                             </thead>
  
@@ -104,36 +75,8 @@ export default function MuestrasPage(){
                                                     {muestra.descripcion_calidad}
                                                 </p>
                                             </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.id_calidad}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.id_tipo_naturaleza}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.organo}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.id_formato}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={muestra.id} onClick={()=> {}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                                    Editar muestra
-                                                </button>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={muestra.id} onClick={()=> {}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                                    Borrar muestra
-                                                </button>
-                                            </td>
+
+                                            
                                         </tr>
                                     ))
                                 }

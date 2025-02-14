@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function AppNavBar() {
     return (
         <>
@@ -17,21 +19,21 @@ export default function AppNavBar() {
                     </li>
 
 
-                    <li className="nav-item d-none d-sm-inline-block">
-                        <a href="../../index3.html" className="nav-link">
-                            Inicio
-                        </a>
-                    </li>
 
 
-                    <li className="nav-item d-none d-sm-inline-block">
-                        <a href="#" className="nav-link">
-                            Contacto
-                        </a>
-                    </li>
                 </ul>
 
                 <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <a
+                        className="nav-link"
+                        data-widget=""
+                        href="#"
+                        role="button"
+                    >
+                        <i className="fas  fa-bell"></i>
+                    </a>
+                </li>
                     <li className="nav-item">
                         <a
                             className="nav-link"
@@ -43,16 +45,8 @@ export default function AppNavBar() {
                         </a>
                     </li>
                     
-                    <li className="nav-item">
-                        <a
-                            className="nav-link"
-                            data-widget=""
-                            href="#"
-                            role="button"
-                        >
-                            <i className="fas  fa-user"></i>
-                        </a>
-                    </li>
+
+
 
 
                 </ul>

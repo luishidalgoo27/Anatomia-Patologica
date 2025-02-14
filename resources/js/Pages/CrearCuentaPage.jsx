@@ -2,7 +2,7 @@ export default function CrearCuentaPage() {
     return (
 
         <>
-            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)] ">
+            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]  ">
             <div className="content">
                     <section className="">
                         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -48,7 +48,11 @@ export default function CrearCuentaPage() {
                                                 required=""
                                             ></input>
                                         </div>
-
+                                        <div className="">
+                                                <button className="bg-azulMedac text-white w-20 h-10 rounded-lg ">
+                                                    Crear
+                                                </button>
+                                            </div>
                                     </form>
                                 </div>
                             </div>
