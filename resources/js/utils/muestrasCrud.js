@@ -69,41 +69,61 @@ export const handleAdd = async (getMuestras) => {
     Swal.fire({
         title:'Añadir muestra',
         html: `
-            <div class="flex flex-col">
-                <label for="codigo">Código de la muestra</label>
-                <input type="text" id="codigo" class="swal2-input" placeholder="Codigo">
+            <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-6  text-azulMedac font-sans">
                 
-                <label for="fecha">Fecha de recolección</label>
-                <input type="date" id="fecha" class="swal2-input">
-                
-                <label for="formato">Formato</label>
-                <select id="formato" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                </select>
+                <div class="flex flex-col   w-96">
+                    <label for="codigo">Código de la muestra</label>
+                    <input type="text" id="codigo" class=" rounded-xl" placeholder="Codigo">
+                </div>
 
-                <label for="naturaleza">Tipo de naturaleza</label>
-                <select id="naturaleza" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                </select>
+                <div class="flex flex-col   w-96">
+                    <label for="fecha">Fecha de recolección</label>
+                    <input type="date" id="fecha" class=" rounded-xl">
+                </div>
+                    
+                <div class="flex flex-col  w-96 ">
+                    <label for="formato">Formato</label>
+                    <select id="formato" class=" rounded-xl">
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
 
-                <label for="organo">Órgano</label>
-                <input type="text" id="organo" class="swal2-input" placeholder="Órgano">
+                <div class="flex flex-col   w-96">
+                    <label for="naturaleza">Tipo de naturaleza</label>
+                    <select id="naturaleza" class=" rounded-xl">
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
 
-                <label for="estudio">Tipo de estudio</label>
-                <select id="estudio" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                </select>
+                <div class="flex flex-col  w-96 ">
+                    <label for="organo">Órgano</label>
+                    <input type="text" id="organo" class=" rounded-xl" placeholder="Órgano">
+                </div>
 
-                <label for="calidad">Calidad de la muestra</label>
-                <select id="calidad" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                </select>
-                
-                <label for="descripcion">Descripción de la calidad</label>
-                <textarea type="text" id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
+                <div class="flex flex-col  w-96 ">
+                    <label for="estudio">Tipo de estudio</label>
+                    <select id="estudio" class=" rounded-xl">
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
 
-                <label for="imagenes">Imagenes de la muestra</label>
-                <input type="file" id="imagenes" class="swal2-file" accept="image/*" multiple />
+                <div class="flex flex-col w-96  ">
+                    <label for="calidad">Calidad de la muestra</label>
+                    <select id="calidad" class="rounded-xl ">
+                        <option value="">Seleccione una opción</option>
+                    </select>
+                </div>
+ 
+                <div class="flex flex-col  w-96 ">
+                    <label for="descripcion">Descripción de la calidad</label>
+                    <textarea type="text" id="descripcion" class="h-36 rounded-lg" placeholder="Descripción"></textarea>
+                </div>
+
+                <div class="flex flex-col  w-96 ">
+                    <label for="imagenes">Imagenes de la muestra</label>
+                    <input type="file" id="imagenes" class="" accept="image/*" multiple />
+                </div>
+
             </div
         `,
         showCancelButton: true,
