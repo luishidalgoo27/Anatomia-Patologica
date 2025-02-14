@@ -107,6 +107,7 @@ export const handleAdd = async (getMuestras) => {
                     </select>
                 </div>
 
+                
                 <div class="flex flex-col w-96  ">
                     <label for="calidad">Calidad de la muestra</label>
                     <select id="calidad" class="rounded-xl ">
