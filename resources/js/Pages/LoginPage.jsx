@@ -66,10 +66,19 @@ export default function LoginPage() {
                                                     >
                                                         Recuerdame
                                                     </label>
+                                                                    
+                                                                    
                                                 </div>
+
                                             </div>
 
+                                            <div className="">
+                                                <button className="bg-azulMedac text-white w-20 h-10 rounded-lg ">
+                                                    Entrar
+                                                </button>
+                                            </div>
                                         </div>
+                                        
                                     </form>
                                 </div>
                             </div>

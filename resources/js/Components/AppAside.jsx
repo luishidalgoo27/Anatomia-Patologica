@@ -5,8 +5,8 @@ import UserImg from '../../assets/img/user2-160x160.jpg'
 export default function AppAside(){
     return(
         <>
-            <aside className="main-sidebar bg-navy sidebar-dark-primary elevation-4">
-                <Link to="/" className="brand-link">
+            <aside className="main-sidebar bg-navy sidebar-dark-primary elevation-4 font-hola">
+                <Link to="https://www.fundaciondavante.org/" className="brand-link">
                     <img src={MedacLogo} alt="AdminLTE Logo" className="brand-image img-circle elevation-3"/>
                     <span className="brand-text font-weight-light">Medac Fundación</span>
                 </Link>
@@ -17,7 +17,7 @@ export default function AppAside(){
                             <img src={UserImg} className="img-circle elevation-2" alt="User Image"/>
                         </div>
                         <div className="info">
-                            <a href="#" className="d-block">Luis Hidalgo</a>
+                            <a href="/login" className="d-block">Luis</a>
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@ export default function AppAside(){
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li className="nav-item">
                                 <Link to="/muestras" className="nav-link">
-                                    <i className="nav-icon fas fa-tachometer-alt"></i>
+                                    <i className="nav-icon fas  fa-heartbeat"></i>
                                     <p>
                                         Muestras
                                     </p>
@@ -44,25 +44,26 @@ export default function AppAside(){
                             </li>
                             <li className="nav-item">
                                 <Link to="/muestras2" className="nav-link">
-                                    <i className="nav-icon fas fa-tachometer-alt"></i>
+                                    <i className="nav-icon fas  fa-image"></i>
                                     <p>
                                         Interpretaciones
                                     </p>
                                 </Link>
                             </li>
+
                             <li className="nav-item">
-                                <Link to="/informeFinal" className="nav-link">
-                                    <i className="nav-icon fas fa-tachometer-alt"></i>
+                                <Link to="/" className="nav-link">
+                                    <i className="nav-icon fas  fa-user"></i>
                                     <p>
-                                        Informe Final
+                                        Usuario
                                     </p>
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/tablamuestras" className="nav-link">
-                                    <i className="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Tabla muestras
+                                <Link to="" className="nav-link">
+                                    <i className="nav-icon fas fa-power-off"></i>
+                                    <p className="text-danger">
+                                        Cerrar Sesion
                                     </p>
                                 </Link>
                             </li>
