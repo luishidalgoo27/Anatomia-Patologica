@@ -17,10 +17,10 @@ class Sede extends Model
         'nombre'
     ];
 
-  //  public function usuarios()
-    //{
-      //  return $this->hasMany(User::class, 'id_sede');
-    //}
+    public function usuarios()
+    {
+        return $this->hasMany(User::class, 'id_sede');
+    }
 
 //    public function muestras()
 //    {

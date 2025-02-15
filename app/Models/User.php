@@ -21,13 +21,13 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-       // 'id_sede'
+        'id_sede'
     ];
 
-  //  public function sede()
-    //{
-      //  return $this->belongsTo(Sede::class, 'id_sede');
-    //}
+    public function sede()
+    {
+      return $this->belongsTo(Sede::class, 'id_sede');
+    }
 
     //public function muestras()
     //{
