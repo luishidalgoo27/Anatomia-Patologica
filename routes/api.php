@@ -29,6 +29,6 @@ Route::get('/naturaleza', [NaturalezaController::class, 'index']);
 Route::get('/calidad', [CalidadController::class, 'index']);
 /* Route::get('/apiSede', [SedeController::class, 'index']); */
 
-Route::get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request){
     return $request->user();
-})->middleware('auth:sanctum');
+});
