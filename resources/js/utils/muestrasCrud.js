@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 
 let formato,estudio,naturaleza,calidad 
 
+
 const getFormato = async () => {
     try{
         const response = await fetch(`/api/formato`)
@@ -47,7 +48,6 @@ const getCalidad = async () => {
 
 
 
-
 const addMuestra = async (muestra, getMuestras) => {
     const response = await fetch(`/api/addMuestra`, {
         method: 'POST',
@@ -74,61 +74,81 @@ export const handleAdd = async (getMuestras) => {
     Swal.fire({
         title:'Añadir muestra',
         html: `
-            <div class="flex flex-col">
-                <label for="codigo">Código de la muestra</label>
-                <input type="text" id="codigo" class="swal2-input" placeholder="Codigo">
+            <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-6  text-azulMedac font-sans">           
+                <div class="flex flex-col   w-96">
+                    <label for="codigo">Código de la muestra</label>
+                    <input type="text" id="codigo" class=" rounded-xl" placeholder="Codigo">
+                </div>
+
+                <div class="flex flex-col   w-96">
+                    <label for="fecha">Fecha de recolección</label>
+                    <input type="date" id="fecha" class=" rounded-xl">
+                </div>
+                    
+                <div class="flex flex-col  w-96 ">
+                    <label for="formato">Formato</label>
+                    <select id="formato" class=" rounded-xl">
+                        <option value="">Seleccione una opción</option>
+                        ${
+                            formato.map(f => (
+                                `<option value="${f.id}">${f.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+
+                <div class="flex flex-col   w-96">
+                    <label for="naturaleza">Tipo de naturaleza</label>
+                    <select id="naturaleza" class=" rounded-xl">
+                        <option value="">Seleccione una opción</option>
+                        ${
+                            naturaleza.map(n => (
+                                `<option value="${n.id}">${n.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+
+                <div class="flex flex-col  w-96 ">
+                    <label for="organo">Órgano</label>
+                    <input type="text" id="organo" class=" rounded-xl" placeholder="Órgano">
+                </div>
+
+                <div class="flex flex-col  w-96 ">
+                    <label for="estudio">Tipo de estudio</label>
+                    <select id="estudio" class=" rounded-xl">
+                        <option value="">Seleccione una opción</option>
+                        ${
+                            estudio.map(e => (
+                                `<option value="${e.id}">${e.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+
                 
-                <label for="fecha">Fecha de recolección</label>
-                <input type="date" id="fecha" class="swal2-input">
-                
-                <label for="formato">Formato</label>
-                <select id="formato" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                    ${
-                        formato.map(f => (
-                            `<option value="${f.id}">${f.nombre}</option>`
-                        ))                  
-                    }
-                </select>
+                <div class="flex flex-col w-96  ">
+                    <label for="calidad">Calidad de la muestra</label>
+                    <select id="calidad" class="rounded-xl ">
+                        <option value="">Seleccione una opción</option>
+                        ${
+                            calidad.map(c => (
+                                `<option value="${c.id}">${c.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+ 
+                <div class="flex flex-col  w-96 ">
+                    <label for="descripcion">Descripción de la calidad</label>
+                    <textarea type="text" id="descripcion" class="h-36 rounded-lg" placeholder="Descripción"></textarea>
+                </div>
 
-                <label for="naturaleza">Tipo de naturaleza</label>
-                <select id="naturaleza" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                    ${
-                        naturaleza.map(n => (
-                            `<option value="${n.id}">${n.nombre}</option>`
-                        ))                  
-                    }
-                </select>
+                <div class="flex flex-col  w-96 ">
+                    <label for="imagenes">Imagenes de la muestra</label>
+                    <input type="file" id="imagenes" class="" accept="image/*" multiple />
+                </div>
 
-                <label for="organo">Órgano</label>
-                <input type="text" id="organo" class="swal2-input" placeholder="Órgano">
-
-                <label for="estudio">Tipo de estudio</label>
-                <select id="estudio" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                    ${
-                        estudio.map(e => (
-                            `<option value="${e.id}">${e.nombre}</option>`
-                        ))                  
-                    }
-                </select>
-
-                <label for="calidad">Calidad de la muestra</label>
-                <select id="calidad" class="swal2-select">
-                    <option value="">Seleccione una opción</option>
-                    ${
-                        calidad.map(c => (
-                            `<option value="${c.id}">${c.nombre}</option>`
-                        ))                  
-                    }
-                </select>
-                
-                <label for="descripcion">Descripción de la calidad</label>
-                <textarea type="text" id="descripcion" class="swal2-textarea" placeholder="Descripción"></textarea>
-
-                <label for="imagenes">Imagenes de la muestra</label>
-                <input type="file" id="imagenes" class="swal2-file" accept="image/*" multiple />
             </div>
         `,
         showCancelButton: true,
@@ -208,57 +228,77 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
     Swal.fire({
         title: `Editar Muestra`,
         html: `
-            <div class="flex flex-col">
-                <label for="codigo">Código de la muestra</label>
-                <input type="text" id="codigo" class="swal2-input" placeholder="Codigo" value="${muestra.codigo}">
+            <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-6  text-azulMedac font-sans">           
+                <div class="flex flex-col  w-96">
+                    <label for="codigo">Código de la muestra</label>
+                    <input type="text" id="codigo" class=" rounded-xl" placeholder="Codigo" value="${muestra.codigo}">
+                </div>
+
+                <div class="flex flex-col w-96">
+                    <label for="fecha">Fecha de recolección</label>
+                    <input type="date" id="fecha" class=" rounded-xl" value="${muestra.fecha}">
+                </div>
+                    
+                <div class="flex flex-col w-96 ">
+                    <label for="formato">Formato</label>
+                    <select id="formato" class=" rounded-xl" value="${muestra.formato}">
+                        ${
+                            formato.map(f => (
+                                `<option value="${f.id}">${f.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+
+                <div class="flex flex-col w-96">
+                    <label for="naturaleza">Tipo de naturaleza</label>
+                    <select id="naturaleza" class=" rounded-xl" value="${muestra.naturaleza}">
+                        ${
+                            naturaleza.map(n => (
+                                `<option value="${n.id}">${n.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+
+                <div class="flex flex-col w-96">
+                    <label for="organo">Órgano</label>
+                    <input type="text" id="organo" class=" rounded-xl" placeholder="Órgano" value="${muestra.organo}">
+                </div>
+
+                <div class="flex flex-col w-96">
+                    <label for="estudio">Tipo de estudio</label>
+                    <select id="estudio" class=" rounded-xl" value="${muestra.estudio}">
+                        ${
+                            estudio.map(e => (
+                                `<option value="${e.id}">${e.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+
                 
-                <label for="fecha">Fecha de recolección</label>
-                <input type="date" id="fecha" class="swal2-input" value="${muestra.fecha}">
-                
-                <label for="formato">Formato</label>
-                <select id="formato" class="swal2-select" value="${muestra.formato}">
-                    ${
-                        formato.map(f => (
-                            `<option value="${f.id}">${f.nombre}</option>`
-                        ))                  
-                    }
-                </select>
+                <div class="flex flex-col w-96">
+                    <label for="calidad">Calidad de la muestra</label>
+                    <select id="calidad" class="rounded-xl" value="${muestra.calidad}">
+                        ${
+                            calidad.map(c => (
+                                `<option value="${c.id}">${c.nombre}</option>`
+                            ))                  
+                        }
+                    </select>
+                </div>
+ 
+                <div class="flex flex-col w-96">
+                    <label for="descripcion">Descripción de la calidad</label>
+                    <textarea type="text" id="descripcion" class="h-36 rounded-lg" placeholder="Descripción">${muestra.descripcion_calidad}</textarea>
+                </div>
 
-                <label for="naturaleza">Tipo de naturaleza</label>
-                <select id="naturaleza" class="swal2-select" value="${muestra.naturaleza}">
-                    ${
-                        naturaleza.map(n => (
-                            `<option value="${n.id}">${n.nombre}</option>`
-                        ))                  
-                    }
-                </select>
+                <div class="flex flex-col w-96">
+                    <label for="imagenes">Imagenes de la muestra</label>
+                    <input type="file" id="imagenes" class="" accept="image/*" multiple />
+                </div>
 
-                <label for="organo">Órgano</label>
-                <input type="text" id="organo" class="swal2-input" placeholder="Órgano" value="${muestra.organo}">
-
-                <label for="estudio">Tipo de estudio</label>
-                <select id="estudio" class="swal2-select" value="${muestra.estudio}">
-                    ${
-                        estudio.map(e => (
-                            `<option value="${e.id}">${e.nombre}</option>`
-                        ))                  
-                    }
-                </select>
-
-                <label for="calidad">Calidad de la muestra</label>
-                <select id="calidad" class="swal2-select" value="${muestra.calidad}">
-                    ${
-                        calidad.map(c => (
-                            `<option value="${c.id}">${c.nombre}</option>`
-                        ))                  
-                    }
-                </select>
-                
-                <label for="descripcion">Descripción de la calidad</label>
-                <textarea type="text" id="descripcion" class="swal2-textarea" placeholder="Descripción">${muestra.descripcion_calidad}</textarea>
-
-                <label for="imagenes">Imagenes de la muestra</label>
-                <input type="file" id="imagenes" class="swal2-file" accept="image/*" multiple />
             </div>
         `,
         showCancelButton: true,

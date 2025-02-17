@@ -58,7 +58,7 @@ export default function MuestrasPage(){
                             <tbody>
                                 {
                                     muestras.map((muestra,index) => (
-                                        <tr id={muestra.id} key={index} onClick={() => actualizarMuestra(muestra)}>
+                                        <tr key={index} onClick={() => actualizarMuestra(muestra, getMuestras)}>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {muestra.codigo}
