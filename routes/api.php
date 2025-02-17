@@ -45,3 +45,6 @@ Route::get('/sanctum/csrf-cookie', function () {
     return response()->json(['message' => 'CSRF token set']);
 });
 
+Route::get('/descargarMuestra/{id}', [MuestraController::class, 'descargarPDF']);
+
+
