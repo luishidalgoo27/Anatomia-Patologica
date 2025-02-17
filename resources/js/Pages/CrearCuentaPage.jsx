@@ -8,6 +8,68 @@ export default function CrearCuentaPage() {
   const [sedes, setSedes] = useState([]);           // Array de sedes
   const [selectedSede, setSelectedSede] = useState(""); // ID de la sede seleccionada
 
+ // Función para obtener las sedes
+ const getSede = async () => {
+    try {
+      const response = await fetch("/api/sede");
+      const data = await response.json();
+      setSedes(data); // Actualiza el estado con el array de sedes
+    } catch (error) {
+      console.error("Error al obtener los datos de las sedes:", error);
+    }
+  };
+
+  useEffect(() => {
+    getSede();
+  }, []);
+
+  const handleRegister = async (e) => {
+    e.preventDefault(); // Esto evita que se haga una redirección automática
+    setLoading(true);
+    setError("");  // Limpiar errores anteriores
+  
+    try {
+      // Asegurarse de que se haya seleccionado una sede
+      if (!selectedSede) {
+        setError("Debes seleccionar una sede");
+        return;
+      }
+    
+      const response = await fetch("/api/register", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Enviamos email, password y el id de la sede seleccionada
+        body: JSON.stringify({
+          email,
+          password,
+          id_sede: selectedSede,
+        }),
+      });
+  
+      // Si la respuesta no es ok, obtenemos los errores específicos
+      if (!response.ok) {
+        const data = await response.json();
+        if (data.errors) {
+          // Si hay errores específicos, los mostramos
+          setError(data.errors);
+        } else {
+          // Si no hay un campo de errores, mostramos el mensaje general de la API
+          setError("Hubo un error desconocido al procesar tu solicitud.");
+        }
+      } else {
+        window.location.href = "/"; // Redirección a la página principal
+      }
+    } catch (error) {
+      console.log("Error completo:", error);
+      setError(error.message || "Hubo un problema al procesar tu solicitud.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
@@ -19,7 +81,7 @@ export default function CrearCuentaPage() {
                   <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Crear cuenta
                   </h1>
-                  <form className="space-y-4 md:space-y-6">
+                  <form className="space-y-4 md:space-y-6"  onSubmit={handleRegister}>
                     <div>
                       <label
                         htmlFor="email"
@@ -90,7 +152,6 @@ export default function CrearCuentaPage() {
                     {error && <p className="text-red-500 text-sm">{error}</p>}
                     <div className="">
                       <button
-                        onClick={() => handleAdd(obtenerUsuarios)}
                         className="bg-azulMedac text-white w-20 h-10 rounded-lg"
                         disabled={loading}
                       >
