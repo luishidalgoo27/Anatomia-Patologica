@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Muestra;
 use Exception;
+use App\Models\Muestra;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 
 class MuestraController extends Controller
@@ -87,5 +88,14 @@ class MuestraController extends Controller
         }
 
         return response()->json(['message' => 'Muestra eliminada correctamente', 'muestra' => $muestra], 201);
+    }
+
+    public function descargarPDF($id)
+    {
+        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato'])->findOrFail($id);
+    
+        $pdf = PDF::loadView('pdf.muestra', ['muestras'=>$muestras]);
+    
+        return $pdf->stream('muestra_' . $muestras->codigo . '.pdf');
     }
 }
