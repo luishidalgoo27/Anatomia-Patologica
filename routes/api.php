@@ -3,13 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CalidadController;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\TipoEstudioController;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
@@ -35,11 +35,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request){
     return $request->user();
 });
 
-Route::middleware([EnsureFrontendRequestsAreStateful::class])->group(function () {
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-});
+
+Route::post('/register', [AuthController::class, 'createUser']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
 
 Route::get('/sanctum/csrf-cookie', function () {
     return response()->json(['message' => 'CSRF token set']);
