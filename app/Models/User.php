@@ -21,7 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'id_sede'
+        'id_sede',
+        'imagen'
     ];
 
     public function sede()

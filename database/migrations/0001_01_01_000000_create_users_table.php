@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); 
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('imagen')->nullable();
             $table->foreign('id_sede')->references('id')->on('sedes');
             $table->rememberToken();
             $table->unsignedBigInteger('id_sede');
