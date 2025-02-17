@@ -17,9 +17,12 @@ export default {
             },
         
         colors:{'azulMedac': '#001f3f'},
-
+        fontFamily: {
+            hola: ['Rowdies', ...defaultTheme.fontFamily.sans]
+        },
         },
     },
 
     plugins: [forms],
+    darkMode: 'false'
 };

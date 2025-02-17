@@ -9,6 +9,8 @@ import HomePage from './Pages/HomePage'
 import MuestrasPage from './Pages/MuestrasPage'
 import MuestrasPage2 from './Pages/MuestrasPage2'
 import InformeFinalPage from './Pages/InformeFinalPage'
+import LoginPage from './Pages/LoginPage'
+import CrearCuentaPage from './Pages/CrearCuentaPage'
 
 const router = createBrowserRouter([
     {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
             {
                 path: '/informeFinal',
                 element: <InformeFinalPage />
+            },
+            {
+                path: '/login',
+                element: <LoginPage />
+            },
+            {
+                path: '/CrearCuenta',
+                element: <CrearCuentaPage />
             }
         ]
     }

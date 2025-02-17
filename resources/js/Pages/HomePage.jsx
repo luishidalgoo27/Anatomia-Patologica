@@ -9,7 +9,7 @@ export default function HomePage() {
     }, []) 
 
     const obtenerUsuarios = () => {
-        fetch('/api/api/users')
+        fetch('/api/users')
             .then(response => response.json())
             .then(data => setUsuarios(data))
             .catch(error => console.error('Error al obtener los datos:', error))
@@ -17,11 +17,11 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="content-wrapper">
-                <div className="content">
+        <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
+        <div className="content">
                
-                    <div className="p-4 flex gap-4 justify-center">
-                        <button onClick={() => handleAdd(obtenerUsuarios)} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
+                    <div className="text-right p-3 pb-3">
+                        <button onClick={() => handleAdd(obtenerUsuarios)} className="bg-azulMedac text-white  w-36 h-12 rounded-lg ">
                             Añadir usuario
                         </button>
                     </div>
@@ -39,6 +39,11 @@ export default function HomePage() {
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                                             Contraseña
+                                        </p>
+                                    </th>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            Sede
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -66,6 +71,11 @@ export default function HomePage() {
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {usuario.password}
+                                                </p>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                                    {usuario.id_sede}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
