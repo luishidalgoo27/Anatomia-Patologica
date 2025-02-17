@@ -1,74 +1,50 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CrearCuentaPage() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [sedes, setSedes] = useState([]);           // Array de sedes
-  const [selectedSede, setSelectedSede] = useState(""); // ID de la sede seleccionada
+  const [sedes, setSedes] = useState([]);
+  const [selectedSede, setSelectedSede] = useState(""); 
 
- // Función para obtener las sedes
+
  const getSede = async () => {
     try {
       const response = await fetch("/api/sede");
       const data = await response.json();
-      setSedes(data); // Actualiza el estado con el array de sedes
+      setSedes(data);
     } catch (error) {
       console.error("Error al obtener los datos de las sedes:", error);
     }
-  };
+  }
 
   useEffect(() => {
     getSede();
   }, []);
 
+  
   const handleRegister = async (e) => {
-    e.preventDefault(); // Esto evita que se haga una redirección automática
-    setLoading(true);
-    setError("");  // Limpiar errores anteriores
+    e.preventDefault()
   
-    try {
-      // Asegurarse de que se haya seleccionado una sede
-      if (!selectedSede) {
-        setError("Debes seleccionar una sede");
-        return;
-      }
-    
-      const response = await fetch("/api/register", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // Enviamos email, password y el id de la sede seleccionada
-        body: JSON.stringify({
-          email,
-          password,
-          id_sede: selectedSede,
-        }),
-      });
-  
-      // Si la respuesta no es ok, obtenemos los errores específicos
-      if (!response.ok) {
-        const data = await response.json();
-        if (data.errors) {
-          // Si hay errores específicos, los mostramos
-          setError(data.errors);
-        } else {
-          // Si no hay un campo de errores, mostramos el mensaje general de la API
-          setError("Hubo un error desconocido al procesar tu solicitud.");
-        }
-      } else {
-        window.location.href = "/"; // Redirección a la página principal
-      }
-    } catch (error) {
-      console.log("Error completo:", error);
-      setError(error.message || "Hubo un problema al procesar tu solicitud.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const response = await fetch("/api/register", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email, password,id_sede: selectedSede})
+    })
+
+    const data = await response.json();
+    if (!response.ok) {
+      console.error("Error en el servidor:", data);
+      console.log("Error: " + data.message);
+    }else {
+      navigate('/', {replace: true})
+    } 
+  }
 
   return (
     <>
@@ -134,28 +110,22 @@ export default function CrearCuentaPage() {
                       <select
                         name="sede"
                         id="sede"
-                        value={selectedSede}  // El id de la sede seleccionada
+                        value={selectedSede}
                         onChange={(e) => setSelectedSede(e.target.value)}
                       >
                         <option value="">Seleccione una sede:</option>
-                        {sedes.length > 0 ? (
+                        {
                           sedes.map((s) => (
                             <option key={s.id} value={s.id}>
                               {s.nombre}
                             </option>
                           ))
-                        ) : (
-                          <option>Loading...</option>
-                        )}
+                        }
                       </select>
                     </div>
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
                     <div className="">
-                      <button
-                        className="bg-azulMedac text-white w-20 h-10 rounded-lg"
-                        disabled={loading}
-                      >
-                        {loading ? "Creando..." : "Crear"}
+                      <button className="bg-azulMedac text-white w-20 h-10 rounded-lg">
+                        Crear
                       </button>
                     </div>
                   </form>
