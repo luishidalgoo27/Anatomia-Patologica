@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -88,6 +89,10 @@ class AuthController extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
+
+            DB::table('personal_access_tokens')
+            ->where('tokenable_id', $user->id)
+            ->delete();
 
             return response()->json([
                 'status' => true,
