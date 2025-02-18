@@ -1,12 +1,20 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoute = ({ isAuthenticated, children }) => {
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+export default function PrivateRoute() {
+  const token = sessionStorage.getItem("token"); // Verificamos si hay token
+  const tokenUser = false;
+  
+  fetch('/api/token')
+  .then(resultado => resultado.json())
+  .then(datos => {
+    if (datos.token === token){
+      tokenUser = true;
+    }
+  })
+
+  if(tokenUser){
+    return <Outlet/>
+  } else {
+    return <Navigate to="/login" replace/>
   }
-
-  return children;
-};
-
-export default PrivateRoute;
+}
