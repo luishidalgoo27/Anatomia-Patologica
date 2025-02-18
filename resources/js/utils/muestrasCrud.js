@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 
 let formato,estudio,naturaleza,calidad 
 
-
 const getFormato = async () => {
     try{
         const response = await fetch(`/api/formato`)

@@ -3,6 +3,12 @@ import DavanteIMG from '../../assets/img/davantefundacion.png'
 import UserImg from '../../assets/img/user2-160x160.jpg'
 
 export default function AppAside(){
+
+    const handleLogOut = () => {
+        sessionStorage.removeItem('token')
+        window.location.reload()
+    }
+
     return(
         <>
             <aside className="main-sidebar bg-navy sidebar-dark-primary elevation-4 font-hola">
@@ -60,7 +66,7 @@ export default function AppAside(){
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="" className="nav-link">
+                                <Link className="nav-link" onClick={handleLogOut}>
                                     <i className="nav-icon fas fa-power-off"></i>
                                     <p className="text-danger">
                                         Cerrar Sesion
