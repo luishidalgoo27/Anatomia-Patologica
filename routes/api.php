@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -13,7 +14,6 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ApiTokenController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\TipoEstudioController;
-use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/addUser', [UserController::class, 'store']);
@@ -37,3 +37,5 @@ Route::post('/login', [AuthController::class, 'loginUser']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::get('/token', [ApiTokenController::class, 'index']);
+
+Route::get('/descargarMuestra/{id}', [MuestraController::class, 'descargarPDF']);
