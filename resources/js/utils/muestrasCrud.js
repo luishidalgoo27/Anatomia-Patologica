@@ -3,62 +3,66 @@ import Swal from "sweetalert2";
 let formato,estudio,naturaleza,calidad 
 
 const getFormato = async () => {
-    try{
-        const response = await fetch(`/api/formato`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
-            },
-        })
-        const data = await response.json()
+    const response = await fetch(`/api/formato`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+        },
+    })
+    const data = await response.json()
+    if(!response.ok){
+        window.location.href = '/login'
+    }else{
         formato = data
-    } catch(error){
-        console.error('Error al obtener los datos:', error)
-    }   
+    }
 }  
 
 const getTipoEstudio = async () => {
-    try {
-        const response = await fetch(`/api/tipoEstudio`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
-            },
-        })
-        const data = await response.json()
+    const response = await fetch(`/api/formato`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+        },
+    })
+    const data = await response.json()
+    if(!response.ok){
+        window.location.href = '/login'
+    }else{
         estudio = data
-    } catch (error) {
-        console.error('Error al obtener los datos:', error)
     }
 } 
 
 const getNaturaleza = async () => {
-    try {
-        const response = await fetch(`/api/naturaleza`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
-            },
-        })
-        const data = await response.json()
+    const response = await fetch(`/api/formato`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+        },
+    })
+    const data = await response.json()
+    if(!response.ok){
+        window.location.href = '/login'
+    }else{
         naturaleza = data
-    } catch (error) {
-        console.error('Error al obtener los datos:', error)
     }
 } 
 
 const getCalidad = async () => {
-    try {
-        const response = await fetch('/api/calidad', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
-            },
-        })
-        const data = await response.json()
+    const response = await fetch(`/api/formato`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+        },
+    })
+    const data = await response.json()
+    if(!response.ok){
+        window.location.href = '/login'
+    }else{
         calidad = data
-    } catch (error) {
-        console.error('Error al obtener los datos:', error)
     }
 } 
 
@@ -76,6 +80,7 @@ const addMuestra = async (muestra, getMuestras) => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
+        window.location.href = '/login'
     }else{
         getMuestras()
         console.log("Muestra añadida correctamente:", data);
@@ -203,7 +208,8 @@ const deleteMuestra = async (idMuestra, getMuestras) => {
     const response = await fetch(`/api/deleteMuestra?id=${idMuestra}`, {
         method: 'DELETE',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         }
     })
 
@@ -211,6 +217,7 @@ const deleteMuestra = async (idMuestra, getMuestras) => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
+        window.location.href = '/login'
     }else{
         getMuestras()
         console.log("Muestra eliminada correctamente:", data);
@@ -222,7 +229,8 @@ const updateMuestra = async (muestra, idMuestra, getMuestra) => {
     const response = await fetch(`/api/updateMuestra?id=${idMuestra}`, {
         method: 'PATCH',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
         body: JSON.stringify(muestra)
     })
@@ -230,6 +238,7 @@ const updateMuestra = async (muestra, idMuestra, getMuestra) => {
     const data = response.json()
     if(!response.ok){
         console.error("Error en el servidor:", data)
+        window.location.href = '/login'
     }else{
         getMuestra()
         console.log("Muestra actualizada correctamente:", data)
