@@ -41,6 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/token', [ApiTokenController::class, 'index']);
     
     // Rutas Interpretacion
+    Route::get('/mostrarinterpretaciones', [InterpretacionController::class, 'showInterpretaciones']);
     Route::get('/interpretacion', [InterpretacionController::class, 'index']);
     Route::post('/interpretacion', [InterpretacionController::class, 'store']);
     Route::patch('/interpretacion', [InterpretacionController::class, 'update']);
