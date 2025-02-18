@@ -39,7 +39,7 @@ export default function CrearCuentaPage() {
       headers: {
         'Content-Type': 'application/json',
     },
-      body: JSON.stringify({ email, password, id_sede: selectedSede }),
+      body: JSON.stringify({ email, password, name, id_sede: selectedSede }),
     });
     
     const data = await response.json();
