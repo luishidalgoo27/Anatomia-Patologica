@@ -3,11 +3,14 @@
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CalidadController;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ApiTokenController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\TipoEstudioController;
 
@@ -28,20 +31,10 @@ Route::get('/naturaleza', [NaturalezaController::class, 'index']);
 Route::get('/calidad', [CalidadController::class, 'index']);
 Route::get('/sede', [SedeController::class, 'index']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request){
-    return $request->user();
-});
-
-
 Route::post('/register', [AuthController::class, 'createUser']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'loginUser']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-
-Route::get('/sanctum/csrf-cookie', function () {
-    return response()->json(['message' => 'CSRF token set']);
-});
+Route::get('/token', [ApiTokenController::class, 'index']);
 
 Route::get('/descargarMuestra/{id}', [MuestraController::class, 'descargarPDF']);
-
-
