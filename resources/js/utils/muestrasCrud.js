@@ -94,7 +94,7 @@ export const handleAdd = async (getMuestras) => {
     Swal.fire({
         title:'Añadir muestra',
         html: `
-            <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-6  text-azulMedac font-sans">           
+            <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-4  text-azulMedac font-sans">
                 <div class="flex flex-col   w-96">
                     <label for="codigo">Código de la muestra</label>
                     <input type="text" id="codigo" class=" rounded-xl" placeholder="Codigo">

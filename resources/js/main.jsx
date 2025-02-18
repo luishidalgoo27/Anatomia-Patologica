@@ -62,6 +62,14 @@ const router = createBrowserRouter([
                         path: "/interpretacion/:id",
                         element: <InterpretacionPage />,
                         loader: interpretacionDetail
+                    },
+                    {
+                        path: '/Inicio',
+                        element: <InicioPage />
+                    },
+                    {
+                        path: '/ActualizarUsuario',
+                        element: <ActualizarUsuarioPage />
                     }
                 ],
             },
@@ -72,3 +80,5 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 );
+
+            
