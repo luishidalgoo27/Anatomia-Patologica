@@ -12,7 +12,11 @@ export default function CrearCuentaPage() {
 
  const getSede = async () => {
     try {
-      const response = await fetch("/api/sede");
+      const response = await fetch("/api/sede", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       const data = await response.json();
       setSedes(data);
     } catch (error) {
@@ -32,8 +36,8 @@ export default function CrearCuentaPage() {
       method: "POST",
       credentials: "include",
       headers: {
-        "Content-Type": "application/json",
-      },
+        'Content-Type': 'application/json',
+    },
       body: JSON.stringify({ email, password, id_sede: selectedSede }),
     });
     
@@ -48,15 +52,6 @@ export default function CrearCuentaPage() {
       sessionStorage.setItem("token", data.token);
     }
   };
-
-    const data = await response.json();
-    if (!response.ok) {
-      console.error("Error en el servidor:", data);
-      console.log("Error: " + data.message);
-    }else {
-      navigate('/', {replace: true})
-    } 
-  }
 
   return (
     <>

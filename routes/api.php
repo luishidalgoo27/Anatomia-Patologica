@@ -10,7 +10,6 @@ use App\Http\Controllers\CalidadController;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ApiTokenController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\TipoEstudioController;

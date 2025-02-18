@@ -4,7 +4,8 @@ const addUser = async (usuario,obtenerUsuarios) => {
     const response = await fetch('/api/addUser', {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
         body: JSON.stringify(usuario)
     }); 
@@ -23,7 +24,8 @@ const updateUser = async (usuarioEmail, usuarioId, obtenerUsuarios) => {
     const response = await fetch(`api/updateUser?id=${usuarioId}`, {
         method: 'PATCH',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
         body: JSON.stringify(usuarioEmail)
     });
@@ -42,7 +44,8 @@ export const deleteUser = async (usuarioId,obtenerUsuarios) => {
     const response = await fetch(`/api/deleteUser?id=${usuarioId}`, {
         method: "DELETE", 
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
     });
 
