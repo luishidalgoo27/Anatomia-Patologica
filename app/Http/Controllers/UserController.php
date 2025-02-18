@@ -21,12 +21,14 @@ class UserController extends Controller
     public function store(Request $request)
 {
     $request->validate([
+        'name' => 'required',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8'
     ]);
 
     try {
         $user = User::create([
+            'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password) // Bycript para pasar contra encriptada
         ]);
