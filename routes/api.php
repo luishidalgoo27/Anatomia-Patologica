@@ -14,10 +14,6 @@ use App\Http\Controllers\ApiTokenController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\TipoEstudioController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('/users', [UserController::class, 'index']);
 Route::post('/addUser', [UserController::class, 'store']);
 Route::patch('/updateUser', [UserController::class, 'update']);

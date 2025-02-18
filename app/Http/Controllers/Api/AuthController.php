@@ -90,7 +90,7 @@ class AuthController extends Controller
 
             $user = User::where('email', $request->email)->first();
 
-            $tokenUser = DB::table('personal_access_tokens')
+            DB::table('personal_access_tokens')
             ->where('tokenable_id', $user->id)
             ->delete();
 
