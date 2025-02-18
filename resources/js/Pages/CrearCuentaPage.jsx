@@ -49,15 +49,6 @@ export default function CrearCuentaPage() {
     }
   };
 
-    const data = await response.json();
-    if (!response.ok) {
-      console.error("Error en el servidor:", data);
-      console.log("Error: " + data.message);
-    }else {
-      navigate('/', {replace: true})
-    } 
-  }
-
   return (
     <>
       <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
