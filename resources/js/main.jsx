@@ -9,6 +9,8 @@ import ErrorPage from "./Pages/ErrorPage";
 import LoginPage from "./Pages/LoginPage";
 import CrearCuentaPage from "./Pages/CrearCuentaPage";
 import HomePage from "./Pages/HomePage";
+import InicioPage from "./Pages/InicioPage";
+import ActualizarUsuarioPage from "./Pages/ActualizarUsuarioPage";
 import MuestrasPage from "./Pages/MuestrasPage";
 import InterpretacionPage from "./Pages/InterpretacionPage";
 
