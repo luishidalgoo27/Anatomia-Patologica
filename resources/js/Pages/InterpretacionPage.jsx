@@ -1,31 +1,33 @@
-import { useEffect, useState } from "react"
-import { handleAdd, actualizarMuestra } from "@/utils/muestrasCrud"
+import { useLoaderData } from "react-router-dom"
+import { useState, useEffect } from "react"
 
-export default function MuestrasPage(){    
-    //Estados para pintar los input de muestras
-    const [muestras,setMuestras] = useState([])
-        
-    useEffect(()=>{
-        getMuestras()
-    }, [])
-     
-    const getMuestras = () => {
-        fetch(`/api/muestras`, {
-            method: 'GET',
+export async function loader({params}){
+    const id = params.id
+    return { id }
+}
+
+export default function InterpretacionPage(){
+    const [interpretacion, setInterpretacion] = useState([])
+    const { id } = useLoaderData()
+
+    const getInterpretacion = async () => {
+        fetch(`/api/interpretacion`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
             },
         })
         .then(response => response.json())
-        .then(data => setMuestras(data))
+        .then(data => setInterpretacion(data))
         .catch(error => console.error('Error al obtener los datos:', error))
-    }  
-    
+    }
 
+    useEffect(()=>{
+        getInterpretacion()
+    }, [])
+    
     return(
         <>
-
             <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
                 <div className="content ">
                 
@@ -60,7 +62,7 @@ export default function MuestrasPage(){
                                     </th>
                                 </tr>
                             </thead>
- 
+    
                             <tbody>
                                 {
                                     muestras.map((muestra,index) => (
@@ -90,7 +92,6 @@ export default function MuestrasPage(){
     
                 </div>
             </div>
-            
         </>
     )
 }
