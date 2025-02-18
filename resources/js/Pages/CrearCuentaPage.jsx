@@ -26,7 +26,7 @@ export default function CrearCuentaPage() {
 
   
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
   
     const response = await fetch("/api/register", {
       method: "POST",
@@ -34,17 +34,20 @@ export default function CrearCuentaPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({email, password,id_sede: selectedSede})
-    })
-
+      body: JSON.stringify({ email, password, id_sede: selectedSede }),
+    });
+    
     const data = await response.json();
     if (!response.ok) {
       console.error("Error en el servidor:", data);
-      console.log("Error: " + data.message);
-    }else {
-      navigate('/', {replace: true})
-    } 
-  }
+      alert("Error: " + data.message);
+    } else {
+      navigate("/", { replace: true });
+      console.log(data);
+      // Guardar token en sessionStorage
+      sessionStorage.setItem("token", data.token);
+    }
+  };
 
   return (
     <>
