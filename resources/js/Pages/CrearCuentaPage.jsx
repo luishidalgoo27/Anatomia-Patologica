@@ -132,9 +132,9 @@ export default function CrearCuentaPage() {
                 </div>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </div>
-    </>
+    </div>
   );
 }
