@@ -11,6 +11,7 @@ use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApiTokenController;
+use App\Http\Controllers\InterpretacionController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\TipoEstudioController;
 
@@ -39,5 +40,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('/token', [ApiTokenController::class, 'index']);
     
+    // Rutas Interpretacion
+    Route::get('/interpretacion', [InterpretacionController::class, 'index']);
+    Route::post('/interpretacion', [InterpretacionController::class, 'store']);
+    Route::patch('/interpretacion', [InterpretacionController::class, 'update']);
+    Route::delete('/interpretacion', [InterpretacionController::class, 'destroy']);
+
     Route::get('/descargarMuestra/{id}', [MuestraController::class, 'descargarPDF']);
 });
