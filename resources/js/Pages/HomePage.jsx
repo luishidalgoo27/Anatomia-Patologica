@@ -9,7 +9,7 @@ export default function HomePage() {
     }, []) 
 
     const obtenerUsuarios = () => {
-        fetch('/api/api/users')
+        fetch('/api/users')
             .then(response => response.json())
             .then(data => setUsuarios(data))
             .catch(error => console.error('Error al obtener los datos:', error))
@@ -43,6 +43,11 @@ export default function HomePage() {
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            Sede
+                                        </p>
+                                    </th>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                                             Modificar
                                         </p>
                                     </th>
@@ -66,6 +71,11 @@ export default function HomePage() {
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {usuario.password}
+                                                </p>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                                    {usuario.id_sede}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
