@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Muestra;
 use Exception;
+use App\Models\Muestra;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
 
 class MuestraController extends Controller
@@ -13,7 +14,7 @@ class MuestraController extends Controller
      */
     public function index()
     {
-        $muestras = Muestra::all();
+        $muestras = Muestra::with(['calidad','formato','tipoNaturaleza'])->get();
         return response()->json($muestras, 200);
     }
 
@@ -55,19 +56,19 @@ class MuestraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         $idMuestra = $request->input('id');
         $muestra = Muestra::where('id', $idMuestra);
 
         $muestra->update([
-            'codigo' => $request->codigo,
-            'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
-            'fecha' => $request->fecha,
-            'id_formato' => $request->id_formato,
-            'organo' => $request->organo,
-            'id_calidad' => $request->id_calidad,
             'descripcion_calidad' => $request->descripcion_calidad,
+            'fecha' => $request->fecha,
+            'codigo' => $request->codigo,
+            'id_calidad' => $request->id_calidad,
+            'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
+            'organo' => $request->organo,
+            'id_formato' => $request->id_formato,
             /* 'id_sede' => $request->centro, */
         ]);
 
@@ -87,5 +88,14 @@ class MuestraController extends Controller
         }
 
         return response()->json(['message' => 'Muestra eliminada correctamente', 'muestra' => $muestra], 201);
+    }
+
+    public function descargarPDF($id)
+    {
+        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato'])->findOrFail($id);
+    
+        $pdf = PDF::loadView('pdf.muestra', ['muestras'=>$muestras]);
+    
+        return $pdf->stream('muestra_' . $muestras->codigo . '.pdf');
     }
 }

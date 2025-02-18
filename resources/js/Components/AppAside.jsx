@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import MedacLogo from '../../assets/img/MEDAC_LOGO.png'
+import DavanteIMG from '../../assets/img/davantefundacion.png'
 import UserImg from '../../assets/img/user2-160x160.jpg'
 
 export default function AppAside(){
@@ -7,8 +7,8 @@ export default function AppAside(){
         <>
             <aside className="main-sidebar bg-navy sidebar-dark-primary elevation-4 font-hola">
                 <Link to="https://www.fundaciondavante.org/" className="brand-link">
-                    <img src={MedacLogo} alt="AdminLTE Logo" className="brand-image img-circle elevation-3"/>
-                    <span className="brand-text font-weight-light">Medac Fundación</span>
+                    <img src={DavanteIMG} alt="AdminLTE Logo" className="brand-image img-circle elevation-3"/>
+                    <span className="brand-text font-weight-light">Davante Fundación</span>
                 </Link>
 
                 <div className="sidebar">

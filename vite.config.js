@@ -3,10 +3,19 @@ import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+    server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false,
+        }
+        }
+    },
     plugins: [
         react(),
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/js/app.jsx'], // Cambié app.js a app.jsx
             refresh: true,
         }),
     ],

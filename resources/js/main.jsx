@@ -9,7 +9,6 @@ import HomePage from './Pages/HomePage'
 import MuestrasPage from './Pages/MuestrasPage'
 import MuestrasPage2 from './Pages/MuestrasPage2'
 import InformeFinalPage from './Pages/InformeFinalPage'
-import TablaMuestras from './Pages/TablaMuestras'
 import LoginPage from './Pages/LoginPage'
 import CrearCuentaPage from './Pages/CrearCuentaPage'
 import InicioPage from './Pages/InicioPage'
@@ -35,10 +34,6 @@ const router = createBrowserRouter([
             {
                 path: '/informeFinal',
                 element: <InformeFinalPage />
-            },
-            {
-                path: '/tablamuestras',
-                element: <TablaMuestras />
             },
             {
                 path: '/login',

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Cloudinary\Asset\Image;
 use Illuminate\Http\Request;
+use Cloudinary\Transformation\Format;
+use Cloudinary\Transformation\Resize;
+use Cloudinary\Transformation\Delivery;
 
 class UserController extends Controller
 {
@@ -56,5 +60,23 @@ public function destroy(Request $request)
 
     return response()->json(['message' => 'Usuario eliminado correctamente', 'user' => $user], 201);
 }
+
+public function subirImagen(Request $request){
+
+    $image = $request->file('image');
+    /* dd($image->getRealPath()); */
+    $publicIdImagen = cloudinary()->upload($image->getRealPath(), [
+        'folder' => 'prueba'
+        ])->getPublicId();
+        
+    $url_image = (new Image($publicIdImagen))
+    ->resize(Resize::scale()->width(250))
+    ->delivery(Delivery::quality(35))
+    ->delivery(Delivery::format(
+        Format::auto()
+    ));
+
+}
+
 
 }
