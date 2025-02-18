@@ -56,19 +56,19 @@ class MuestraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         $idMuestra = $request->input('id');
         $muestra = Muestra::where('id', $idMuestra);
 
         $muestra->update([
-            'codigo' => $request->codigo,
-            'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
-            'fecha' => $request->fecha,
-            'id_formato' => $request->id_formato,
-            'organo' => $request->organo,
-            'id_calidad' => $request->id_calidad,
             'descripcion_calidad' => $request->descripcion_calidad,
+            'fecha' => $request->fecha,
+            'codigo' => $request->codigo,
+            'id_calidad' => $request->id_calidad,
+            'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
+            'organo' => $request->organo,
+            'id_formato' => $request->id_formato,
             /* 'id_sede' => $request->centro, */
         ]);
 

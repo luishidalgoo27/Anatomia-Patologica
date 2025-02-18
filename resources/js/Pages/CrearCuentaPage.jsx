@@ -1,12 +1,50 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CrearCuentaPage() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [sedes, setSedes] = useState([]);           // Array de sedes
-  const [selectedSede, setSelectedSede] = useState(""); // ID de la sede seleccionada
+  const [sedes, setSedes] = useState([]);
+  const [selectedSede, setSelectedSede] = useState(""); 
+
+
+ const getSede = async () => {
+    try {
+      const response = await fetch("/api/sede");
+      const data = await response.json();
+      setSedes(data);
+    } catch (error) {
+      console.error("Error al obtener los datos de las sedes:", error);
+    }
+  }
+
+  useEffect(() => {
+    getSede();
+  }, []);
+
+  
+  const handleRegister = async (e) => {
+    e.preventDefault()
+  
+    const response = await fetch("/api/register", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email, password,id_sede: selectedSede})
+    })
+
+    const data = await response.json();
+    if (!response.ok) {
+      console.error("Error en el servidor:", data);
+      console.log("Error: " + data.message);
+    }else {
+      navigate('/', {replace: true})
+    } 
+  }
 
   return (
     <>
@@ -19,7 +57,7 @@ export default function CrearCuentaPage() {
                   <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Crear cuenta
                   </h1>
-                  <form className="space-y-4 md:space-y-6">
+                  <form className="space-y-4 md:space-y-6"  onSubmit={handleRegister}>
                     <div>
                       <label
                         htmlFor="email"
@@ -72,29 +110,22 @@ export default function CrearCuentaPage() {
                       <select
                         name="sede"
                         id="sede"
-                        value={selectedSede}  // El id de la sede seleccionada
+                        value={selectedSede}
                         onChange={(e) => setSelectedSede(e.target.value)}
                       >
                         <option value="">Seleccione una sede:</option>
-                        {sedes.length > 0 ? (
+                        {
                           sedes.map((s) => (
                             <option key={s.id} value={s.id}>
                               {s.nombre}
                             </option>
                           ))
-                        ) : (
-                          <option>Loading...</option>
-                        )}
+                        }
                       </select>
                     </div>
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
                     <div className="">
-                      <button
-                        onClick={() => handleAdd(obtenerUsuarios)}
-                        className="bg-azulMedac text-white w-20 h-10 rounded-lg"
-                        disabled={loading}
-                      >
-                        {loading ? "Creando..." : "Crear"}
+                      <button className="bg-azulMedac text-white w-20 h-10 rounded-lg">
+                        Crear
                       </button>
                     </div>
                   </form>
