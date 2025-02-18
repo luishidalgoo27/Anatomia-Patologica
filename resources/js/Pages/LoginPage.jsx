@@ -15,32 +15,29 @@ export default function LoginPage() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError("");
-        setMessage("");
+      
+        const response = await fetch("/api/login", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+      
+        const data = await response.json();
+      
+        if (!response.ok || !data.status) {
+          console.error("Error en el servidor:", data);
+          alert("Error: " + data.message);
+        } else {
+            navigate("/", { replace: true });
 
-        await getCsrfToken(); // Obtiene el token CSRF antes de loguearse
-
-        try {
-            const response = await fetch("/api/login", {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Credenciales incorrectas");
-            }
-
-            const data = await response.json();
-            setMessage("Inicio de sesión exitoso");
-            console.log("Usuario autenticado:", data);
-        } catch (error) {
-            setError(error.message);
+            // Guardar token en sessionStorage
+            sessionStorage.setItem("token", data.token);
         }
-    };
+      };
+      
 
     return (
         <>
