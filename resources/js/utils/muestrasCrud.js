@@ -4,7 +4,12 @@ let formato,estudio,naturaleza,calidad
 
 const getFormato = async () => {
     try{
-        const response = await fetch(`/api/formato`)
+        const response = await fetch(`/api/formato`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        })
         const data = await response.json()
         formato = data
     } catch(error){
@@ -14,7 +19,12 @@ const getFormato = async () => {
 
 const getTipoEstudio = async () => {
     try {
-        const response = await fetch(`/api/tipoEstudio`)
+        const response = await fetch(`/api/tipoEstudio`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        })
         const data = await response.json()
         estudio = data
     } catch (error) {
@@ -24,7 +34,12 @@ const getTipoEstudio = async () => {
 
 const getNaturaleza = async () => {
     try {
-        const response = await fetch(`/api/naturaleza`)
+        const response = await fetch(`/api/naturaleza`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        })
         const data = await response.json()
         naturaleza = data
     } catch (error) {
@@ -34,7 +49,12 @@ const getNaturaleza = async () => {
 
 const getCalidad = async () => {
     try {
-        const response = await fetch('/api/calidad')
+        const response = await fetch('/api/calidad', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        })
         const data = await response.json()
         calidad = data
     } catch (error) {
@@ -42,16 +62,12 @@ const getCalidad = async () => {
     }
 } 
 
-
-
-
-
-
 const addMuestra = async (muestra, getMuestras) => {
     const response = await fetch(`/api/addMuestra`, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
         body: JSON.stringify(muestra)
     })

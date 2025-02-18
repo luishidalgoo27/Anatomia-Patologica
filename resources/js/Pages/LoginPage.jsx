@@ -9,13 +9,6 @@ export default function LoginPage() {
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
 
-    const getCsrfToken = async () => {
-        await fetch("/sanctum/csrf-cookie", {
-            method: 'GET',
-            credentials: "include",
-        });
-    };
-
     const handleLogin = async (e) => {
         e.preventDefault();
       
@@ -23,8 +16,9 @@ export default function LoginPage() {
           method: "POST",
           credentials: "include",
           headers: {
-            "Content-Type": "application/json",
-          },
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+        },
           body: JSON.stringify({ email, password }),
         });
       
