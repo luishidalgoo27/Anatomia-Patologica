@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Interpretacion;
 use App\Models\Interpretacion_muestra;
 
 class InterpretacionController extends Controller
@@ -22,15 +23,16 @@ class InterpretacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function showInterpretaciones()
+    {  
+        $interpretaciones = Interpretacion::all();
+        return response()->json($interpretaciones, 200);
     }
 
     /**
