@@ -1,4 +1,3 @@
-import './bootstrap';
 import './main';
 import '../assets/plugins/jquery/jquery.min.js';
 import '../assets/plugins/bootstrap/js/bootstrap.bundle.min.js';
