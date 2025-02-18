@@ -1,41 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom"
 export default function LoginPage() {
-    const navigate = useNavigate();
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    const [message, setMessage] = useState("");
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-      
-        const response = await fetch("/api/login", {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
-        },
-          body: JSON.stringify({ email, password }),
-        });
-      
-        const data = await response.json();
-      
-        if (!response.ok || !data.status) {
-          console.error("Error en el servidor:", data);
-          alert("Error: " + data.message);
-        } else {
-            navigate("/", { replace: true });
-
-            // Guardar token en sessionStorage
-            sessionStorage.setItem("token", data.token);
-        }
-      };
-      
-
     return (
 
         <>
