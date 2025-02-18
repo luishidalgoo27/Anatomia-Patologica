@@ -12,6 +12,8 @@ import InformeFinalPage from './Pages/InformeFinalPage'
 import TablaMuestras from './Pages/TablaMuestras'
 import LoginPage from './Pages/LoginPage'
 import CrearCuentaPage from './Pages/CrearCuentaPage'
+import InicioPage from './Pages/InicioPage'
+import ActualizarUsuarioPage from './Pages/ActualizarUsuarioPage'
 
 const router = createBrowserRouter([
     {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
             {
                 path: '/CrearCuenta',
                 element: <CrearCuentaPage />
+            },
+            {
+                path: '/Inicio',
+                element: <InicioPage />
+            },
+            {
+                path: '/ActualizarUsuario',
+                element: <ActualizarUsuarioPage />
             }
         ]
     }

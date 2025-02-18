@@ -17,7 +17,7 @@ export default function AppAside(){
                             <img src={UserImg} className="img-circle elevation-2" alt="User Image"/>
                         </div>
                         <div className="info">
-                            <a href="#" className="d-block">Luis</a>
+                            <a href="/login" className="d-block">Luis</a>
                         </div>
                     </div>
 
@@ -60,7 +60,7 @@ export default function AppAside(){
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="" className="nav-link">
+                                <Link to="/errorPage" className="nav-link">
                                     <i className="nav-icon fas fa-power-off"></i>
                                     <p className="text-danger">
                                         Cerrar Sesion
@@ -68,6 +68,7 @@ export default function AppAside(){
                                 </Link>
                             </li>
                         </ul>
+                        
                     </nav>
                 </div>
             </aside>
