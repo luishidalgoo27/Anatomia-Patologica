@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { handleAdd, deleteUser, handleUpdate } from "@/utils/sweetAlert2"
+import { handleAdd, deleteUser, handleUpdate } from "@/utils/usuariosCrud"
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])

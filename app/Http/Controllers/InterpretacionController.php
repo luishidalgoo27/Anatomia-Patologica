@@ -21,14 +21,14 @@ class InterpretacionController extends Controller
 
     public function index(Request $request)
     {
-        $interpretaciones = Interpretacion_muestra::where('id_muestra', $request->id);
+        $idMuestra = $request->id;
+        $interpretaciones = Interpretacion_muestra::where('id_muestra', $idMuestra)->get();
         return response()->json($interpretaciones, 200);
     }
 
     public function validateInterpretacion(Request $request){
         $request->validate([
             'descripcion' => 'required',
-            'id_muestra' => 'required',
             'id_interpretacion' => 'required'
         ]);
     }

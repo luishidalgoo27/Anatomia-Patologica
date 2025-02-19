@@ -21,9 +21,7 @@ class MuestraController extends Controller
             'id_calidad' => 'required',
             'id_tipo_naturaleza' => 'required',
             'organo' => 'required|nullable',
-            'id_formato' => 'required',
-            'id_user' => 'required',
-            'id_sede' => 'required'
+            'id_formato' => 'required'
         ]);
     }
 
@@ -72,7 +70,7 @@ class MuestraController extends Controller
     {
         $this->validateMuestra($request);
 
-        $idMuestra = $request->input('id');
+        $idMuestra = $request->id;
         $muestra = Muestra::where('id', $idMuestra);
 
         $muestra->update([

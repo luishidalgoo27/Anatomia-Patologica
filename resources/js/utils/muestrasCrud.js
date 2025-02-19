@@ -13,14 +13,13 @@ const getFormato = async () => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
-        window.location.href = '/login'
     }else{
         formato = data
     }
 }  
 
 const getTipoEstudio = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/tipoEstudio`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -31,14 +30,13 @@ const getTipoEstudio = async () => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
-        window.location.href = '/login'
     }else{
         estudio = data
     }
 } 
 
 const getNaturaleza = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/naturaleza`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -49,14 +47,13 @@ const getNaturaleza = async () => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
-        window.location.href = '/login'
     }else{
         naturaleza = data
     }
 } 
 
 const getCalidad = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/calidad`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -67,7 +64,6 @@ const getCalidad = async () => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
-        window.location.href = '/login'
     }else{
         calidad = data
     }
@@ -87,7 +83,6 @@ const addMuestra = async (muestra, getMuestras) => {
 
     if (!response.ok) {
         console.error("Error en el servidor:", data);
-        window.location.href = '/login';
     } else {
         getMuestras();
         Swal.fire("Muestra añadida!", "La muestra se ha creado correctamente", "success");
@@ -111,7 +106,6 @@ export const handleAdd = async (getMuestras) => {
 
     if (!response.ok) {
         console.error("Error obteniendo usuario:", userData);
-        window.location.href = '/login';
         return;
     }
 
@@ -221,7 +215,6 @@ const deleteMuestra = async (idMuestra, getMuestras) => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
-        window.location.href = '/login'
     }else{
         getMuestras()
         console.log("Muestra eliminada correctamente:", data);
@@ -239,14 +232,13 @@ const updateMuestra = async (muestra, idMuestra, getMuestra) => {
         body: JSON.stringify(muestra)
     })
 
-    const data = response.json()
+    const data = await response.json()
     if(!response.ok){
         console.error("Error en el servidor:", data)
-        window.location.href = '/login'
     }else{
-        getMuestra()
         console.log("Muestra actualizada correctamente:", data)
         Swal.fire("¡Muestra actualizada!", "La muestra se ha actualizado correctamente", "success")
+        getMuestra()
     }
 }
 
