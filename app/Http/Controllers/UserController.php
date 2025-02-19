@@ -23,14 +23,16 @@ class UserController extends Controller
     $request->validate([
         'name' => 'required',
         'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:8'
+        'password' => 'required|min:8',
+        'id_sede' => 'required'
     ]);
 
     try {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password) // Bycript para pasar contra encriptada
+            'password' => bcrypt($request->password), // Bycript para pasar contra encriptada
+            'id_sede' => $request->id_sede
         ]);
 
         return response()->json(['message' => 'Usuario creado correctamente', 'user' => $user], 201);
@@ -45,6 +47,7 @@ public function update(Request $request)
     $user = User::where('id', $idUser);
     
     $user->update([
+        'name' => $request->name,
         'email' => $request->email
     ]);
   

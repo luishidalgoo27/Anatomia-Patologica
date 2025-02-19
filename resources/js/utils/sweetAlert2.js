@@ -20,25 +20,26 @@ const addUser = async (usuario,obtenerUsuarios) => {
     }
 } 
 
-const updateUser = async (usuarioEmail, usuarioId, obtenerUsuarios) => {
-    const response = await fetch(`api/updateUser?id=${usuarioId}`, {
+const updateUser = async (name, email, usuarioId, obtenerUsuarios) => {
+    const response = await fetch(`/api/updateUser?id=${usuarioId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
         },
-        body: JSON.stringify(usuarioEmail)
+        body: JSON.stringify({ name, email }) // Enviar como objeto
     });
-    
-    const data = await response.json()
-    if(!response.ok){
+
+    const data = await response.json();
+    if (!response.ok) {
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
-    }else{
+    } else {
         console.log("Usuario actualizado correctamente:", data);
         obtenerUsuarios();
     }
-}  
+};
+ 
 
 export const deleteUser = async (usuarioId,obtenerUsuarios) => {
     const response = await fetch(`/api/deleteUser?id=${usuarioId}`, {
@@ -59,60 +60,84 @@ export const deleteUser = async (usuarioId,obtenerUsuarios) => {
     }  
 }
 
-export const handleAdd = (obtenerUsuarios) => {
-    Swal.fire({
-        title:'Añadir usuarios',
-        html: `
-            <input type="text" id="email" class="swal2-input" placeholder="Correo electrónico">
-            <input type="password" id="password" class="swal2-input" placeholder="Contraseña">
-        `,
-        showCancelButton: true,
-        confirmButtonText: "Añadir",
-        cancelButtonText: "Cancelar",
-        preConfirm: () => {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+export const handleAdd = async (obtenerUsuarios) => {
+    try {
+        // Obtener las sedes antes de mostrar el Swal.fire
+        const response = await fetch('/api/sede');
+        const sedes = await response.json();
 
-            if (!email || !password) {
-                Swal.showValidationMessage("Todos los campos son obligatorios");
-                return false;
+        // Generar opciones para el select
+        const opcionesSedes = sedes
+            .map(s => `<option value="${s.id}">${s.nombre}</option>`)
+            .join(""); // Unir todas las opciones en un solo string
+
+        Swal.fire({
+            title: 'Añadir usuarios',
+            html: `
+                <input type="text" id="name" class="swal2-input" placeholder="Nombre">
+                <input type="email" id="email" class="swal2-input" placeholder="Correo electrónico">
+                <input type="password" id="password" class="swal2-input" placeholder="Contraseña">
+                <select class="swal2-select" id="sede">
+                    <option value="">Seleccione una sede:</option>
+                    ${opcionesSedes} 
+                </select>
+            `,
+            showCancelButton: true,
+            confirmButtonText: "Añadir",
+            cancelButtonText: "Cancelar",
+            preConfirm: () => {
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                const id_sede = document.getElementById("sede").value;
+
+                if (!name || !email || !password || !id_sede) {
+                    Swal.showValidationMessage("Todos los campos son obligatorios");
+                    return false;
+                }
+
+                return { name, email, password, id_sede };
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                addUser(result.value, obtenerUsuarios);
+                console.log("Datos ingresados:", result.value);
+                Swal.fire("¡Usuario añadido!", "El usuario se ha registrado correctamente", "success");
             }
+        });
+    } catch (error) {
+        console.error("Error obteniendo las sedes:", error);
+        Swal.fire("Error", "No se pudieron cargar las sedes", "error");
+    }
+};
 
-            return { email, password }
-        },
-    }).then((result) => {
-        if (result.isConfirmed) {
-            addUser(result.value,obtenerUsuarios); 
-            console.log("Datos ingresados:", result.value)
-            Swal.fire("¡Usuario añadido!", "El usuario se ha registrado correctamente", "success")
-        }
-    })
-}
-
-export const handleUpdate = (usuario,obtenerUsuarios) => {
+export const handleUpdate = (usuario, obtenerUsuarios) => {
     Swal.fire({
-        title:'Editar usuarios',
+        title: 'Editar usuario',
         html: `
-            <input type="text" id="email" name="email" class="swal2-input" value=${usuario.email} placeholder="Correo electrónico">
+            <input type="text" id="name" name="name" class="swal2-input" value="${usuario.name}" placeholder="Nombre">
+            <input type="email" id="email" name="email" class="swal2-input" value="${usuario.email}" placeholder="Correo electrónico">
         `,
         showCancelButton: true,
         confirmButtonText: "Editar",
         cancelButtonText: "Cancelar",
         preConfirm: () => {
+            const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
 
-            if (!email) {
+            if (!name || !email) {
                 Swal.showValidationMessage("Todos los campos son obligatorios");
                 return false;
             }
 
-            return { email }
+            return { name, email };
         },
     }).then((result) => {
         if (result.isConfirmed) {
-            updateUser(result.value,usuario.id,obtenerUsuarios); 
-            console.log("Datos ingresados:", result.value)
-            Swal.fire("¡Usuario actualizado!", "El usuario se ha actualizado correctamente", "success")
+            const { name, email } = result.value; // Extraer valores
+            updateUser(name, email, usuario.id, obtenerUsuarios); // Pasar valores correctamente
+            console.log("Datos ingresados:", result.value);
+            Swal.fire("¡Usuario actualizado!", "El usuario se ha actualizado correctamente", "success");
         }
-    })
-}
+    });
+};

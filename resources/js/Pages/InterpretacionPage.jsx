@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 export async function loader({params}){
@@ -9,22 +9,32 @@ export async function loader({params}){
 export default function InterpretacionPage(){
     const [interpretacion, setInterpretacion] = useState([])
     const { id } = useLoaderData()
+    const navigate = useNavigate()
 
     const getInterpretacion = async () => {
-        fetch(`/api/interpretacion`, {
+        const response = await fetch(`/api/interpretacion?id=${id}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
             },
         })
-        .then(response => response.json())
-        .then(data => setInterpretacion(data))
-        .catch(error => console.error('Error al obtener los datos:', error))
+        
+        const data = await response.json()
+        if (!response.ok) {
+            console.error("Error en el servidor:", data);
+            console.log("Error: " + data.message);
+            navigate('/', {replace:true})
+        } else {
+            setInterpretacion(Array.isArray(data) ? data : [])
+        }
     }
 
     useEffect(()=>{
-        getInterpretacion()
-    }, [])
+        if(id){
+            getInterpretacion()
+        }
+    }, [id])
     
     return(
         <>
@@ -33,8 +43,8 @@ export default function InterpretacionPage(){
                 
                     <div>
                         <div className="text-right p-3 pb-3">
-                            <button onClick={()=>{handleAdd(getMuestras)}} className="bg-azulMedac text-white w-36 h-12 rounded-lg ">
-                                Añadir muestra
+                            <button onClick={()=>{}} className="bg-azulMedac text-white p-3 rounded-lg ">
+                                Añadir interpretacion
                             </button>
                         </div>
                     </div>
@@ -47,7 +57,7 @@ export default function InterpretacionPage(){
                                 <tr>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Código
+                                            Id
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
@@ -65,21 +75,21 @@ export default function InterpretacionPage(){
     
                             <tbody>
                                 {
-                                    muestras.map((muestra,index) => (
-                                        <tr key={index} onClick={() => actualizarMuestra(muestra, getMuestras)}>
+                                    interpretacion.map((i,index) => (
+                                        <tr key={index} /* onClick={() => actualizarMuestra(muestra, getMuestras)} */>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.codigo}
+                                                    {i.id_muestra}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.fecha}
+                                                    {i.id_interpretacion}
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {muestra.descripcion_calidad}
+                                                    {i.descripcion}
                                                 </p>
                                             </td>
                                         </tr>
