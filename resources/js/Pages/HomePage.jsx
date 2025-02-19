@@ -37,8 +37,8 @@ export default function HomePage() {
 
     return (
         <>
-        <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
-        <div className="content">
+            <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
+            <div className="content">
                
                     <div className="text-right p-3 pb-3">
                         <button onClick={() => handleAdd(obtenerUsuarios)} className="bg-azulMedac text-white  w-36 h-12 rounded-lg ">
@@ -47,7 +47,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Tabla de usuarios */}                    
-                    <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+                    <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border overflow-auto">
                         <table className="w-full text-left table-auto min-w-max">
                             <thead>
                                 <tr>
