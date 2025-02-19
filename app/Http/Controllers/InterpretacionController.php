@@ -13,6 +13,12 @@ class InterpretacionController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function indexAll()
+    {
+        $interpretaciones = Interpretacion_muestra::all();
+        return response()->json($interpretaciones, 200);
+    }
+
     public function index(Request $request)
     {
         $interpretaciones = Interpretacion_muestra::where('id_muestra', $request->id);

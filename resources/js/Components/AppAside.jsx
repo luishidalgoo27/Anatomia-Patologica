@@ -70,7 +70,7 @@ export default function AppAside(){
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/muestras2" className="nav-link">
+                                <Link to="/interpretaciones" className="nav-link">
                                     <i className="nav-icon fas  fa-image"></i>
                                     <p>
                                         Interpretaciones

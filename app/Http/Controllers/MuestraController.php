@@ -12,8 +12,9 @@ class MuestraController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        /* $muestrasUsuario = Muestra::where($request->id_user, 'id_user'); */
         $muestras = Muestra::with(['calidad','formato','tipoNaturaleza'])->get();
         return response()->json($muestras, 200);
     }
