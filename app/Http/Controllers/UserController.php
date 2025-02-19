@@ -13,10 +13,10 @@ class UserController extends Controller
 {
     public function validateUser(Request $request){
         $request->validate([
-            'name' => 'required',
+            /* 'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
-            'id_sede' => 'required'
+            'id_sede' => 'required' */
         ]);
     }
 
@@ -48,12 +48,13 @@ public function update(Request $request)
 {
     $this->validateUser($request);
 
-    $idUser = $request->input('id');
+    $idUser = $request->id;
     $user = User::where('id', $idUser);
     
     $user->update([
         'name' => $request->name,
-        'email' => $request->email
+        'email' => $request->email,
+        'id_sede' => $request->id_sede,
     ]);
   
     return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 201);
