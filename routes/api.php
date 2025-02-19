@@ -30,7 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/deleteUser', [UserController::class, 'destroy']);
     
     /* LLamadas API de Muestras */
-    Route::get('/muestras/{id_user}', [MuestraController::class, 'index']);
+/*     Route::get('/muestras/{id_user}', [MuestraController::class, 'index']); */   
+
+    Route::get('/muestras', [MuestraController::class, 'index']);
     Route::post('/addMuestra', [MuestraController::class, 'store']);
     Route::patch('/updateMuestra', [MuestraController::class, 'update']);
     Route::delete('/deleteMuestra', [MuestraController::class, 'destroy']);
