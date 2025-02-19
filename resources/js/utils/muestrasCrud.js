@@ -1,6 +1,27 @@
 import Swal from "sweetalert2";
 let formato,estudio,naturaleza,calidad 
-    
+
+// CLOUDINARY -----------------------
+const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "ml_default"); // Asegúrate de configurar tu "upload_preset" en Cloudinary
+
+    try {
+        const response = await fetch("https://api.cloudinary.com/v1_1/dotw4uex6/image/upload", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await response.json();
+        return data.secure_url; // Retorna la URL de la imagen subida
+    } catch (error) {
+        console.error("Error subiendo la imagen a Cloudinary:", error);
+        return null;
+    }
+};
+// ------------------------------------
+
 const getFormato = async () => {
     const response = await fetch(`/api/formato`, {
         method: 'GET',
@@ -184,7 +205,7 @@ export const handleAdd = async (getMuestras) => {
         showCancelButton: true,
         confirmButtonText: "Añadir",
         cancelButtonText: "Cancelar",
-        preConfirm: () => {
+        preConfirm: async () => {
             const codigo = document.getElementById("codigo").value;
             const fecha = document.getElementById("fecha").value;
             const id_formato = document.getElementById("formato").value;
@@ -193,13 +214,23 @@ export const handleAdd = async (getMuestras) => {
             const id_estudio = document.getElementById("estudio").value;
             const id_calidad = document.getElementById("calidad").value;
             const descripcion_calidad = document.getElementById("descripcion").value;
+            const imagenesInput = document.getElementById("imagenes");
+            const archivos = imagenesInput.files;
 
             if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_estudio || !id_calidad || !descripcion_calidad) {
                 Swal.showValidationMessage("Todos los campos son obligatorios");
                 return false;
             }
 
-            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_estudio, id_calidad, descripcion_calidad, id_user, id_sede };
+            const urlsImagenes = [];
+            for (let i = 0; i < archivos.length; i++) {
+                const url = await uploadImageToCloudinary(archivos[i]);
+                if (url) {
+                    urlsImagenes.push(url);
+                }
+            }
+
+            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_estudio, id_calidad, descripcion_calidad, id_user, id_sede, imagenes: urlsImagenes };
         },
     }).then((result) => {
         if (result.isConfirmed) {

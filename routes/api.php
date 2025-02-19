@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CalidadController;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
@@ -53,7 +53,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('/interpretacion', [InterpretacionController::class, 'update']);
     Route::delete('/interpretacion', [InterpretacionController::class, 'destroy']);
 
-    Route::post('/subirImagen', [ImagenController::class, 'subirImagen']);
+    Route::post('/upload-image', [ImageController::class, 'upload']);
 
     Route::get('/descargarMuestra/{id}', [MuestraController::class, 'descargarPDF']);
 });
