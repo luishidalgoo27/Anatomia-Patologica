@@ -12,6 +12,8 @@ const getFormato = async () => {
     })
     const data = await response.json()
     if(!response.ok){
+        console.error("Error en el servidor:", data);
+        console.log("Error: " + data.message);
         window.location.href = '/login'
     }else{
         formato = data
@@ -28,6 +30,8 @@ const getTipoEstudio = async () => {
     })
     const data = await response.json()
     if(!response.ok){
+        console.error("Error en el servidor:", data);
+        console.log("Error: " + data.message);
         window.location.href = '/login'
     }else{
         estudio = data
@@ -44,6 +48,8 @@ const getNaturaleza = async () => {
     })
     const data = await response.json()
     if(!response.ok){
+        console.error("Error en el servidor:", data);
+        console.log("Error: " + data.message);
         window.location.href = '/login'
     }else{
         naturaleza = data
@@ -60,6 +66,8 @@ const getCalidad = async () => {
     })
     const data = await response.json()
     if(!response.ok){
+        console.error("Error en el servidor:", data);
+        console.log("Error: " + data.message);
         window.location.href = '/login'
     }else{
         calidad = data

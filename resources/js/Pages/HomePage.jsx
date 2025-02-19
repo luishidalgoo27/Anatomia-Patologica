@@ -1,24 +1,39 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { handleAdd, deleteUser, handleUpdate } from "@/utils/sweetAlert2"
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])
+    const navigate = useNavigate()
     
     useEffect(()=>{
         obtenerUsuarios()
     }, []) 
 
-    const obtenerUsuarios = () => {
-        fetch('/api/users' ,{
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
-            },
-        })
-            .then(response => response.json())
-            .then(data => setUsuarios(data))
-            .catch(error => console.error('Error al obtener los datos:', error))
-    }
+    const obtenerUsuarios = async () => {
+        try {
+            const response = await fetch(`/api/muestras`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                },
+            });
+    
+            if (!response.ok) {
+                console.error("Error en el servidor:", response.status, response.statusText);
+                navigate("/login", { replace: true }); 
+                return; 
+            }
+    
+            const data = await response.json();
+            setUsuarios(data);
+    
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+            navigate("/login", { replace: true }); 
+        }
+    };
 
     return (
         <>
