@@ -37,7 +37,7 @@ export default function AppAside() {
           className="brand-link flex items-center     "
         >
           <img
-            src="public\favicon.ico"
+            src={DavanteIMG}
             alt="Davante Fundación Logo"
             className="brand-image  elevation-3"
           />
