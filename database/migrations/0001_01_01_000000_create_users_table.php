@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('name');
             $table->string('password');
+            $table->boolean('rol');
             $table->string('imagen')->nullable();
             $table->foreign('id_sede')->references('id')->on('sedes');
             $table->rememberToken();

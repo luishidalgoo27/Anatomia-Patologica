@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'id_sede',
-        'imagen'
+        'imagen',
+        'rol'
     ];
 
     public function sede()
