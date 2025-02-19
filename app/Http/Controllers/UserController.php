@@ -11,24 +11,31 @@ use Cloudinary\Transformation\Delivery;
 
 class UserController extends Controller
 {
+    public function validateUser(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8',
+            'id_sede' => 'required'
+        ]);
+    }
+
     public function index()
     {
         $users = User::all();
         return response()->json($users, 200);
-        //return view('users');
     }  
 
     public function store(Request $request)
 {
-    $request->validate([
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:8'
-    ]);
-
     try {
+        $this->validateUser($request);
+
         $user = User::create([
+            'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password) // Bycript para pasar contra encriptada
+            'password' => bcrypt($request->password), // Bycript para pasar contra encriptada
+            'id_sede' => $request->id_sede
         ]);
 
         return response()->json(['message' => 'Usuario creado correctamente', 'user' => $user], 201);
@@ -39,10 +46,13 @@ class UserController extends Controller
 
 public function update(Request $request)
 {
+    $this->validateUser($request);
+
     $idUser = $request->input('id');
     $user = User::where('id', $idUser);
     
     $user->update([
+        'name' => $request->name,
         'email' => $request->email
     ]);
   

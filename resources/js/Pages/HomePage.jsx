@@ -1,19 +1,39 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { handleAdd, deleteUser, handleUpdate } from "@/utils/sweetAlert2"
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])
+    const navigate = useNavigate()
     
     useEffect(()=>{
         obtenerUsuarios()
     }, []) 
 
-    const obtenerUsuarios = () => {
-        fetch('/api/users')
-            .then(response => response.json())
-            .then(data => setUsuarios(data))
-            .catch(error => console.error('Error al obtener los datos:', error))
-    }
+    const obtenerUsuarios = async () => {
+        try {
+            const response = await fetch(`/api/users`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                },
+            });
+    
+            if (!response.ok) {
+                console.error("Error en el servidor:", response.status, response.statusText);
+                navigate("/login", { replace: true }); 
+                return; 
+            }
+    
+            const data = await response.json();
+            setUsuarios(data);
+    
+        } catch (error) {
+            console.error("Error en la solicitud:", error);
+            navigate("/login", { replace: true }); 
+        }
+    };
 
     return (
         <>
@@ -31,6 +51,11 @@ export default function HomePage() {
                         <table className="w-full text-left table-auto min-w-max">
                             <thead>
                                 <tr>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            Nombre
+                                        </p>
+                                    </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                                             Correo
@@ -63,6 +88,11 @@ export default function HomePage() {
                                 {
                                     usuarios.map((usuario,index) => (
                                         <tr key={index}>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                                    {usuario.name}
+                                                </p>
+                                            </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {usuario.email}

@@ -19,10 +19,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'name',
         'email',
         'password',
         'id_sede',
-        'imagen'
+        'imagen',
+        'rol'
     ];
 
     public function sede()
@@ -30,10 +32,10 @@ class User extends Authenticatable
       return $this->belongsTo(Sede::class, 'id_sede');
     }
 
-    //public function muestras()
-    //{
-      //  return $this->hasMany(Muestra::class, 'id_usuario');
-    //}
+    public function muestras()
+    {
+        return $this->hasMany(Muestra::class, 'id_usuario');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

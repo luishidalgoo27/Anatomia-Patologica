@@ -1,10 +1,32 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import DavanteIMG from "../../assets/img/davantefundacion.png";
 import UserImg from "../../assets/img/user2-160x160.jpg";
+import { useEffect, useState } from "react"
 
 export default function AppAside() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [nombreUser, setNombreUser] = useState([])
+    const handleLogOut = () => {
+        sessionStorage.removeItem('token')
+        window.location.reload()
+    }  
+    useEffect(()=>{
+        getNombre()
+    }, [])
+    const getNombre = async() => {
+        fetch('/api/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        })
+        .then(resultado => resultado.json())
+        .then(datos => {
+            setNombreUser(datos.name)
+        })
+    }
+    const [nombreUser, setNombreUser] = useState([])
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
@@ -38,7 +60,7 @@ export default function AppAside() {
                 alt="Usuario"
                 className="w-8 h-8 rounded-full border-2 border-white ml-2"
               />
-              <span className="ml-2">Luis  </span>
+              <span className="ml-2">¡Hola {nombreUser}!</span>
               <svg
                 className="w-2.5 h-2 ms-auto"
                 aria-hidden="true"
