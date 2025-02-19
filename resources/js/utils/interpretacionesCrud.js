@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-let estudio, interpretacion
+let estudios, interpretaciones
     
 const getTipoEstudio = async () => {
     const response = await fetch(`/api/tipoEstudio`, {
@@ -15,7 +15,7 @@ const getTipoEstudio = async () => {
         console.log("Error: " + data.message);
         window.location.href = '/login'
     }else{
-        estudio = data
+        estudios = data
     }
 } 
 
@@ -33,7 +33,7 @@ const getInterpretacion = async () => {
         console.log("Error: " + data.message);
         window.location.href = '/login'
     }else{
-        interpretacion = data
+        interpretaciones = data
     }
 } 
 
@@ -70,7 +70,7 @@ export const handleAdd = async (id,getInterpretacionesMuestra) => {
                     <label for="estudio">Tipo de estudio</label>
                     <select id="estudio" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${estudio.map(e => `<option value="${e.id}">${e.nombre}</option>`)}
+                        ${estudios.map(e => `<option value="${e.id}">${e.nombre}</option>`)}
                     </select>
                 </div>
 
@@ -78,7 +78,7 @@ export const handleAdd = async (id,getInterpretacionesMuestra) => {
                     <label for="interpretacion">Interpretación de la muestra</label>
                     <select id="interpretacion" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${interpretacion.map(i => `<option value="${i.id}">${i.texto}</option>`)}
+                        ${interpretaciones.map(i => `<option value="${i.id}">${i.texto}</option>`)}
                     </select>
                 </div>
 
@@ -111,8 +111,8 @@ export const handleAdd = async (id,getInterpretacionesMuestra) => {
     });
 };
 
-const deleteInterpretacion = async (idMuestra, getMuestras) => {
-    const response = await fetch(`/api/deleteMuestra?id=${idMuestra}`, {
+const deleteInterpretacion = async (idInterpretacion, getInterpretacionesMuestra) => {
+    const response = await fetch(`/api/interpretacion?id=${idInterpretacion}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -124,61 +124,61 @@ const deleteInterpretacion = async (idMuestra, getMuestras) => {
     if(!response.ok){
         console.error("Error en el servidor:", data);
         console.log("Error: " + data.message);
-        window.location.href = '/login'
     }else{
-        getMuestras()
-        console.log("Muestra eliminada correctamente:", data);
-        Swal.fire("¡Muestra eliminada!", "La muestra se ha eliminada correctamente", "error")
+        getInterpretacionesMuestra()
+        console.log("Interpretación eliminada correctamente:", data);
+        Swal.fire("Interpretación eliminada!", "La interpretación se ha eliminada correctamente", "error")
     }
 }
 
-const updateInterpretacion = async (muestra, idMuestra, getMuestra) => {
-    const response = await fetch(`/api/updateMuestra?id=${idMuestra}`, {
+const updateInterpretacion = async (interpretacion, idInterpretacion, getInterpretacionesMuestra) => {
+    const response = await fetch(`/api/interpretacion?id=${idInterpretacion}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
-        body: JSON.stringify(muestra)
+        body: JSON.stringify(interpretacion)
     })
 
     const data = response.json()
     if(!response.ok){
         console.error("Error en el servidor:", data)
-        window.location.href = '/login'
     }else{
-        getMuestra()
-        console.log("Muestra actualizada correctamente:", data)
-        Swal.fire("¡Muestra actualizada!", "La muestra se ha actualizado correctamente", "success")
+        getInterpretacionesMuestra()
+        console.log("Interpretación actualizada correctamente:", data)
+        Swal.fire("Interpretación actualizada!", "La interpretación se ha actualizado correctamente", "success")
     }
 }
 
-export const actualizarInterpretacion = async (id, interpretacion, getInterpretacionesMuestra) => {
+export const actualizarInterpretacion = async (interpretacion, getInterpretacionesMuestra) => {
     await Promise.all([getTipoEstudio(), getInterpretacion()]);
 
     Swal.fire({
-        title: `Editar Interpretacion`,
+        title: `Editar Interpretación`,
         html: `
             <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-4 text-azulMedac font-sans">
                 <div class="flex flex-col w-96">
                     <label for="estudio">Tipo de estudio</label>
                     <select id="estudio" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${estudio.map(e => `<option value="${e.id}">${e.nombre}</option>`)}
+                        ${estudios.map(e => `<option value="${e.id}">${e.nombre}</option>`)}
                     </select>
                 </div>
 
                 <div class="flex flex-col w-96">
                     <label for="interpretacion">Interpretación de la muestra</label>
                     <select id="interpretacion" class="rounded-xl">
-                        <option value="">Seleccione una opción</option>
-                        ${interpretacion.map(i => `<option value="${i.id}">${i.texto}</option>`)}
+                        ${interpretaciones.map(i => 
+                            `<option value="${i.id}" ${i.id === interpretacion.id_interpretacion ? 'selected' : ''}>
+                                ${i.texto}
+                            </option>`)}
                     </select>
                 </div>
 
                 <div class="flex flex-col w-96">
                     <label for="descripcion">Descripción de la interpretación</label>
-                    <textarea id="descripcion" class="h-36 rounded-lg" placeholder="Descripción"></textarea>
+                    <textarea id="descripcion" class="h-36 rounded-lg" placeholder="Descripción">${interpretacion.descripcion}</textarea>
                 </div>
 
             </div>
@@ -189,7 +189,6 @@ export const actualizarInterpretacion = async (id, interpretacion, getInterpreta
         showDenyButton: true,
         denyButtonText: "Eliminar",
         preConfirm: () => {
-            const id_muestra = id
             const id_interpretacion = document.getElementById("interpretacion").value;
             const descripcion = document.getElementById("descripcion").value;
 
@@ -198,13 +197,13 @@ export const actualizarInterpretacion = async (id, interpretacion, getInterpreta
                 return false;
             }
 
-            return { id_muestra, id_interpretacion, descripcion };
+            return { id_interpretacion, descripcion };
         },
     }).then((result) => {
         if (result.isConfirmed) {
-            updateMuestra(result.value, muestra.id, getMuestras);
+            updateInterpretacion(result.value, interpretacion.id, getInterpretacionesMuestra);
         } else if (result.isDenied) {
-            deleteMuestra(muestra.id, getMuestras);
+            deleteInterpretacion(interpretacion.id, getInterpretacionesMuestra);
         }
     });
 };

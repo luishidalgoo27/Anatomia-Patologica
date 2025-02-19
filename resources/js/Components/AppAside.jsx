@@ -5,34 +5,36 @@ import { useEffect, useState } from "react"
 
 export default function AppAside() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [nombreUser, setNombreUser] = useState([])
-    const handleLogOut = () => {
-        sessionStorage.removeItem('token')
-        window.location.reload()
-    }  
-    useEffect(()=>{
-        getNombre()
-    }, [])
-    const getNombre = async() => {
-        fetch('/api/user', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
-            },
-        })
-        .then(resultado => resultado.json())
-        .then(datos => {
-            setNombreUser(datos.name)
-        })
-    }
-    const [nombreUser, setNombreUser] = useState([])
+  const [nombreUser, setNombreUser] = useState([])
+
+  const handleLogOut = () => {
+      sessionStorage.removeItem('token')
+      window.location.reload()
+  }  
+
+  useEffect(()=>{
+      getNombre()
+  }, [])
+
+  const getNombre = async() => {
+      fetch('/api/user', {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+          },
+      })
+      .then(resultado => resultado.json())
+      .then(datos => {
+          setNombreUser(datos.name)
+      })
+  }
 
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
     <>
-      <aside className="main-sidebar bg-navy sidebar-dark-primary elevation-4  ">
+      <aside className="main-sidebar bg-navy sidebar-dark-primary elevation-4">
         <Link
           to="https://www.fundaciondavante.org/"
           className="brand-link flex items-center     "

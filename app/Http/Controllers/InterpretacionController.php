@@ -29,7 +29,6 @@ class InterpretacionController extends Controller
     public function validateInterpretacion(Request $request){
         $request->validate([
             'descripcion' => 'required',
-            'id_muestra' => 'required',
             'id_interpretacion' => 'required'
         ]);
     }

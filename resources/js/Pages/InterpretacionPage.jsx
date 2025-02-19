@@ -27,7 +27,7 @@ export default function InterpretacionPage(){
             console.log("Error: " + data.message);
             navigate('/', {replace:true})
         } else {
-            setInterpretacion(Array.isArray(data) ? data : [])
+            setInterpretacion(data)
         }
     }
 
@@ -81,7 +81,7 @@ export default function InterpretacionPage(){
                             <tbody>
                                 {
                                     interpretacion.map((i,index) => (
-                                        <tr key={index} onClick={() => actualizarInterpretacion(i.id, interpretacion, getInterpretacionesMuestra)}>
+                                        <tr key={index} onClick={() => actualizarInterpretacion(i, getInterpretacionesMuestra)}>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {i.id}
