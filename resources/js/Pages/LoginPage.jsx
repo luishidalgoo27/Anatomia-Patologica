@@ -1,51 +1,46 @@
+import { Link } from "react-router-dom"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
 
-    const getCsrfToken = async () => {
-        await fetch("/sanctum/csrf-cookie", {
-            method: 'GET',
-            credentials: "include",
-        });
-    };
-
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError("");
-        setMessage("");
+      
+        const response = await fetch("/api/login", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+        },
+          body: JSON.stringify({ email, password }),
+        });
+      
+        const data = await response.json();
+      
+        if (!response.ok || !data.status) {
+          console.error("Error en el servidor:", data);
+          alert("Error: " + data.message);
+        } else {
+            navigate("/", { replace: true });
 
-        await getCsrfToken(); // Obtiene el token CSRF antes de loguearse
-
-        try {
-            const response = await fetch("/api/login", {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
-            });
-
-            if (!response.ok) {
-                throw new Error("Credenciales incorrectas");
-            }
-
-            const data = await response.json();
-            setMessage("Inicio de sesión exitoso");
-            console.log("Usuario autenticado:", data);
-        } catch (error) {
-            setError(error.message);
+            // Guardar token en sessionStorage
+            sessionStorage.setItem("token", data.token);
         }
-    };
+      };
+      
 
     return (
         <>
-            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
-                <div className="content">
+        <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
+        <div className="content">
                     <section className="">
                         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -93,7 +88,6 @@ export default function LoginPage() {
                                             />
                                         </div>
 
-                                        <div className="flex items-center justify-between">
                                             <div className="flex items-start">
                                                 <div className="flex items-center h-5">
                                                     <input
@@ -109,9 +103,19 @@ export default function LoginPage() {
                                                 </div>
                                             </div>
 
-                                            <button type="submit" className="bg-azulMedac text-white w-20 h-10 rounded-lg">
-                                                Entrar
-                                            </button>
+                                            <div className="flex  justify-between">
+
+                                            <div className="text-sm text-gray-500 flex gap-2 mt-2">
+                                                <label for="">¿No tienes una cuenta?</label>
+                                                <Link to="/CrearCuenta">Crear cuenta</Link>                                                  
+                                            </div>
+
+
+                                            <div className="">
+                                                <button className="bg-azulMedac text-white w-20 h-10 rounded-lg ">
+                                                    Entrar
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

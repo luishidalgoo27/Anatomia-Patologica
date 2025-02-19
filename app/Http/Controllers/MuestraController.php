@@ -12,9 +12,27 @@ class MuestraController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function validateMuestra(Request $request)
     {
-        $muestras = Muestra::with(['calidad','formato','tipoNaturaleza'])->get();
+        $request->validate([
+            'descripcion_calidad' => 'required',
+            'fecha' => 'required',
+            'codigo' => 'required',
+            'id_calidad' => 'required',
+            'id_tipo_naturaleza' => 'required',
+            'organo' => 'required|nullable',
+            'id_formato' => 'required',
+            'id_user' => 'required',
+            'id_sede' => 'required'
+        ]);
+    }
+
+    public function index(Request $request)
+    {   
+        $muestras = Muestra::with(['calidad','formato','tipoNaturaleza'])
+        ->where('id_user', $request->id_user)
+        ->get();
+
         return response()->json($muestras, 200);
     }
 
@@ -23,17 +41,9 @@ class MuestraController extends Controller
      */
     public function store(Request $request)
     {
-    $request->validate([
-        'descripcion_calidad' => 'required',
-        'fecha' => 'required',
-        'codigo' => 'required',
-        'id_calidad' => 'required',
-        'id_tipo_naturaleza' => 'required',
-        'organo' => 'required|nullable',
-        'id_formato' => 'required'
-    ]);
-
     try{
+        $this->validateMuestra($request);
+        
         Muestra::create([
             'descripcion_calidad' => $request->descripcion_calidad,
             'fecha' => $request->fecha,
@@ -42,6 +52,8 @@ class MuestraController extends Controller
             'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
             'organo' => $request->organo,
             'id_formato' => $request->id_formato,
+            'id_user' => $request->id_user,
+            'id_sede' => $request->id_sede,
         ]);
 
         return response()->json('La muestra se ha creado correctamente', 201);
@@ -58,6 +70,8 @@ class MuestraController extends Controller
      */
     public function update(Request $request)
     {
+        $this->validateMuestra($request);
+
         $idMuestra = $request->input('id');
         $muestra = Muestra::where('id', $idMuestra);
 
@@ -68,8 +82,7 @@ class MuestraController extends Controller
             'id_calidad' => $request->id_calidad,
             'id_tipo_naturaleza' => $request->id_tipo_naturaleza,
             'organo' => $request->organo,
-            'id_formato' => $request->id_formato,
-            /* 'id_sede' => $request->centro, */
+            'id_formato' => $request->id_formato
         ]);
 
         return response()->json(['message' => 'Muestra actualizada correctamente', 'muestra' => $muestra], 201);
@@ -79,7 +92,7 @@ class MuestraController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Request $request)
-    {
+    {   
         $idMuestra = $request->input('id');
         $muestra = Muestra::where('id', $idMuestra);
 

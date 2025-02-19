@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +23,7 @@ class AuthController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(),
             [
+                'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
                 'id_sede' => 'required'
@@ -36,6 +38,7 @@ class AuthController extends Controller
             }
 
             $user = User::create([
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'id_sede' => $request->id_sede,
@@ -44,6 +47,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'id' => $user->id,
+                'name' => $user->name,
                 'email' => $user->email,
                 'id_sede' => $user->id_sede,
                 'message' => 'User Logged In Successfully',
@@ -87,7 +91,12 @@ class AuthController extends Controller
                 ], 200);
             }
 
+            
             $user = User::where('email', $request->email)->first();
+
+            DB::table('personal_access_tokens')
+            ->where('tokenable_id', $user->id)
+            ->delete();
 
             return response()->json([
                 'status' => true,
