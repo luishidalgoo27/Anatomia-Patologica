@@ -91,6 +91,7 @@ class AuthController extends Controller
                 ], 200);
             }
 
+            
             $user = User::where('email', $request->email)->first();
 
             DB::table('personal_access_tokens')

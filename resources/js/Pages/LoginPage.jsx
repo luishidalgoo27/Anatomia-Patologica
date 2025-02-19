@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -87,7 +88,6 @@ export default function LoginPage() {
                                             />
                                         </div>
 
-                                        <div className="flex items-center justify-between">
                                             <div className="flex items-start">
                                                 <div className="flex items-center h-5">
                                                     <input
@@ -103,9 +103,19 @@ export default function LoginPage() {
                                                 </div>
                                             </div>
 
-                                            <button type="submit" className="bg-azulMedac text-white w-20 h-10 rounded-lg">
-                                                Entrar
-                                            </button>
+                                            <div className="flex  justify-between">
+
+                                            <div className="text-sm text-gray-500 flex gap-2 mt-2">
+                                                <label for="">¿No tienes una cuenta?</label>
+                                                <Link to="/CrearCuenta">Crear cuenta</Link>                                                  
+                                            </div>
+
+
+                                            <div className="">
+                                                <button className="bg-azulMedac text-white w-20 h-10 rounded-lg ">
+                                                    Entrar
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

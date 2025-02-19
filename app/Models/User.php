@@ -31,10 +31,10 @@ class User extends Authenticatable
       return $this->belongsTo(Sede::class, 'id_sede');
     }
 
-    //public function muestras()
-    //{
-      //  return $this->hasMany(Muestra::class, 'id_usuario');
-    //}
+    public function muestras()
+    {
+        return $this->hasMany(Muestra::class, 'id_usuario');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

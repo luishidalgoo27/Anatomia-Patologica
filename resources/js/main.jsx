@@ -9,21 +9,13 @@ import ErrorPage from "./Pages/ErrorPage";
 import LoginPage from "./Pages/LoginPage";
 import CrearCuentaPage from "./Pages/CrearCuentaPage";
 import HomePage from "./Pages/HomePage";
+import ActualizarUsuarioPage from "./Pages/ActualizarUsuarioPage";
 import MuestrasPage from "./Pages/MuestrasPage";
 import InterpretacionPage from "./Pages/InterpretacionPage";
+import AllInterpretacionesPage from "./Pages/AllInterpretacionesPage";
 
 function PrivateRoute() {
     const token = sessionStorage.getItem("token"); // Verificamos si hay token
-    /* const tokenUser = false; */
-    
-    /*   fetch('/api/token')
-    .then(resultado => resultado.json())
-    .then(datos => {
-      if (datos.token === token){
-        tokenUser = true;
-      }
-    })
-   */
     if(token){
       return <Outlet/>
     } else {
@@ -62,6 +54,14 @@ const router = createBrowserRouter([
                         path: "/interpretacion/:id",
                         element: <InterpretacionPage />,
                         loader: interpretacionDetail
+                    },
+                    {
+                        path: '/interpretaciones',
+                        element: <AllInterpretacionesPage />
+                    },
+                    {
+                        path: '/actualizarUsuario',
+                        element: <ActualizarUsuarioPage />
                     }
                 ],
             },
@@ -72,3 +72,5 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 );
+
+            
