@@ -64,7 +64,17 @@ export default function InterpretacionPage(){
                             <tbody>
                                 {
                                     interpretacion.map((i,index) => (
-                                        <tr key={index} /* onClick={() => actualizarMuestra(muestra, getMuestras)} */>
+                                        <tr key={index} onClick={() => actualizarInterpretacion(id, interpretacion, getInterpretacionesMuestra)}>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                                    {i.id}
+                                                </p>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                                    {i.descripcion}
+                                                </p>
+                                            </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {i.id_muestra}
@@ -73,11 +83,6 @@ export default function InterpretacionPage(){
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {i.id_interpretacion}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {i.descripcion}
                                                 </p>
                                             </td>
                                         </tr>

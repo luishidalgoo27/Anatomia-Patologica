@@ -20,7 +20,7 @@ const getFormato = async () => {
 }  
 
 const getTipoEstudio = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/tipoEstudio`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const getTipoEstudio = async () => {
 } 
 
 const getNaturaleza = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/naturaleza`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const getNaturaleza = async () => {
 } 
 
 const getCalidad = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/calidad`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

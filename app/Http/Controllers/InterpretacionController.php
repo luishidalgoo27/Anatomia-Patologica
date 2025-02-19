@@ -21,7 +21,8 @@ class InterpretacionController extends Controller
 
     public function index(Request $request)
     {
-        $interpretaciones = Interpretacion_muestra::where('id_muestra', $request->id);
+        $idMuestra = $request->id;
+        $interpretaciones = Interpretacion_muestra::where('id_muestra', $idMuestra)->get();
         return response()->json($interpretaciones, 200);
     }
 
@@ -35,7 +36,7 @@ class InterpretacionController extends Controller
             Interpretacion_muestra::create([
                 'descripcion' => $request->descripcion,
                 'id_muestra' => $request->id_muestra,
-                'id_enterpretacion' => $request->id_interpretacion
+                'id_interpretacion' => $request->id_interpretacion
             ]);
 
             return response()->json('La interpretacion se ha creado correctamente', 201);
