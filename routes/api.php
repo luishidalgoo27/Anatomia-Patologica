@@ -19,7 +19,11 @@ Route::get('/sede', [SedeController::class, 'index']);
 Route::post('/register', [AuthController::class, 'createUser']);
 Route::post('/login', [AuthController::class, 'loginUser']);
 
+
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
     Route::get('/users', [UserController::class, 'index']);
     Route::post('/addUser', [UserController::class, 'store']);
     Route::patch('/updateUser', [UserController::class, 'update']);
