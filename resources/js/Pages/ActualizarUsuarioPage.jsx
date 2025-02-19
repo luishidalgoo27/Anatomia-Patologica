@@ -2,8 +2,8 @@ export default function ActualizarUsuarioPage() {
     return (
 
         <>
-            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]  ">
-            <div className="content">
+        <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
+        <div className="content">
                     <section className="">
                         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 
@@ -12,7 +12,7 @@ export default function ActualizarUsuarioPage() {
                                     
                                     <div className="flex">
                                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                                            Actualizar Cuenta
+                                            Editar Cuenta
                                         </h1>
                                         <div className=" ml-auto">
                                             <img src="/public/media/user2-160x160.jpg" className="img-circle elevation-2 w-12" alt="User Image"/>

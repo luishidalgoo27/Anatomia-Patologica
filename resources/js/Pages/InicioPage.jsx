@@ -1,8 +1,8 @@
 export default function LoginPage() {
     return (
         <>
-            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)] ">
-                <div className="content pt-3">
+        <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]  bg-cover ">
+        <div className="content pt-3">
                     <div className="bg-white w-full rounded-xl ">
                         <h1>ejemplo</h1>
                     </div>

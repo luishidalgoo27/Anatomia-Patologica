@@ -14,12 +14,12 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                hola: ['Viga', ...defaultTheme.fontFamily.sans]
+
             },
         
-        colors:{'azulMedac': '#001f3f'},
-        fontFamily: {
-            hola: ['Rowdies', ...defaultTheme.fontFamily.sans]
-        },
+        colors:{'azulMedac': '#001f3f', 'navHover': '#1a3653'},
+
         },
     },
 

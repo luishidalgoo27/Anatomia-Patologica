@@ -1,8 +1,8 @@
 export default function MuestrasPage(){
     return(
         <>
-            <div class="content-wrapper">
-                <div class="content">
+        <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
+        <div class="content">
                     <div className="flex flex-wrap flex-col pt-4 pb-4">
 
                         

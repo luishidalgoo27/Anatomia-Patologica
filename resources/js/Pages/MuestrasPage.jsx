@@ -20,8 +20,8 @@ export default function MuestrasPage(){
     return(
         <>
 
-            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
-                <div className="content ">
+<div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
+<div className="content ">
                 
                     <div>
                         <div className="text-right p-3 pb-3">
