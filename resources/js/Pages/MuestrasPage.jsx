@@ -4,16 +4,32 @@ import { handleAdd, actualizarMuestra } from "@/utils/muestrasCrud"
 
 export default function MuestrasPage(){    
     //Estados para pintar los input de muestras
+    const [id_user, setidUser] = useState()
     const [muestras,setMuestras] = useState([])
     const navigate = useNavigate()
         
     useEffect(()=>{
         getMuestras()
     }, [])
-     
+
+    const getidUser = async () => {
+        const response = await fetch('/api/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        });
+
+        const data = await response.json()
+        setidUser(data.id)
+        return data.id
+    }
+
     const getMuestras = async () => {
         try {
-            const response = await fetch(`/api/muestras`, {
+            const id_user = await getidUser()
+            const response = await fetch(`/api/muestras?id_user=${id_user}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,18 +37,11 @@ export default function MuestrasPage(){
                 },
             });
     
-            if (!response.ok) {
-                console.error("Error en el servidor:", response.status, response.statusText);
-                navigate("/login", { replace: true }); 
-                return; 
-            }
-    
             const data = await response.json();
             setMuestras(data);
     
         } catch (error) {
             console.error("Error en la solicitud:", error);
-            navigate("/login", { replace: true }); 
         }
     };
       
