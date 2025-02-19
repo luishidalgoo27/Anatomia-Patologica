@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_interpretacion'); 
             $table->timestamps();
         
-            $table->foreign('id_muestra')->references('id')->on('muestras');
+            $table->foreign('id_muestra')->references('id')->on('muestras')->onDelete('cascade');
             $table->foreign('id_interpretacion')->references('id')->on('interpretaciones');
         
             
