@@ -26,7 +26,7 @@ return new class extends Migration
 
             $table->foreign('id_calidad')->references('id')->on('calidades');
             $table->foreign('id_formato')->references('id')->on('formatos');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_tipo_naturaleza')->references('id')->on('tipo_naturalezas');
             $table->foreign('id_sede')->references('id')->on('sedes');
         });
