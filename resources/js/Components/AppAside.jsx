@@ -26,8 +26,7 @@ export default function AppAside() {
             setNombreUser(datos.name)
         })
     }
-    const [nombreUser, setNombreUser] = useState([])
-
+    
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
