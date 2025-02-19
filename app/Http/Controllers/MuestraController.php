@@ -15,7 +15,7 @@ class MuestraController extends Controller
     public function index(Request $request)
     {   
         $muestras = Muestra::with(['calidad','formato','tipoNaturaleza'])
-        /* ->where('id_user', $request->id_user) */
+        ->where('id_user', $request->id_user)
         ->get();
 
         return response()->json($muestras, 200);
