@@ -78,7 +78,6 @@ export const handleAdd = async (id,getInterpretacionesMuestra) => {
                     <label for="interpretacion">Interpretación de la muestra</label>
                     <select id="interpretacion" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${interpretaciones.map(i => `<option value="${i.id}">${i.texto}</option>`)}
                     </select>
                 </div>
 
@@ -92,6 +91,18 @@ export const handleAdd = async (id,getInterpretacionesMuestra) => {
         showCancelButton: true,
         confirmButtonText: "Añadir",
         cancelButtonText: "Cancelar",
+        didOpen: () => {
+            const selectEstudio = document.getElementById('estudio')
+            const selectInterpretacion = document.getElementById('interpretacion')
+            
+            selectEstudio.addEventListener('change', ()=>{
+                const idEstudioSeleccionado = selectEstudio.value
+
+                const interpretacionesFiltradas = interpretaciones.filter(i => i.id_tipo_estudios == idEstudioSeleccionado).map(i => `<option value="${i.id}">${i.texto}</option>`).join()
+
+                selectInterpretacion.innerHTML = interpretacionesFiltradas || '<option value="">No hay interpretaciones disponibles</option>';
+            })
+        },
         preConfirm: () => {
             const id_muestra = id
             const id_interpretacion = document.getElementById("interpretacion").value;
@@ -188,6 +199,18 @@ export const actualizarInterpretacion = async (interpretacion, getInterpretacion
         cancelButtonText: "Cancelar",
         showDenyButton: true,
         denyButtonText: "Eliminar",
+        didOpen: () => {
+            const selectEstudio = document.getElementById('estudio')
+            const selectInterpretacion = document.getElementById('interpretacion')
+            
+            selectEstudio.addEventListener('change', ()=>{
+                const idEstudioSeleccionado = selectEstudio.value
+
+                const interpretacionesFiltradas = interpretaciones.filter(i => i.id_tipo_estudios == idEstudioSeleccionado).map(i => `<option value="${i.id}">${i.texto}</option>`).join()
+
+                selectInterpretacion.innerHTML = interpretacionesFiltradas || '<option value="">No hay interpretaciones disponibles</option>';
+            })
+        },
         preConfirm: () => {
             const id_interpretacion = document.getElementById("interpretacion").value;
             const descripcion = document.getElementById("descripcion").value;
