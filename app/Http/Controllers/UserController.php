@@ -35,7 +35,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password), // Bycript para pasar contra encriptada
-            'id_sede' => $request->id_sede
+            'id_sede' => $request->id_sede,
+            'rol' => false
         ]);
 
         return response()->json(['message' => 'Usuario creado correctamente', 'user' => $user], 201);
@@ -46,14 +47,6 @@ class UserController extends Controller
 
 public function update(Request $request)
 {
-    $request->validate([
-    'id' => 'required|exists:users,id',
-    'name' => 'sometimes|string|max:255',
-    'email' => 'email|max:255|unique:users,email,',
-    'password' => 'nullable|min:6',
-    'imagen' => 'nullable|string',
-    ]);
-
     $user = User::find($request->id);
 
     if (!$user) {
@@ -68,7 +61,6 @@ public function update(Request $request)
     
     if ($request->filled('password')) $user->password = bcrypt($request->password);
     
-
     $user->save();
 
     return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 200);
