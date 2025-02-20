@@ -43,8 +43,7 @@ export default function MuestrasPage(){
         } catch (error) {
             console.error("Error en la solicitud:", error);
         }
-    };
-      
+    };  
 
     return(
         <>

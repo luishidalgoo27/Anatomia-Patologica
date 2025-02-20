@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('imagenes', function (Blueprint $table) {
             $table->id();
             $table->string('ruta');
-            $table->float('zoom');
+            $table->float('zoom')->nullable();
             $table->unsignedBigInteger('id_muestra');
             $table->timestamps();
 
-            $table->foreign('id_muestra')->references('id')->on('muestras');
+            $table->foreign('id_muestra')->references('id')->on('muestras')->onDelete('cascade');
 
         });
     }

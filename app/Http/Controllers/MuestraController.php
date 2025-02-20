@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagen;
 use Exception;
 use App\Models\Muestra;
 use Barryvdh\DomPDF\Facade\PDF;
@@ -42,7 +43,7 @@ class MuestraController extends Controller
     try{
         $this->validateMuestra($request);
         
-        Muestra::create([
+        $muestra = Muestra::create([
             'descripcion_calidad' => $request->descripcion_calidad,
             'fecha' => $request->fecha,
             'codigo' => $request->codigo,
@@ -53,6 +54,14 @@ class MuestraController extends Controller
             'id_user' => $request->id_user,
             'id_sede' => $request->id_sede,
         ]);
+
+        foreach ($request->rutas as $ruta) {
+            Imagen::create([
+                'ruta' => $ruta,
+                'id_muestra' => $muestra->id
+            ]);
+        }
+
 
         return response()->json('La muestra se ha creado correctamente', 201);
     }
@@ -82,7 +91,7 @@ class MuestraController extends Controller
             'organo' => $request->organo,
             'id_formato' => $request->id_formato
         ]);
-
+        
         return response()->json(['message' => 'Muestra actualizada correctamente', 'muestra' => $muestra], 201);
     }
 
