@@ -16,12 +16,12 @@ export default function MuestrasPage(){
     const descargarPdf = async (id, event) => {
         event.stopPropagation();
     
-        const url = `/api/descargarMuestra?id=${id}`;
+        const url = `/api/api/descargarMuestra?id=${id}`;
         window.open(url, '_blank'); 
     };
 
     const getidUser = async () => {
-        const response = await fetch('/api/user', {
+        const response = await fetch('/api/api/user', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default function MuestrasPage(){
     const getMuestras = async () => {
         try {
             const id_user = await getidUser()
-            const response = await fetch(`/api/muestra?id_user=${id_user}`, {
+            const response = await fetch(`/api/api/muestra?id_user=${id_user}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export default function MuestrasPage(){
     };  
 
     const getImagenes = async () => {
-        const response = await fetch(`/api/imagenes`, {
+        const response = await fetch(`/api/api/imagenes`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

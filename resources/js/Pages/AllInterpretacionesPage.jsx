@@ -6,7 +6,7 @@ export default function InterpretacionPage(){
     const navigate = useNavigate()
 
     const getInterpretacion = async () => {
-        const response = await fetch(`/api/allInterpretaciones`, {
+        const response = await fetch(`/api/api/allInterpretaciones`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
