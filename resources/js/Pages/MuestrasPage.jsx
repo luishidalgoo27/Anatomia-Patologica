@@ -140,7 +140,7 @@ export default function MuestrasPage(){
                                                     <i className="pr-3 fas fa-eye"></i>
                                                 </Link>
                                                 
-                                                <a href={`/api/api/descargarMuestra?id=${id}`} target="_blank" onClick={(event) => event.stopPropagation()}>
+                                                <a href={`/api/api/descargarMuestra?id=${muestra.id}`} target="_blank" onClick={(event) => event.stopPropagation()}>
                                                     <i className="pl-3 fas fa-download"></i>
                                                 </a>
                                             </td>
