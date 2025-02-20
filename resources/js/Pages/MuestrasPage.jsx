@@ -4,12 +4,13 @@ import { handleAdd, actualizarMuestra } from "@/utils/muestrasCrud"
 
 export default function MuestrasPage(){    
     //Estados para pintar los input de muestras
-    const [id_user, setidUser] = useState()
     const [muestras,setMuestras] = useState([])
+    const [imagenes,setImagenes] = useState([])
     const navigate = useNavigate()
         
     useEffect(()=>{
-        getMuestras()
+        getMuestras(),
+        getImagenes()
     }, [])
 
     const descargarPdf = async (id, event) => {
@@ -29,7 +30,6 @@ export default function MuestrasPage(){
         });
 
         const data = await response.json()
-        setidUser(data.id)
         return data.id
     }
 
@@ -50,8 +50,25 @@ export default function MuestrasPage(){
         } catch (error) {
             console.error("Error en la solicitud:", error);
         }
-    };
-      
+    };  
+
+    const getImagenes = async () => {
+        const response = await fetch(`/api/imagenes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        })
+        
+        const data = await response.json()
+        if (!response.ok) {
+            console.error("Error en el servidor:", data);
+            console.log("Error: " + data.message);
+        } else {
+            setImagenes(data)
+        }
+    }; 
 
     return(
         <>
@@ -90,8 +107,11 @@ export default function MuestrasPage(){
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Interpretaciones
+                                            Imagenes
                                         </p>
+                                    </th>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        
                                     </th>
                                 </tr>
                             </thead>
@@ -114,6 +134,13 @@ export default function MuestrasPage(){
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {muestra.descripcion_calidad}
                                                 </p>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                {
+                                                    imagenes.filter((imagen) => imagen.id_muestra === muestra.id).map((imagen,index) => ( 
+                                                        <img key={index} src={imagen.ruta} />
+                                                    ))
+                                                }
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <Link to={`/interpretacion/${muestra.id}`} onClick={(event) => event.stopPropagation()}>

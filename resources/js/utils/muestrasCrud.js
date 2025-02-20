@@ -89,11 +89,9 @@ const addMuestra = async (muestra, getMuestras) => {
     }
 };
 
-
 export const handleAdd = async (getMuestras) => {
     await Promise.all([getFormato(), getNaturaleza(), getTipoEstudio(), getCalidad()]);
 
-    // Obtener el id del usuario
     const response = await fetch('/api/user', {
         method: 'GET',
         headers: {
@@ -110,7 +108,7 @@ export const handleAdd = async (getMuestras) => {
     }
 
     const id_user = userData.id;
-    const id_sede = userData.id_sede
+    const id_sede = userData.id_sede;
 
     Swal.fire({
         title: 'Añadir muestra',
@@ -118,7 +116,7 @@ export const handleAdd = async (getMuestras) => {
             <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-4 text-azulMedac font-sans">
                 <div class="flex flex-col w-96">
                     <label for="codigo">Código de la muestra</label>
-                    <input type="text" id="codigo" class="rounded-xl" placeholder="Codigo">
+                    <input type="text" id="codigo" class="rounded-xl" placeholder="Código">
                 </div>
 
                 <div class="flex flex-col w-96">
@@ -130,7 +128,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="formato">Formato</label>
                     <select id="formato" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${formato.map(f => `<option value="${f.id}">${f.nombre}</option>`)}
+                        ${formato.map(f => `<option value="${f.id}">${f.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -138,7 +136,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="naturaleza">Tipo de naturaleza</label>
                     <select id="naturaleza" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${naturaleza.map(n => `<option value="${n.id}">${n.nombre}</option>`)}
+                        ${naturaleza.map(n => `<option value="${n.id}">${n.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -151,7 +149,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="estudio">Tipo de estudio</label>
                     <select id="estudio" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${estudio.map(e => `<option value="${e.id}">${e.nombre}</option>`)}
+                        ${estudio.map(e => `<option value="${e.id}">${e.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -159,7 +157,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="calidad">Calidad de la muestra</label>
                     <select id="calidad" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${calidad.map(c => `<option value="${c.id}">${c.nombre}</option>`)}
+                        ${calidad.map(c => `<option value="${c.id}">${c.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -178,7 +176,7 @@ export const handleAdd = async (getMuestras) => {
         showCancelButton: true,
         confirmButtonText: "Añadir",
         cancelButtonText: "Cancelar",
-        preConfirm: () => {
+        preConfirm: async () => {
             const codigo = document.getElementById("codigo").value;
             const fecha = document.getElementById("fecha").value;
             const id_formato = document.getElementById("formato").value;
@@ -186,20 +184,41 @@ export const handleAdd = async (getMuestras) => {
             const organo = document.getElementById("organo").value;
             const id_calidad = document.getElementById("calidad").value;
             const descripcion_calidad = document.getElementById("descripcion").value;
+            const imagenesInput = document.getElementById("imagenes").files;
 
-            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_calidad || !descripcion_calidad) {
+            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_calidad || !descripcion_calidad || !imagenesInput) {
                 Swal.showValidationMessage("Todos los campos son obligatorios");
                 return false;
             }
 
-            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_calidad, descripcion_calidad, id_user, id_sede };
-        },
+            let rutas = [];
+
+            for (let i = 0; i < imagenesInput.length; i++) {
+                const archivo = imagenesInput[i];
+                const formData = new FormData();
+                formData.append("file", archivo);
+                formData.append("upload_preset", "ml_default");
+
+                const cloudinaryRes = await fetch("https://api.cloudinary.com/v1_1/dotw4uex6/image/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const cloudinaryData = await cloudinaryRes.json();
+                rutas.push(cloudinaryData.secure_url);
+            }
+
+            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_calidad, descripcion_calidad, rutas, id_user, id_sede }
+
+        }
     }).then((result) => {
         if (result.isConfirmed) {
             addMuestra(result.value, getMuestras);
         }
     });
 };
+
+
 
 const deleteMuestra = async (idMuestra, getMuestras) => {
     const response = await fetch(`/api/muestra?id=${idMuestra}`, {
@@ -321,12 +340,7 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
                     <label for="descripcion">Descripción de la calidad</label>
                     <textarea type="text" id="descripcion" class="h-36 rounded-lg" placeholder="Descripción">${muestra.descripcion_calidad}</textarea>
                 </div>
-
-                <div class="flex flex-col w-96">
-                    <label for="imagenes">Imagenes de la muestra</label>
-                    <input type="file" id="imagenes" class="" accept="image/*" multiple />
-                </div>
-
+                
             </div>
         `,
         showCancelButton: true,

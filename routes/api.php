@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CalidadController;
 use App\Http\Controllers\FormatoController;
 use App\Http\Controllers\MuestraController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ApiTokenController;
-use App\Http\Controllers\InterpretacionController;
 use App\Http\Controllers\NaturalezaController;
 use App\Http\Controllers\TipoEstudioController;
+use App\Http\Controllers\InterpretacionController;
 
 Route::get('/sede', [SedeController::class, 'index']);
 Route::post('/register', [AuthController::class, 'createUser']);
@@ -31,8 +32,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/users', [UserController::class, 'destroy']);
     
     /* LLamadas API de Muestras */
-    /*     Route::get('/muestras/{id_user}', [MuestraController::class, 'index']); */   
-
     Route::get('/muestra', [MuestraController::class, 'index']);
     Route::post('/muestra', [MuestraController::class, 'store']);
     Route::patch('/muestra', [MuestraController::class, 'update']);
@@ -54,4 +53,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/interpretacion', [InterpretacionController::class, 'store']);
     Route::patch('/interpretacion', [InterpretacionController::class, 'update']);
     Route::delete('/interpretacion', [InterpretacionController::class, 'destroy']);
+
+    // Rutas de imagenes
+    Route::get('/imagenes', [ImageController::class, 'index']);
+    Route::post('/upload-image', [ImageController::class, 'upload']);
+    Route::post('/upload-logo', [ImageController::class, 'uploadLogo']);
 });
