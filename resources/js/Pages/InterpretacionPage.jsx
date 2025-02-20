@@ -1,5 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { actualizarInterpretacion, handleAdd } from "@/utils/interpretacionesCrud"
 
 export async function loader({params}){
     const id = params.id
@@ -11,7 +12,7 @@ export default function InterpretacionPage(){
     const { id } = useLoaderData()
     const navigate = useNavigate()
 
-    const getInterpretacion = async () => {
+    const getInterpretacionesMuestra = async () => {
         const response = await fetch(`/api/interpretacion?id=${id}`, {
             method: 'GET',
             headers: {
@@ -26,31 +27,30 @@ export default function InterpretacionPage(){
             console.log("Error: " + data.message);
             navigate('/', {replace:true})
         } else {
-            setInterpretacion(Array.isArray(data) ? data : [])
+            setInterpretacion(data)
         }
     }
 
     useEffect(()=>{
         if(id){
-            getInterpretacion()
+            getInterpretacionesMuestra()
         }
     }, [id])
     
     return(
         <>
             <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
-                <div className="content ">
-                
+                <div className="content pt-5">
+
                     <div>
                         <div className="text-right p-3 pb-3">
-                            <button onClick={()=>{}} className="bg-azulMedac text-white p-3 rounded-lg ">
-                                Añadir interpretacion
+                            <button onClick={()=>{handleAdd(id,getInterpretacionesMuestra)}} className="bg-azulMedac text-white p-3 rounded-lg ">
+                                Añadir Interpretacion
                             </button>
                         </div>
                     </div>
-
-
-                    {/* Tabla de muestras */}                    
+                
+                    {/* Tabla de interpretaciones */}                    
                     <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border overflow-auto">
                         <table className="w-full text-left table-auto min-w-max">
                             <thead>
@@ -62,12 +62,17 @@ export default function InterpretacionPage(){
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Fecha
+                                        Descripción
                                         </p>
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Descripción
+                                            Id Muestra
+                                        </p>
+                                    </th>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                            Id Interpretacion
                                         </p>
                                     </th>
                                 </tr>
@@ -76,7 +81,17 @@ export default function InterpretacionPage(){
                             <tbody>
                                 {
                                     interpretacion.map((i,index) => (
-                                        <tr key={index} /* onClick={() => actualizarMuestra(muestra, getMuestras)} */>
+                                        <tr key={index} onClick={() => actualizarInterpretacion(i, getInterpretacionesMuestra)} className="hover:cursor-pointer">
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                                    {i.id}
+                                                </p>
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                                    {i.descripcion}
+                                                </p>
+                                            </td>
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {i.id_muestra}
@@ -85,11 +100,6 @@ export default function InterpretacionPage(){
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {i.id_interpretacion}
-                                                </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                    {i.descripcion}
                                                 </p>
                                             </td>
                                         </tr>

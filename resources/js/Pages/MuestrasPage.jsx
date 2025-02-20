@@ -4,13 +4,21 @@ import { handleAdd, actualizarMuestra } from "@/utils/muestrasCrud"
 
 export default function MuestrasPage(){    
     //Estados para pintar los input de muestras
-    const [id_user, setidUser] = useState()
     const [muestras,setMuestras] = useState([])
+    const [imagenes,setImagenes] = useState([])
     const navigate = useNavigate()
         
     useEffect(()=>{
-        getMuestras()
+        getMuestras(),
+        getImagenes()
     }, [])
+
+    const descargarPdf = async (id, event) => {
+        event.stopPropagation();
+    
+        const url = `/api/descargarMuestra?id=${id}`;
+        window.open(url, '_blank'); 
+    };
 
     const getidUser = async () => {
         const response = await fetch('/api/user', {
@@ -22,14 +30,13 @@ export default function MuestrasPage(){
         });
 
         const data = await response.json()
-        setidUser(data.id)
         return data.id
     }
 
     const getMuestras = async () => {
         try {
             const id_user = await getidUser()
-            const response = await fetch(`/api/muestras?id_user=${id_user}`, {
+            const response = await fetch(`/api/muestra?id_user=${id_user}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,11 +52,29 @@ export default function MuestrasPage(){
         }
     };  
 
+    const getImagenes = async () => {
+        const response = await fetch(`/api/imagenes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            },
+        })
+        
+        const data = await response.json()
+        if (!response.ok) {
+            console.error("Error en el servidor:", data);
+            console.log("Error: " + data.message);
+        } else {
+            setImagenes(data)
+        }
+    }; 
+
     return(
         <>
 
-<div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
-<div className="content ">
+            <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
+                <div className="content ">
                 
                     <div>
                         <div className="text-right p-3 pb-3">
@@ -82,8 +107,11 @@ export default function MuestrasPage(){
                                     </th>
                                     <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                                         <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Interpretaciones
+                                            Imagenes
                                         </p>
+                                    </th>
+                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                                        
                                     </th>
                                 </tr>
                             </thead>
@@ -91,7 +119,7 @@ export default function MuestrasPage(){
                             <tbody>
                                 {
                                     muestras.map((muestra,index) => (
-                                        <tr key={index} onClick={() => actualizarMuestra(muestra, getMuestras)}>
+                                        <tr key={index} onClick={() => actualizarMuestra(muestra, getMuestras)} className="hover:cursor-pointer">
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {muestra.codigo}
@@ -108,8 +136,19 @@ export default function MuestrasPage(){
                                                 </p>
                                             </td>
                                             <td className="p-4 border-b border-blue-gray-50">
-                                                <Link to={`/interpretacion/${muestra.id}`} onClick={(event) => event.stopPropagation()} className="bg-blue-600 text-white p-3 rounded-lg">
-                                                    Interpretacion
+                                                {
+                                                    imagenes.filter((imagen) => imagen.id_muestra === muestra.id).map((imagen,index) => ( 
+                                                        <img key={index} src={imagen.ruta} />
+                                                    ))
+                                                }
+                                            </td>
+                                            <td className="p-4 border-b border-blue-gray-50">
+                                                <Link to={`/interpretacion/${muestra.id}`} onClick={(event) => event.stopPropagation()}>
+                                                    <i className="pr-3 fas fa-eye"></i>
+                                                </Link>
+                                                
+                                                <Link onClick={(event) => descargarPdf(muestra.id, event)}>
+                                                    <i className="pl-3 fas fa-download"></i>
                                                 </Link>
                                             </td>
                                         </tr>

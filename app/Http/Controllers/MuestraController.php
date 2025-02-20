@@ -22,9 +22,7 @@ class MuestraController extends Controller
             'id_calidad' => 'required',
             'id_tipo_naturaleza' => 'required',
             'organo' => 'required|nullable',
-            'id_formato' => 'required',
-            'id_user' => 'required',
-            'id_sede' => 'required'
+            'id_formato' => 'required'
         ]);
     }
 
@@ -81,7 +79,7 @@ class MuestraController extends Controller
     {
         $this->validateMuestra($request);
 
-        $idMuestra = $request->input('id');
+        $idMuestra = $request->id;
         $muestra = Muestra::where('id', $idMuestra);
 
         $muestra->update([
@@ -112,9 +110,11 @@ class MuestraController extends Controller
         return response()->json(['message' => 'Muestra eliminada correctamente', 'muestra' => $muestra], 201);
     }
 
-    public function descargarPDF($id)
+    public function descargarPDF(Request $request)
     {
-        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato'])->findOrFail($id);
+        $id = $request->id;
+
+        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato','usuario','interpretaciones.interpretacion','imagenes'])->findOrFail($id);
     
         $pdf = PDF::loadView('pdf.muestra', ['muestras'=>$muestras]);
     
