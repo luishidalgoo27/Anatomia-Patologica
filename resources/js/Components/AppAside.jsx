@@ -17,7 +17,7 @@ export default function AppAside() {
   }, [])
 
   const getNombre = async() => {
-      fetch('/api/api/user', {
+      fetch('/api/user', {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',

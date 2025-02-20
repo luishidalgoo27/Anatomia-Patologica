@@ -43,7 +43,7 @@ export default function ActualizarUsuarioPage() {
   // Cargar el usuario al montar el componente
   useEffect(() => {
     const getUser = async () => {
-      const response = await fetch('/api/api/user', {
+      const response = await fetch('/api/user', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export default function ActualizarUsuarioPage() {
     };
 
     try {
-      const response = await fetch(`/api/api/users`, {
+      const response = await fetch(`/api/users`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

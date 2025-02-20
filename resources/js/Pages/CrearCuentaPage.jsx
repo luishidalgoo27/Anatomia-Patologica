@@ -14,7 +14,7 @@ export default function CrearCuentaPage() {
 
  const getSede = async () => {
     try {
-      const response = await fetch("/api/api/sede", {
+      const response = await fetch("/api/sede", {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -34,7 +34,7 @@ export default function CrearCuentaPage() {
   const handleRegister = async (e) => {
     e.preventDefault();
   
-    const response = await fetch("/api/api/register", {
+    const response = await fetch("/api/register", {
       method: "POST",
       credentials: "include",
       headers: {
