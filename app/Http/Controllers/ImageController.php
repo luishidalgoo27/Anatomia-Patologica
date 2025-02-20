@@ -10,6 +10,13 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ImageController extends Controller
 {
+    public function index()
+    {  
+        $imagenes = Imagen::all();
+        return response()->json($imagenes, 200);
+    }
+    
+
     public function upload(Request $request)
     {
         // Validar que haya una imagen

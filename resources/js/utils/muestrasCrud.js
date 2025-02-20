@@ -1,79 +1,74 @@
 import Swal from "sweetalert2";
-let formato, estudio, naturaleza, calidad;
-
-// Obtener Formato
+let formato,estudio,naturaleza,calidad 
+    
 const getFormato = async () => {
     const response = await fetch(`/api/formato`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
-    });
-    const data = await response.json();
-    if (!response.ok) {
+    })
+    const data = await response.json()
+    if(!response.ok){
         console.error("Error en el servidor:", data);
-        window.location.href = '/login';
-    } else {
-        formato = data;
+        console.log("Error: " + data.message);
+    }else{
+        formato = data
     }
-};
+}  
 
-// Obtener Tipo de Estudio
 const getTipoEstudio = async () => {
-    const response = await fetch(`/api/tipoEstudio`, { // Corregido el endpoint
+    const response = await fetch(`/api/tipoEstudio`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
-    });
-    const data = await response.json();
-    if (!response.ok) {
+    })
+    const data = await response.json()
+    if(!response.ok){
         console.error("Error en el servidor:", data);
-        window.location.href = '/login';
-    } else {
-        estudio = data;
+        console.log("Error: " + data.message);
+    }else{
+        estudio = data
     }
-};
+} 
 
-// Obtener Naturaleza
 const getNaturaleza = async () => {
-    const response = await fetch(`/api/naturaleza`, { // Corregido el endpoint
+    const response = await fetch(`/api/naturaleza`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
-    });
-    const data = await response.json();
-    if (!response.ok) {
+    })
+    const data = await response.json()
+    if(!response.ok){
         console.error("Error en el servidor:", data);
-        window.location.href = '/login';
-    } else {
-        naturaleza = data;
+        console.log("Error: " + data.message);
+    }else{
+        naturaleza = data
     }
-};
+} 
 
-// Obtener Calidad
 const getCalidad = async () => {
-    const response = await fetch(`/api/calidad`, { // Corregido el endpoint
+    const response = await fetch(`/api/calidad`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
         },
-    });
-    const data = await response.json();
-    if (!response.ok) {
+    })
+    const data = await response.json()
+    if(!response.ok){
         console.error("Error en el servidor:", data);
-        window.location.href = '/login';
-    } else {
-        calidad = data;
+        console.log("Error: " + data.message);
+    }else{
+        calidad = data
     }
-};
+} 
 
-// Añadir muestra con imagen
 const addMuestra = async (muestra, getMuestras) => {
     const response = await fetch(`/api/muestra`, {
         method: 'POST',
@@ -191,7 +186,7 @@ export const handleAdd = async (getMuestras) => {
             const descripcion_calidad = document.getElementById("descripcion").value;
             const imagenesInput = document.getElementById("imagenes").files;
 
-            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_calidad || !descripcion_calidad) {
+            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_calidad || !descripcion_calidad || !imagenesInput) {
                 Swal.showValidationMessage("Todos los campos son obligatorios");
                 return false;
             }
@@ -213,7 +208,12 @@ export const handleAdd = async (getMuestras) => {
                 rutas.push(cloudinaryData.secure_url);
             }
 
-            addMuestra({ codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_estudio, id_calidad, descripcion_calidad, rutas, id_user, id_sede }, getMuestras);
+            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_calidad, descripcion_calidad, rutas, id_user, id_sede }
+
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            addMuestra(result.value, getMuestras);
         }
     });
 };
