@@ -1,6 +1,31 @@
 export default function ActualizarUsuarioPage() {
-    return (
+    // CLOUDINARY -----------------------
+const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "ml_default"); // Asegúrate de configurar tu "upload_preset" en Cloudinary
 
+    try {
+        const response = await fetch("https://api.cloudinary.com/v1_1/dotw4uex6/image/upload", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await response.json();
+        return data.secure_url; // Retorna la URL de la imagen subida
+    } catch (error) {
+        console.error("Error subiendo la imagen a Cloudinary:", error);
+        return null;
+    }
+};
+
+fetch('/api/user')
+.then(result => result.json())
+.then(data => {
+    data.id
+})
+// ------------------------------------
+    return (
         <>
         <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg)]  bg-cover ">
         <div className="content">

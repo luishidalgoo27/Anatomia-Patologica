@@ -1,99 +1,79 @@
 import Swal from "sweetalert2";
-let formato,estudio,naturaleza,calidad 
+let formato, estudio, naturaleza, calidad;
 
-// CLOUDINARY -----------------------
-const uploadImageToCloudinary = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "ml_default"); // Asegúrate de configurar tu "upload_preset" en Cloudinary
-
-    try {
-        const response = await fetch("https://api.cloudinary.com/v1_1/dotw4uex6/image/upload", {
-            method: "POST",
-            body: formData,
-        });
-
-        const data = await response.json();
-        return data.secure_url; // Retorna la URL de la imagen subida
-    } catch (error) {
-        console.error("Error subiendo la imagen a Cloudinary:", error);
-        return null;
-    }
-};
-// ------------------------------------
-
+// Obtener Formato
 const getFormato = async () => {
     const response = await fetch(`/api/formato`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
         },
-    })
-    const data = await response.json()
-    if(!response.ok){
+    });
+    const data = await response.json();
+    if (!response.ok) {
         console.error("Error en el servidor:", data);
-        console.log("Error: " + data.message);
-        window.location.href = '/login'
-    }else{
-        formato = data
+        window.location.href = '/login';
+    } else {
+        formato = data;
     }
-}  
+};
 
+// Obtener Tipo de Estudio
 const getTipoEstudio = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/tipoEstudio`, { // Corregido el endpoint
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
         },
-    })
-    const data = await response.json()
-    if(!response.ok){
+    });
+    const data = await response.json();
+    if (!response.ok) {
         console.error("Error en el servidor:", data);
-        console.log("Error: " + data.message);
-        window.location.href = '/login'
-    }else{
-        estudio = data
+        window.location.href = '/login';
+    } else {
+        estudio = data;
     }
-} 
+};
 
+// Obtener Naturaleza
 const getNaturaleza = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/naturaleza`, { // Corregido el endpoint
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
         },
-    })
-    const data = await response.json()
-    if(!response.ok){
+    });
+    const data = await response.json();
+    if (!response.ok) {
         console.error("Error en el servidor:", data);
-        console.log("Error: " + data.message);
-        window.location.href = '/login'
-    }else{
-        naturaleza = data
+        window.location.href = '/login';
+    } else {
+        naturaleza = data;
     }
-} 
+};
 
+// Obtener Calidad
 const getCalidad = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`/api/calidad`, { // Corregido el endpoint
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization' : 'Bearer ' + sessionStorage.getItem('token')
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token')
         },
-    })
-    const data = await response.json()
-    if(!response.ok){
+    });
+    const data = await response.json();
+    if (!response.ok) {
         console.error("Error en el servidor:", data);
-        console.log("Error: " + data.message);
-        window.location.href = '/login'
-    }else{
-        calidad = data
+        window.location.href = '/login';
+    } else {
+        calidad = data;
     }
-} 
+};
 
+// Añadir muestra con imagen
 const addMuestra = async (muestra, getMuestras) => {
     const response = await fetch(`/api/addMuestra`, {
         method: 'POST',
@@ -115,11 +95,9 @@ const addMuestra = async (muestra, getMuestras) => {
     }
 };
 
-
 export const handleAdd = async (getMuestras) => {
     await Promise.all([getFormato(), getNaturaleza(), getTipoEstudio(), getCalidad()]);
 
-    // Obtener el id del usuario
     const response = await fetch('/api/user', {
         method: 'GET',
         headers: {
@@ -137,7 +115,7 @@ export const handleAdd = async (getMuestras) => {
     }
 
     const id_user = userData.id;
-    const id_sede = userData.id_sede
+    const id_sede = userData.id_sede;
 
     Swal.fire({
         title: 'Añadir muestra',
@@ -145,7 +123,7 @@ export const handleAdd = async (getMuestras) => {
             <div class="flex flex-col bg-white rounded-3xl text-left items-center gap-4 text-azulMedac font-sans">
                 <div class="flex flex-col w-96">
                     <label for="codigo">Código de la muestra</label>
-                    <input type="text" id="codigo" class="rounded-xl" placeholder="Codigo">
+                    <input type="text" id="codigo" class="rounded-xl" placeholder="Código">
                 </div>
 
                 <div class="flex flex-col w-96">
@@ -157,7 +135,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="formato">Formato</label>
                     <select id="formato" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${formato.map(f => `<option value="${f.id}">${f.nombre}</option>`)}
+                        ${formato.map(f => `<option value="${f.id}">${f.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -165,7 +143,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="naturaleza">Tipo de naturaleza</label>
                     <select id="naturaleza" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${naturaleza.map(n => `<option value="${n.id}">${n.nombre}</option>`)}
+                        ${naturaleza.map(n => `<option value="${n.id}">${n.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -178,7 +156,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="estudio">Tipo de estudio</label>
                     <select id="estudio" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${estudio.map(e => `<option value="${e.id}">${e.nombre}</option>`)}
+                        ${estudio.map(e => `<option value="${e.id}">${e.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -186,7 +164,7 @@ export const handleAdd = async (getMuestras) => {
                     <label for="calidad">Calidad de la muestra</label>
                     <select id="calidad" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${calidad.map(c => `<option value="${c.id}">${c.nombre}</option>`)}
+                        ${calidad.map(c => `<option value="${c.id}">${c.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -214,30 +192,36 @@ export const handleAdd = async (getMuestras) => {
             const id_estudio = document.getElementById("estudio").value;
             const id_calidad = document.getElementById("calidad").value;
             const descripcion_calidad = document.getElementById("descripcion").value;
-            const imagenesInput = document.getElementById("imagenes");
-            const archivos = imagenesInput.files;
+            const imagenesInput = document.getElementById("imagenes").files;
 
             if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_estudio || !id_calidad || !descripcion_calidad) {
                 Swal.showValidationMessage("Todos los campos son obligatorios");
                 return false;
             }
 
-            const urlsImagenes = [];
-            for (let i = 0; i < archivos.length; i++) {
-                const url = await uploadImageToCloudinary(archivos[i]);
-                if (url) {
-                    urlsImagenes.push(url);
-                }
+            let rutas = [];
+
+            for (let i = 0; i < imagenesInput.length; i++) {
+                const archivo = imagenesInput[i];
+                const formData = new FormData();
+                formData.append("file", archivo);
+                formData.append("upload_preset", "ml_default");
+
+                const cloudinaryRes = await fetch("https://api.cloudinary.com/v1_1/dotw4uex6/image/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const cloudinaryData = await cloudinaryRes.json();
+                rutas.push(cloudinaryData.secure_url);
             }
 
-            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_estudio, id_calidad, descripcion_calidad, id_user, id_sede, imagenes: urlsImagenes };
-        },
-    }).then((result) => {
-        if (result.isConfirmed) {
-            addMuestra(result.value, getMuestras);
+            addMuestra({ codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_estudio, id_calidad, descripcion_calidad, rutas, id_user, id_sede }, getMuestras);
         }
     });
 };
+
+
 
 const deleteMuestra = async (idMuestra, getMuestras) => {
     const response = await fetch(`/api/deleteMuestra?id=${idMuestra}`, {

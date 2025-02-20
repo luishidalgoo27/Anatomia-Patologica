@@ -54,6 +54,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/interpretacion', [InterpretacionController::class, 'destroy']);
 
     Route::post('/upload-image', [ImageController::class, 'upload']);
+    Route::post('/upload-logo', [ImageController::class, 'uploadLogo']);
 
     Route::get('/descargarMuestra/{id}', [MuestraController::class, 'descargarPDF']);
 });
