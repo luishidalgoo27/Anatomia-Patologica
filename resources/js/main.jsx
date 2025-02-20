@@ -2,8 +2,6 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter, Navigate, Outlet } from "react-router-dom";
 import { loader as interpretacionDetail } from "./Pages/InterpretacionPage";
 import "../css/app.css";
-import "../assets/dist/css/adminlte.css";
-import "../assets/plugins/fontawesome-free/css/all.css";
 import AppLayout from "./Layouts/AppLayout";
 import ErrorPage from "./Pages/ErrorPage";
 import LoginPage from "./Pages/LoginPage";
