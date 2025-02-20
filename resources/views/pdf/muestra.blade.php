@@ -57,7 +57,7 @@
     </header>
 
     <div class="info">
-        <p><strong>Profesional:</strong> 
+        <p><strong>Profesional:</strong> {{ $muestras->usuario->name }}
             
         </p>
         <p><strong>Muestra:</strong> {{ $muestras->codigo }}</p>
@@ -125,6 +125,18 @@
             <p>{{ $interpretacionMuestra->descripcion }}</p>
         </div>
     @endforeach
+
+    <div style="page-break-before: always;"></div>
+    <div class="titulo">IMAGENES</div>
+    <table width="100%" cellspacing="5" cellpadding="5" style="border-collapse: collapse;">
+        <tr>
+            @foreach ($muestras->imagenes as $imagen)
+                <td width="50%" style="text-align: center;">
+                    <img src="{{ $imagen->ruta }}" alt="Imagen de la muestra" style="width: 150px; height: 150px; object-fit: cover;">
+                </td>
+            @endforeach
+        </tr>
+    </table>
 
     <footer  style="position: fixed; bottom: 0; left: 0; width: 100%;">
         <div style="text-align: center;">
