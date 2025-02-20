@@ -114,7 +114,7 @@ class MuestraController extends Controller
     {
         $id = $request->id;
 
-        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato'])->findOrFail($id);
+        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato','usuario','interpretaciones.interpretacion','imagenes'])->findOrFail($id);
     
         $pdf = PDF::loadView('pdf.muestra', ['muestras'=>$muestras]);
     
