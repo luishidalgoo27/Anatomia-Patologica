@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <title>Fundación Davante</title>
- 
+  
     @viteReactRefresh
     @vite(['resources/js/app.jsx', 'resources/css/app.css']) 
      
