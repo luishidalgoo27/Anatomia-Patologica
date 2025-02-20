@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function CrearCuentaPage() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function CrearCuentaPage() {
 
  const getSede = async () => {
     try {
-      const response = await fetch("/api/sede", {
+      const response = await fetch(`${API_URL}/sede`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -34,7 +35,7 @@ export default function CrearCuentaPage() {
   const handleRegister = async (e) => {
     e.preventDefault();
   
-    const response = await fetch("/api/register", {
+    const response = await fetch(`${API_URL}/register`, {
       method: "POST",
       credentials: "include",
       headers: {

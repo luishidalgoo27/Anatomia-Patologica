@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { handleAdd, handleUpdate } from "@/utils/usuariosCrud"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])
@@ -12,7 +13,7 @@ export default function HomePage() {
 
     const getUsuarios = async () => {
         try {
-            const response = await fetch(`/api/users`, {
+            const response = await fetch(`${API_URL}/users`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

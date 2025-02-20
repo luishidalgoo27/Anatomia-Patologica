@@ -1,8 +1,9 @@
 import Swal from "sweetalert2";
-let formato,estudio,naturaleza,calidad 
+let formato,estudio,naturaleza,calidad
+const API_URL = import.meta.env.VITE_API_URL;
     
 const getFormato = async () => {
-    const response = await fetch(`/api/formato`, {
+    const response = await fetch(`${API_URL}/formato`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ const getFormato = async () => {
 }  
 
 const getTipoEstudio = async () => {
-    const response = await fetch(`/api/tipoEstudio`, {
+    const response = await fetch(`${API_URL}/tipoEstudio`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ const getTipoEstudio = async () => {
 } 
 
 const getNaturaleza = async () => {
-    const response = await fetch(`/api/naturaleza`, {
+    const response = await fetch(`${API_URL}/naturaleza`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ const getNaturaleza = async () => {
 } 
 
 const getCalidad = async () => {
-    const response = await fetch(`/api/calidad`, {
+    const response = await fetch(`${API_URL}/calidad`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const getCalidad = async () => {
 } 
 
 const addMuestra = async (muestra, getMuestras) => {
-    const response = await fetch(`/api/muestra`, {
+    const response = await fetch(`${API_URL}/muestra`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -92,7 +93,7 @@ const addMuestra = async (muestra, getMuestras) => {
 export const handleAdd = async (getMuestras) => {
     await Promise.all([getFormato(), getNaturaleza(), getTipoEstudio(), getCalidad()]);
 
-    const response = await fetch('/api/user', {
+    const response = await fetch(`${API_URL}/user`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -232,7 +233,7 @@ export const handleAdd = async (getMuestras) => {
 
 
 const deleteMuestra = async (idMuestra, getMuestras) => {
-    const response = await fetch(`/api/muestra?id=${idMuestra}`, {
+    const response = await fetch(`${API_URL}/muestra?id=${idMuestra}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -252,7 +253,7 @@ const deleteMuestra = async (idMuestra, getMuestras) => {
 }
 
 const updateMuestra = async (muestra, idMuestra, getMuestra) => {
-    const response = await fetch(`/api/muestra?id=${idMuestra}`, {
+    const response = await fetch(`${API_URL}/muestra?id=${idMuestra}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",

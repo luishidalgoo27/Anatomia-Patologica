@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Swal from 'sweetalert2';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ActualizarUsuarioPage() {
   const [user, setUser] = useState(null);
@@ -43,7 +44,7 @@ export default function ActualizarUsuarioPage() {
   // Cargar el usuario al montar el componente
   useEffect(() => {
     const getUser = async () => {
-      const response = await fetch('/api/user', {
+      const response = await fetch(`${API_URL}/user`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +81,7 @@ export default function ActualizarUsuarioPage() {
     };
 
     try {
-      const response = await fetch(`/api/users`, {
+      const response = await fetch(`${API_URL}/users`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

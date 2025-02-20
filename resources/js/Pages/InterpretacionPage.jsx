@@ -1,6 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { actualizarInterpretacion, handleAdd } from "@/utils/interpretacionesCrud"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function loader({params}){
     const id = params.id
@@ -13,7 +14,7 @@ export default function InterpretacionPage(){
     const navigate = useNavigate()
 
     const getInterpretacionesMuestra = async () => {
-        const response = await fetch(`/api/interpretacion?id=${id}`, {
+        const response = await fetch(`${API_URL}/interpretacion?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

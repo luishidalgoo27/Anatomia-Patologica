@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
       
-        const response = await fetch("/api/login", {
+        const response = await fetch(`${API_URL}/login`, {
           method: "POST",
           credentials: "include",
           headers: {

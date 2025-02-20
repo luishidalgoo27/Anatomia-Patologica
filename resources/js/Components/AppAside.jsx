@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import DavanteIMG from "../../assets/img/davantefundacion.png";
 import { useEffect, useState } from "react"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AppAside() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -17,7 +18,8 @@ export default function AppAside() {
   }, [])
 
   const getNombre = async() => {
-      fetch('/api/user', {
+
+      fetch(`${API_URL}/user`, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',

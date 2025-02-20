@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function InterpretacionPage(){
     const [interpretacion, setInterpretacion] = useState([])
     const navigate = useNavigate()
 
     const getInterpretacion = async () => {
-        const response = await fetch(`/api/allInterpretaciones`, {
+        const response = await fetch(`${API_URL}/allInterpretaciones`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

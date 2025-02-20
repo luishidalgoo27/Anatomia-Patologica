@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { handleAdd, actualizarMuestra } from "@/utils/muestrasCrud"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function MuestrasPage(){    
     //Estados para pintar los input de muestras
@@ -14,7 +15,7 @@ export default function MuestrasPage(){
     }, [])
 
     const getidUser = async () => {
-        const response = await fetch('/api/user', {
+        const response = await fetch(`${API_URL}/user`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,7 +30,7 @@ export default function MuestrasPage(){
     const getMuestras = async () => {
         try {
             const id_user = await getidUser()
-            const response = await fetch(`/api/muestra?id_user=${id_user}`, {
+            const response = await fetch(`${API_URL}/muestra?id_user=${id_user}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ export default function MuestrasPage(){
     };  
 
     const getImagenes = async () => {
-        const response = await fetch(`/api/imagenes`, {
+        const response = await fetch(`${API_URL}/imagenes`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
