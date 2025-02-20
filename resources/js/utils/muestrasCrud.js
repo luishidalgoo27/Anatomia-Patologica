@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 let formato,estudio,naturaleza,calidad 
     
 const getFormato = async () => {
-    const response = await fetch(`/api/api/formato`, {
+    const response = await fetch(`/api/formato`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ const getFormato = async () => {
 }  
 
 const getTipoEstudio = async () => {
-    const response = await fetch(`/api/api/tipoEstudio`, {
+    const response = await fetch(`/api/tipoEstudio`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const getTipoEstudio = async () => {
 } 
 
 const getNaturaleza = async () => {
-    const response = await fetch(`/api/api/naturaleza`, {
+    const response = await fetch(`/api/naturaleza`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const getNaturaleza = async () => {
 } 
 
 const getCalidad = async () => {
-    const response = await fetch(`/api/api/calidad`, {
+    const response = await fetch(`/api/calidad`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const getCalidad = async () => {
 } 
 
 const addMuestra = async (muestra, getMuestras) => {
-    const response = await fetch(`/api/api/muestra`, {
+    const response = await fetch(`/api/muestra`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ const addMuestra = async (muestra, getMuestras) => {
 export const handleAdd = async (getMuestras) => {
     await Promise.all([getFormato(), getNaturaleza(), getTipoEstudio(), getCalidad()]);
 
-    const response = await fetch('/api/api/user', {
+    const response = await fetch('/api/user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -232,7 +232,7 @@ export const handleAdd = async (getMuestras) => {
 
 
 const deleteMuestra = async (idMuestra, getMuestras) => {
-    const response = await fetch(`/api/api/muestra?id=${idMuestra}`, {
+    const response = await fetch(`/api/muestra?id=${idMuestra}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -252,7 +252,7 @@ const deleteMuestra = async (idMuestra, getMuestras) => {
 }
 
 const updateMuestra = async (muestra, idMuestra, getMuestra) => {
-    const response = await fetch(`/api/api/muestra?id=${idMuestra}`, {
+    const response = await fetch(`/api/muestra?id=${idMuestra}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",

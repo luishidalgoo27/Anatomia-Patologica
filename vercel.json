@@ -1,6 +1,6 @@
 {
     "version": 2,
-      "framework": null,
+    "framework": null,
     "functions": {
         "api/index.php": { "runtime": "vercel-php@0.6.1" }
     },
@@ -11,7 +11,7 @@
         },
         {
             "src": "/(.*\\.(jpg|jpeg|png|gif|svg))",
-            "dest": "/public/$1" 
+            "dest": "/public/$1"
         },
         {
             "src": "/img/(.*)",
@@ -22,12 +22,12 @@
             "dest": "/public/js/"
         },
         {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
+            "src": "^/api/(.*)$",
+            "dest": "/api/index.php?url=/$1"
         },
         {
-            "src": "/api/(.*)",
-            "dest": "/public/index.php"
+            "src": "/(.*)",
+            "dest": "/api/index.php"
         }
     ],
     "env": {

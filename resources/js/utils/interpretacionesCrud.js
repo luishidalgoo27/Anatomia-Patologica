@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 let estudios, interpretaciones
     
 const getTipoEstudio = async () => {
-    const response = await fetch(`/api/api/tipoEstudio`, {
+    const response = await fetch(`/api/tipoEstudio`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ const getTipoEstudio = async () => {
 } 
 
 const getInterpretacion = async () => {
-    const response = await fetch(`/api/api/mostrarinterpretaciones`, {
+    const response = await fetch(`/api/mostrarinterpretaciones`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const getInterpretacion = async () => {
 } 
 
 const addInterpretacion = async (interpretacion, getInterpretacionesMuestra) => {
-    const response = await fetch(`/api/api/interpretacion`, {
+    const response = await fetch(`/api/interpretacion`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ export const handleAdd = async (id,getInterpretacionesMuestra) => {
 };
 
 const deleteInterpretacion = async (idInterpretacion, getInterpretacionesMuestra) => {
-    const response = await fetch(`/api/api/interpretacion?id=${idInterpretacion}`, {
+    const response = await fetch(`/api/interpretacion?id=${idInterpretacion}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -143,7 +143,7 @@ const deleteInterpretacion = async (idInterpretacion, getInterpretacionesMuestra
 }
 
 const updateInterpretacion = async (interpretacion, idInterpretacion, getInterpretacionesMuestra) => {
-    const response = await fetch(`/api/api/interpretacion?id=${idInterpretacion}`, {
+    const response = await fetch(`/api/interpretacion?id=${idInterpretacion}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
