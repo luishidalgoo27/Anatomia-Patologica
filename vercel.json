@@ -22,7 +22,7 @@
             "dest": "/public/js/"
         },
         {
-            "src": "^/api/(.*)$",
+            "src": "/api/(.*)",
             "dest": "/api/index.php?url=/$1"
         },
         {
