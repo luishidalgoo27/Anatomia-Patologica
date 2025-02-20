@@ -13,10 +13,10 @@ class UserController extends Controller
 {
     public function validateUser(Request $request){
         $request->validate([
-            'name' => 'required',
+            /* 'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
-            'id_sede' => 'required'
+            'id_sede' => 'required' */
         ]);
     }
 
@@ -46,17 +46,32 @@ class UserController extends Controller
 
 public function update(Request $request)
 {
-    $this->validateUser($request);
-
-    $idUser = $request->input('id');
-    $user = User::where('id', $idUser);
-    
-    $user->update([
-        'name' => $request->name,
-        'email' => $request->email
+    $request->validate([
+    'id' => 'required|exists:users,id',
+    'name' => 'sometimes|string|max:255',
+    'email' => 'email|max:255|unique:users,email,',
+    'password' => 'nullable|min:6',
+    'imagen' => 'nullable|string',
     ]);
-  
-    return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 201);
+
+    $user = User::find($request->id);
+
+    if (!$user) {
+        return response()->json(['message' => 'Usuario no encontrado'], 404);
+    }
+    // Actualizar solo los campos enviados
+    $user->update([
+        "name" => $request->name,
+        "email" => $request->email,
+        "imagen" => $request->imagen,
+    ]);
+    
+    if ($request->filled('password')) $user->password = bcrypt($request->password);
+    
+
+    $user->save();
+
+    return response()->json(['message' => 'Usuario actualizado correctamente', 'user' => $user], 200);
 }
 
 public function destroy(Request $request)
@@ -87,6 +102,4 @@ public function subirImagen(Request $request){
     ));
 
 }
-
-
 }

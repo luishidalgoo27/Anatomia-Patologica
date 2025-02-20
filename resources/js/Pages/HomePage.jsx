@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { handleAdd, deleteUser, handleUpdate } from "@/utils/sweetAlert2"
+import { handleAdd, handleUpdate } from "@/utils/usuariosCrud"
 
 export default function HomePage() {
     const [usuarios,setUsuarios] = useState([])
     const navigate = useNavigate()
     
     useEffect(()=>{
-        obtenerUsuarios()
+        getUsuarios()
     }, []) 
 
-    const obtenerUsuarios = async () => {
+    const getUsuarios = async () => {
         try {
             const response = await fetch(`/api/users`, {
                 method: 'GET',
@@ -41,7 +41,7 @@ export default function HomePage() {
             <div className="content">
                
                     <div className="text-right p-3 pb-3">
-                        <button onClick={() => handleAdd(obtenerUsuarios)} className="bg-azulMedac text-white  w-36 h-12 rounded-lg ">
+                        <button onClick={() => handleAdd(getUsuarios)} className="bg-azulMedac text-white  w-36 h-12 rounded-lg ">
                             Añadir usuario
                         </button>
                     </div>
@@ -71,23 +71,13 @@ export default function HomePage() {
                                             Sede
                                         </p>
                                     </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Modificar
-                                        </p>
-                                    </th>
-                                    <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                        <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                            Eliminar
-                                        </p>
-                                    </th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 {
                                     usuarios.map((usuario,index) => (
-                                        <tr key={index}>
+                                        <tr key={index} onClick={() => handleUpdate(usuario, getUsuarios)} className="hover:cursor-pointer">
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {usuario.name}
@@ -107,16 +97,6 @@ export default function HomePage() {
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {usuario.id_sede}
                                                 </p>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={usuario.id} onClick={() => handleUpdate(usuario,obtenerUsuarios)} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                                    Editar usuario
-                                                </button>
-                                            </td>
-                                            <td className="p-4 border-b border-blue-gray-50">
-                                                <button id={usuario.id} onClick={()=> {deleteUser(usuario.id,obtenerUsuarios)}} className="bg-blue-600 text-white w-36 h-12 rounded-lg ">
-                                                    Borrar usuario
-                                                </button>
                                             </td>
                                         </tr>
                                     ))

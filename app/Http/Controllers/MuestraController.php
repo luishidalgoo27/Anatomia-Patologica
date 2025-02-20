@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagen;
 use Exception;
 use App\Models\Muestra;
 use Barryvdh\DomPDF\Facade\PDF;
@@ -21,9 +22,7 @@ class MuestraController extends Controller
             'id_calidad' => 'required',
             'id_tipo_naturaleza' => 'required',
             'organo' => 'required|nullable',
-            'id_formato' => 'required',
-            'id_user' => 'required',
-            'id_sede' => 'required'
+            'id_formato' => 'required'
         ]);
     }
 
@@ -44,7 +43,7 @@ class MuestraController extends Controller
     try{
         $this->validateMuestra($request);
         
-        Muestra::create([
+        $muestra = Muestra::create([
             'descripcion_calidad' => $request->descripcion_calidad,
             'fecha' => $request->fecha,
             'codigo' => $request->codigo,
@@ -55,6 +54,14 @@ class MuestraController extends Controller
             'id_user' => $request->id_user,
             'id_sede' => $request->id_sede,
         ]);
+
+        foreach ($request->rutas as $ruta) {
+            Imagen::create([
+                'ruta' => $ruta,
+                'id_muestra' => $muestra->id
+            ]);
+        }
+
 
         return response()->json('La muestra se ha creado correctamente', 201);
     }
@@ -72,7 +79,7 @@ class MuestraController extends Controller
     {
         $this->validateMuestra($request);
 
-        $idMuestra = $request->input('id');
+        $idMuestra = $request->id;
         $muestra = Muestra::where('id', $idMuestra);
 
         $muestra->update([
@@ -84,7 +91,7 @@ class MuestraController extends Controller
             'organo' => $request->organo,
             'id_formato' => $request->id_formato
         ]);
-
+        
         return response()->json(['message' => 'Muestra actualizada correctamente', 'muestra' => $muestra], 201);
     }
 
@@ -103,9 +110,11 @@ class MuestraController extends Controller
         return response()->json(['message' => 'Muestra eliminada correctamente', 'muestra' => $muestra], 201);
     }
 
-    public function descargarPDF($id)
+    public function descargarPDF(Request $request)
     {
-        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato'])->findOrFail($id);
+        $id = $request->id;
+
+        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato','usuario','interpretaciones.interpretacion','imagenes'])->findOrFail($id);
     
         $pdf = PDF::loadView('pdf.muestra', ['muestras'=>$muestras]);
     
