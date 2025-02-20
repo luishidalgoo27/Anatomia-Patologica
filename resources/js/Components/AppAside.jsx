@@ -96,7 +96,7 @@ export default function AppAside() {
                   </li>
                   <li>
                     <Link
-                      to="/errorPage"
+                      onClick={handleLogOut}
                       className="block px-4 py-2 text-red-600 hover:bg-azulMedac dark:hover:bg-gray-600 dark:text-red-400 dark:hover:text-white"
                     >
                     <i className="nav-icon fas mr-2 fa-power-off"></i>
