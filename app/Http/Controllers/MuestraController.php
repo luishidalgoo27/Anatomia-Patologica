@@ -93,7 +93,7 @@ class MuestraController extends Controller
             'organo' => $request->organo,
             'id_formato' => $request->id_formato
         ]);
-
+        
         return response()->json(['message' => 'Muestra actualizada correctamente', 'muestra' => $muestra], 201);
     }
 

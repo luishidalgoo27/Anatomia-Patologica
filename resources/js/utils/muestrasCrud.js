@@ -336,12 +336,7 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
                     <label for="descripcion">Descripción de la calidad</label>
                     <textarea type="text" id="descripcion" class="h-36 rounded-lg" placeholder="Descripción">${muestra.descripcion_calidad}</textarea>
                 </div>
-
-                <div class="flex flex-col w-96">
-                    <label for="imagenes">Imagenes de la muestra</label>
-                    <input type="file" id="imagenes" class="" accept="image/*" multiple />
-                </div>
-
+                
             </div>
         `,
         showCancelButton: true,
