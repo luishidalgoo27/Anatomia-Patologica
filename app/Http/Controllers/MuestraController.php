@@ -110,8 +110,10 @@ class MuestraController extends Controller
         return response()->json(['message' => 'Muestra eliminada correctamente', 'muestra' => $muestra], 201);
     }
 
-    public function descargarPDF($id)
+    public function descargarPDF(Request $request)
     {
+        $id = $request->id;
+
         $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato'])->findOrFail($id);
     
         $pdf = PDF::loadView('pdf.muestra', ['muestras'=>$muestras]);
