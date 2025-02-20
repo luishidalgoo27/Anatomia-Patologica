@@ -1,7 +1,15 @@
 <?php
 
 return [
-
+    'default_paper_size' => 'a4',
+    'default_font' => 'sans-serif',
+    'dpi' => 96,
+    'isRemoteEnabled' => true, // Para cargar imágenes remotas
+    'isHtml5ParserEnabled' => true,
+    'log_output_file' => storage_path('logs/dompdf.log'),
+    'temp_dir' => sys_get_temp_dir(), // Usa el almacenamiento temporal del sistema
+    'chroot' => realpath(base_path()), // Asegura que pueda acceder a los archivos
+    
     /*
     |--------------------------------------------------------------------------
     | Settings
