@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2';
 
 export default function ActualizarUsuarioPage() {
   const [user, setUser] = useState(null);
@@ -6,13 +7,14 @@ export default function ActualizarUsuarioPage() {
   const [rutaImagenUser, setRutaImagenUser] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
 
   // Manejo de subida de imagen
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
 
+    setIsUploading(true);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "ml_default");
@@ -22,11 +24,19 @@ export default function ActualizarUsuarioPage() {
         method: "POST",
         body: formData,
       });
-
       const data = await response.json();
       setRutaImagenUser(data.secure_url);
+      setImagenUser(data.secure_url);
+      setIsUploading(false);
     } catch (error) {
       console.error("Error subiendo la imagen a Cloudinary:", error);
+      setIsUploading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al subir la imagen.',
+      });
+      
     }
   };
 
@@ -53,11 +63,19 @@ export default function ActualizarUsuarioPage() {
 
   // Función para actualizar usuario
   const updateUser = async () => {
+    if (isUploading) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Espere por favor',
+        text: 'La imagen aún se está subiendo.',
+      });
+      return;
+    }
+
     const updatedUser = {
       id: user.id,
       name,
       email,
-      password,
       imagen: rutaImagenUser || user.imagen, // Usar la imagen actual si no se cambia
     };
 
@@ -74,14 +92,31 @@ export default function ActualizarUsuarioPage() {
       const data = await response.json();
       if (!response.ok) {
         console.error("Error en el servidor:", data);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al actualizar el usuario.',
+        });
       } else {
         console.log("Usuario actualizado correctamente");
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Usuario actualizado correctamente.',
+        }).then(() => {
+          window.location.reload();
+        });
+        // Actualizar el estado del usuario con los nuevos datos
+        setUser({...user, ...updatedUser});
       }
     } catch (error) {
       console.error("Error actualizando usuario:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error en la actualización.',
+      });
     }
-    console.log("Datos enviados a la API:", updatedUser);
-
   };
 
   if (!user) {
@@ -100,7 +135,7 @@ export default function ActualizarUsuarioPage() {
                     Editar Cuenta
                   </h1>
                   <div className="ml-auto">
-                    <img src={imagenUser} className="img-circle elevation-2 w-12" alt="User Image" />
+                    <img src={imagenUser || "/placeholder.svg"} className="img-circle elevation-2 w-12" alt="User Image" />
                   </div>
                 </div>
                 <form className="space-y-4 md:space-y-6 mt-0" onSubmit={(e) => e.preventDefault()}>
@@ -133,25 +168,17 @@ export default function ActualizarUsuarioPage() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                      Nueva contraseña
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    />
-                  </div>
-                  <div>
                     <label htmlFor="imagenes">Nueva foto de perfil</label>
                     <input type="file" id="imagenes" accept="image/*" onChange={handleImageUpload} />
+                    {isUploading && <p>Subiendo imagen...</p>}
                   </div>
                   <div>
-                    <button type="submit" onClick={updateUser} className="bg-azulMedac text-white w-20 h-10 rounded-lg">
+                    <button 
+                      type="submit" 
+                      onClick={updateUser} 
+                      className="bg-azulMedac text-white w-20 h-10 rounded-lg"
+                      disabled={isUploading}
+                    >
                       Actualizar
                     </button>
                   </div>

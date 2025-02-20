@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 export default function AppAside() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [nombreUser, setNombreUser] = useState([])
+  const [imagenUser, setImagenUser] = useState([])
 
   const handleLogOut = () => {
       sessionStorage.removeItem('token')
@@ -27,6 +28,7 @@ export default function AppAside() {
       .then(resultado => resultado.json())
       .then(datos => {
           setNombreUser(datos.name)
+          setImagenUser(datos.imagen)
       })
   }
 
@@ -58,7 +60,7 @@ export default function AppAside() {
               type="button"
             >
               <img
-                src={UserImg}
+                src={imagenUser}
                 alt="Usuario"
                 className="w-8 h-8 rounded-full border-2 border-white ml-2"
               />
