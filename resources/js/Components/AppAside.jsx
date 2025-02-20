@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import DavanteIMG from "../../assets/img/davantefundacion.png";
-import UserImg from "../../assets/img/user2-160x160.jpg";
 import { useEffect, useState } from "react"
 
 export default function AppAside() {

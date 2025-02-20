@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export default function ActualizarUsuarioPage() {
   const [user, setUser] = useState(null);
   const [imagenUser, setImagenUser] = useState("");
-  const [rutaImagenUser, setRutaImagenUser] = useState("");
+  const [rutaImagenUser, setRutaImagenUser] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5CQxdTYvVk0IxK9JjTg3YaEPXKfuPfCK3mg&s");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -55,7 +55,7 @@ export default function ActualizarUsuarioPage() {
       setUser(data);
       setName(data.name || "");
       setEmail(data.email || "");
-      setImagenUser(data.imagen || "../../assets/img/user2-160x160.jpg");
+      setImagenUser(data.imagen || imagenDefault);
     };
 
     getUser();
