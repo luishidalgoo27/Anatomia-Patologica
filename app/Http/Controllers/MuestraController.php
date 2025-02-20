@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Imagen;
 use Exception;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use App\Models\Imagen;
 use App\Models\Muestra;
-use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class MuestraController extends Controller
 {
@@ -110,14 +112,38 @@ class MuestraController extends Controller
         return response()->json(['message' => 'Muestra eliminada correctamente', 'muestra' => $muestra], 201);
     }
 
-    public function descargarPDF(Request $request)
-    {
-        $id = $request->id;
+public function descargarPDF(Request $request)
+{   
+    $id = $request->id;
 
-        $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato','usuario','interpretaciones.interpretacion','imagenes'])->findOrFail($id);
-    
-        $pdf = PDF::loadView('pdf.muestra', ['muestras'=>$muestras]);
-    
-        return $pdf->stream('muestra_' . $muestras->codigo . '.pdf');
-    }
+    $muestras = Muestra::with(['calidad', 'tipoNaturaleza', 'formato', 'usuario', 'interpretaciones.interpretacion', 'imagenes'])->findOrFail($id);
+
+    // Configurar opciones de Dompdf
+    $options = new Options();
+    $options->setTempDir('/tmp'); // Usar directorio temporal en Vercel
+    $options->setIsRemoteEnabled(true); // Permitir carga de recursos remotos si es necesario
+    $options->setChroot(base_path()); // Establecer el directorio raíz para las rutas relativas
+
+    // Crear instancia de Dompdf con las opciones
+    $dompdf = new Dompdf($options);
+
+    // Renderizar la vista
+    $html = view('pdf.muestra', ['muestras' => $muestras])->render();
+
+    // Cargar HTML en Dompdf
+    $dompdf->loadHtml($html);
+
+    // Renderizar PDF (opcional: puedes ajustar el tamaño del papel y la orientación)
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    // Generar nombre de archivo
+    $filename = 'muestra_' . $muestras->codigo . '.pdf';
+
+    // Devolver el PDF como una respuesta para descargar
+    return response($dompdf->output(), 200, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="' . $filename . '"'
+    ]);
+}
 }

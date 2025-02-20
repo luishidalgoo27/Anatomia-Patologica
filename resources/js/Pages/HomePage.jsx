@@ -12,7 +12,7 @@ export default function HomePage() {
 
     const getUsuarios = async () => {
         try {
-            const response = await fetch(`/api/users`, {
+            const response = await fetch(`/api/api/users`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

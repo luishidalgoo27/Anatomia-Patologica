@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
 const addUser = async (usuario,getUsuarios) => {
-    const response = await fetch('/api/users', {
+    const response = await fetch('/api/api/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const addUser = async (usuario,getUsuarios) => {
 } 
 
 const updateUser = async (usuario, idUsuario, getUsuarios) => {
-    const response = await fetch(`/api/users?id=${idUsuario}`, {
+    const response = await fetch(`/api/api/users?id=${idUsuario}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const updateUser = async (usuario, idUsuario, getUsuarios) => {
  
 
 const deleteUser = async (idUsuario, getUsuarios) => {
-    const response = await fetch(`/api/users?id=${idUsuario}`, {
+    const response = await fetch(`/api/api/users?id=${idUsuario}`, {
         method: "DELETE", 
         headers: {
             'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const deleteUser = async (idUsuario, getUsuarios) => {
 }
 
 export const handleAdd = async (getUsuarios) => {
-    const response = await fetch('/api/sede');
+    const response = await fetch('/api/api/sede');
     const sedes = await response.json();
 
     Swal.fire({
@@ -119,7 +119,7 @@ export const handleAdd = async (getUsuarios) => {
 };
 
 export const handleUpdate = async (usuario, getUsuarios) => {
-    const response = await fetch('/api/sede');
+    const response = await fetch('/api/api/sede');
     const sedes = await response.json();
 
     Swal.fire({

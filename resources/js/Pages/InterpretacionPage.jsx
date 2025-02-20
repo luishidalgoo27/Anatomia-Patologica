@@ -13,7 +13,7 @@ export default function InterpretacionPage(){
     const navigate = useNavigate()
 
     const getInterpretacionesMuestra = async () => {
-        const response = await fetch(`/api/interpretacion?id=${id}`, {
+        const response = await fetch(`/api/api/interpretacion?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export default function InterpretacionPage(){
     
     return(
         <>
-            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)]">
+            <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg) bg-cover]">
                 <div className="content pt-5">
 
                     <div>
