@@ -39,7 +39,7 @@ export default function InterpretacionPage(){
     
     return(
         <>
-            <div className="content-wrapper bg-[url(/public/media/fondoMuestras1.jpg) bg-cover]">
+            <div className="content-wrapper bg-[url(/public/media/fondoMuestras3.webp)] bg-cover">
                 <div className="content pt-5">
 
                     <div>
