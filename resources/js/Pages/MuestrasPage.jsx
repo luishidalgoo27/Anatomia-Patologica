@@ -138,7 +138,7 @@ export default function MuestrasPage(){
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 {
                                                     imagenes.filter((imagen) => imagen.id_muestra === muestra.id).map((imagen,index) => ( 
-                                                        <img key={index} src={imagen.ruta} />
+                                                        <img width="32" height="32" key={index} src={imagen.ruta} />
                                                     ))
                                                 }
                                             </td>

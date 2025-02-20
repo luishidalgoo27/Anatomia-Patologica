@@ -157,7 +157,6 @@ export const handleAdd = async (getMuestras) => {
                     <label for="calidad">Calidad de la muestra</label>
                     <select id="calidad" class="rounded-xl">
                         <option value="">Seleccione una opción</option>
-                        ${calidad.map(c => `<option value="${c.id}">${c.nombre}</option>`).join("")}
                     </select>
                 </div>
 
@@ -176,6 +175,18 @@ export const handleAdd = async (getMuestras) => {
         showCancelButton: true,
         confirmButtonText: "Añadir",
         cancelButtonText: "Cancelar",
+        didOpen: () => {
+            const selectEstudio = document.getElementById('estudio')
+            const selectCalidad = document.getElementById('calidad')
+            
+            selectEstudio.addEventListener('change', ()=>{
+                const idEstudioSeleccionado = selectEstudio.value
+
+                const calidadesFiltradas = calidad.filter(c => c.id_tipo_estudio == idEstudioSeleccionado).map(c => `<option value="${c.id}">${c.nombre}</option>`).join()
+
+                selectCalidad.innerHTML = calidadesFiltradas || '<option value="">No hay calidades disponibles</option>';
+            })
+        },
         preConfirm: async () => {
             const codigo = document.getElementById("codigo").value;
             const fecha = document.getElementById("fecha").value;
@@ -348,6 +359,18 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
         cancelButtonText: "Cancelar",
         showDenyButton: true,
         denyButtonText: "Eliminar",
+        didOpen: () => {
+            const selectEstudio = document.getElementById('estudio')
+            const selectCalidad = document.getElementById('calidad')
+            
+            selectEstudio.addEventListener('change', ()=>{
+                const idEstudioSeleccionado = selectEstudio.value
+
+                const calidadesFiltradas = calidad.filter(c => c.id_tipo_estudio == idEstudioSeleccionado).map(c => `<option value="${c.id}">${c.nombre}</option>`).join()
+
+                selectCalidad.innerHTML = calidadesFiltradas || '<option value="">No hay calidades disponibles</option>';
+            })
+        },
         preConfirm: () => {
             const codigo = document.getElementById("codigo").value;
             const fecha = document.getElementById("fecha").value;
