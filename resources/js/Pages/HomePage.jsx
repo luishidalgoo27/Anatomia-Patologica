@@ -77,7 +77,7 @@ export default function HomePage() {
                             <tbody>
                                 {
                                     usuarios.map((usuario,index) => (
-                                        <tr key={index} onClick={() => handleUpdate(usuario, getUsuarios)}>
+                                        <tr key={index} onClick={() => handleUpdate(usuario, getUsuarios)} className="hover:cursor-pointer">
                                             <td className="p-4 border-b border-blue-gray-50">
                                                 <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                     {usuario.name}

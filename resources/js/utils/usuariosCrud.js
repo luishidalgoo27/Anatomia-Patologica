@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
 const addUser = async (usuario,getUsuarios) => {
-    const response = await fetch('/api/addUser', {
+    const response = await fetch('/api/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const addUser = async (usuario,getUsuarios) => {
 } 
 
 const updateUser = async (usuario, idUsuario, getUsuarios) => {
-    const response = await fetch(`/api/updateUser?id=${idUsuario}`, {
+    const response = await fetch(`/api/users?id=${idUsuario}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const updateUser = async (usuario, idUsuario, getUsuarios) => {
  
 
 const deleteUser = async (idUsuario, getUsuarios) => {
-    const response = await fetch(`/api/deleteUser?id=${idUsuario}`, {
+    const response = await fetch(`/api/users?id=${idUsuario}`, {
         method: "DELETE", 
         headers: {
             'Content-Type': 'application/json',

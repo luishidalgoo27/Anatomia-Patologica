@@ -70,7 +70,7 @@ const getCalidad = async () => {
 } 
 
 const addMuestra = async (muestra, getMuestras) => {
-    const response = await fetch(`/api/addMuestra`, {
+    const response = await fetch(`/api/muestra`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -184,16 +184,15 @@ export const handleAdd = async (getMuestras) => {
             const id_formato = document.getElementById("formato").value;
             const id_tipo_naturaleza = document.getElementById("naturaleza").value;
             const organo = document.getElementById("organo").value;
-            const id_estudio = document.getElementById("estudio").value;
             const id_calidad = document.getElementById("calidad").value;
             const descripcion_calidad = document.getElementById("descripcion").value;
 
-            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_estudio || !id_calidad || !descripcion_calidad) {
+            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_calidad || !descripcion_calidad) {
                 Swal.showValidationMessage("Todos los campos son obligatorios");
                 return false;
             }
 
-            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_estudio, id_calidad, descripcion_calidad, id_user, id_sede };
+            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_calidad, descripcion_calidad, id_user, id_sede };
         },
     }).then((result) => {
         if (result.isConfirmed) {
@@ -203,7 +202,7 @@ export const handleAdd = async (getMuestras) => {
 };
 
 const deleteMuestra = async (idMuestra, getMuestras) => {
-    const response = await fetch(`/api/deleteMuestra?id=${idMuestra}`, {
+    const response = await fetch(`/api/muestra?id=${idMuestra}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",
@@ -223,7 +222,7 @@ const deleteMuestra = async (idMuestra, getMuestras) => {
 }
 
 const updateMuestra = async (muestra, idMuestra, getMuestra) => {
-    const response = await fetch(`/api/updateMuestra?id=${idMuestra}`, {
+    const response = await fetch(`/api/muestra?id=${idMuestra}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
@@ -261,10 +260,12 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
                     
                 <div class="flex flex-col w-96 ">
                     <label for="formato">Formato</label>
-                    <select id="formato" class=" rounded-xl" value="${muestra.formato}">
+                    <select id="formato" class=" rounded-xl">
                         ${
                             formato.map(f => (
-                                `<option value="${f.id}">${f.nombre}</option>`
+                                `<option value="${f.id}" ${f.id === muestra.id_formato ? 'selected' : ''}>
+                                    ${f.nombre}
+                                </option>`
                             ))                  
                         }
                     </select>
@@ -272,10 +273,12 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
 
                 <div class="flex flex-col w-96">
                     <label for="naturaleza">Tipo de naturaleza</label>
-                    <select id="naturaleza" class=" rounded-xl" value="${muestra.naturaleza}">
+                    <select id="naturaleza" class=" rounded-xl">
                         ${
                             naturaleza.map(n => (
-                                `<option value="${n.id}">${n.nombre}</option>`
+                                `<option value="${n.id}" ${n.id === muestra.id_tipo_naturaleza ? 'selected' : ''}>
+                                    ${n.nombre}
+                                </option>`
                             ))                  
                         }
                     </select>
@@ -288,10 +291,13 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
 
                 <div class="flex flex-col w-96">
                     <label for="estudio">Tipo de estudio</label>
-                    <select id="estudio" class=" rounded-xl" value="${muestra.estudio}">
+                    <select id="estudio" class=" rounded-xl">
+                        <option value="">Seleccione una opción</option>
                         ${
                             estudio.map(e => (
-                                `<option value="${e.id}">${e.nombre}</option>`
+                                `<option value="${e.id}">
+                                    ${e.nombre}
+                                </option>`
                             ))                  
                         }
                     </select>
@@ -300,10 +306,12 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
                 
                 <div class="flex flex-col w-96">
                     <label for="calidad">Calidad de la muestra</label>
-                    <select id="calidad" class="rounded-xl" value="${muestra.calidad}">
+                    <select id="calidad" class="rounded-xl">
                         ${
                             calidad.map(c => (
-                                `<option value="${c.id}">${c.nombre}</option>`
+                                `<option value="${c.id}" ${c.id === muestra.id_calidad ? 'selected' : ''}>
+                                    ${c.nombre}
+                                </option>`
                             ))                  
                         }
                     </select>
@@ -332,16 +340,15 @@ export const actualizarMuestra = async (muestra, getMuestras) => {
             const id_formato = document.getElementById("formato").value;
             const id_tipo_naturaleza = document.getElementById("naturaleza").value;
             const organo = document.getElementById("organo").value;
-            const estudio = document.getElementById("estudio").value;
             const id_calidad = document.getElementById("calidad").value;
             const descripcion_calidad = document.getElementById("descripcion").value;
 
-            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !estudio || !id_calidad || !descripcion_calidad) {
+            if (!codigo || !fecha || !id_formato || !id_tipo_naturaleza || !organo || !id_calidad || !descripcion_calidad) {
                 Swal.showValidationMessage("Todos los campos son obligatorios");
                 return false;
             }
 
-            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, estudio, id_calidad, descripcion_calidad }
+            return { codigo, fecha, id_formato, id_tipo_naturaleza, organo, id_calidad, descripcion_calidad }
         },
     }).then((result) => {
         if (result.isConfirmed) {
