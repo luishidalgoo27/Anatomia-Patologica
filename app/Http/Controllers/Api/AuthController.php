@@ -42,6 +42,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'id_sede' => $request->id_sede,
+                'imagen' => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5CQxdTYvVk0IxK9JjTg3YaEPXKfuPfCK3mg&s",
                 'rol' => false
             ]);
 

@@ -8,6 +8,7 @@ export default function ActualizarUsuarioPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isUploading, setIsUploading] = useState(false);
+  const [imagenDefault, setimagenDefault] = useState("../../assets/img/user2-160x160.jpg")
 
   // Manejo de subida de imagen
   const handleImageUpload = async (event) => {
@@ -55,7 +56,7 @@ export default function ActualizarUsuarioPage() {
       setUser(data);
       setName(data.name || "");
       setEmail(data.email || "");
-      setImagenUser(data.imagen || "../../assets/img/user2-160x160.jpg");
+      setImagenUser(data.imagen || imagenDefault);
     };
 
     getUser();

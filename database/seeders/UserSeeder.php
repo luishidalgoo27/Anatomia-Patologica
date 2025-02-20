@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'rol' => true,
                 'password' => 'latigazo33',
-                'id_sede' => 5 
+                'id_sede' => 5 ,
+                'imagen' => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5CQxdTYvVk0IxK9JjTg3YaEPXKfuPfCK3mg&s"
             ],
 
         ];
