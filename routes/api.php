@@ -56,6 +56,4 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Rutas de imagenes
     Route::get('/imagenes', [ImageController::class, 'index']);
-    Route::post('/upload-image', [ImageController::class, 'upload']);
-    Route::post('/upload-logo', [ImageController::class, 'uploadLogo']);
 });
