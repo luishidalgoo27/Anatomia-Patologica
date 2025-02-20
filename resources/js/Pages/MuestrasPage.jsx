@@ -16,7 +16,7 @@ export default function MuestrasPage(){
     const descargarPdf = async (id, event) => {
         event.stopPropagation();
     
-        const url = `/api/api/descargarMuestra?id=${id}`;
+        const url = `/api/descargarMuestra?id=${id}`;
         window.open(url, '_blank'); 
     };
 
