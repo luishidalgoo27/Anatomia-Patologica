@@ -45,10 +45,15 @@ Sistema web para la gestión de muestras de anatomía patológica que permite a 
 
 5. Configurar la base de datos en el archivo .env:
     DB_CONNECTION=mysql
+
     DB_HOST=127.0.0.1
+
     DB_PORT=3306
+
     DB_DATABASE=anatomia_patologica
+
     DB_USERNAME=tu_usuario
+    
     DB_PASSWORD=tu_contraseña
 
 6. Ejecutar migraciones: 
@@ -63,18 +68,31 @@ Sistema web para la gestión de muestras de anatomía patológica que permite a 
 ## Estructura del Proyecto
 
 AnatomiaPatologica/
+
 ├── app/                  # Lógica de la aplicación
+
 │   ├── Http/            # Controladores
+
 │   └── Models/          # Modelos de datos
+
 ├── config/              # Configuraciones
+
 ├── database/            # Migraciones y seeders
+
 ├── public/              # Archivos públicos
+
 ├── resources/           # Vistas y assets
-│   ├── js/              
+
+│   ├── js/
+
 │   │   ├── Components/  # Componentes React
+
 │   │   └── Pages/       # Páginas de la aplicación
-│   └── views/          
+
+│   └── views/
+
 ├── routes/              # Definición de rutas
+
 └── tests/               # Pruebas
 
 ### Uso
